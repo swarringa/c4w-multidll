@@ -4,11 +4,11 @@
  */
 package nl.practicom.c4w.multidll
 
-import nl.practicom.c4w.txa.parser.SectionMark
+import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContentHandler
 import nl.practicom.c4w.txa.transform.TxaContext
 
-import static nl.practicom.c4w.txa.parser.SectionMark.*
+import static nl.practicom.c4w.txa.transform.SectionMark.*
 
 class EntryProcedureScanner implements TxaContentHandler {
 

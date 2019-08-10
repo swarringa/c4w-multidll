@@ -3,6 +3,8 @@ package nl.practicom.c4w.multidll
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
+import org.junit.Ignore
+import org.junit.Test
 
 class EntryProcedureScannerTest extends GroovyTestCase {
     void setUp() {
@@ -204,4 +206,84 @@ class EntryProcedureScannerTest extends GroovyTestCase {
         ])
     }
 
+    /**
+     * Menu entries can have dependencies on procedures via source code
+     * embeds on their accept event. The embedded source code may call
+     * a procedure directly or may do so via routine(s).
+     * All routines called via source code should be specified in the
+     * procedures' [CALL] section.
+     */
+    @Test @Ignore("Not implemented yet")
+    void testIndirectSourceDependencies(){
+        def content ="""
+            [PROCEDURE]
+            NAME Hoofdmenu
+            [COMMON]
+                DESCRIPTION 'Hoofdmenu Historie *** Udea ***'
+                FROM ABC Frame
+                [EMBED]
+                    EMBED %ControlEventHandling
+                    [INSTANCES]
+                      WHEN '?Aanmelden'
+                      [INSTANCES]
+                      WHEN 'Accepted'
+                            [DEFINITION]
+                                [SOURCE]
+                                DO Aanmelding
+                            [END]
+                      [END]
+                      WHEN '?OpdrachtbevestigingenAanmaken'
+                        [INSTANCES]
+                          WHEN 'Accepted'
+                            [DEFINITION]
+                                [SOURCE]
+                                    PROPERTY:BEGIN
+                                    PRIORITY 5000
+                                    PROPERTY:END
+                                    !Aanroep printen opdrachtbevestiging
+                                    
+                                    GloOrdernummer = 0
+                                    
+                                    START(SelPrintOpdrachtbevestiging, 25000)
+                            [END]
+                        [END]
+                    [END]
+                    EMBED %ProcedureRoutines
+                    [DEFINITION]
+                        [SOURCE]
+                            PROPERTY:BEGIN
+                            PRIORITY 4000
+                            PROPERTY:END
+                            Aanmelding ROUTINE
+                             !Global aanmelden standaard op nee
+                             GloAanmelden = 'Nee'
+                            
+                             !Aanmelding procedure
+                             Aanmelden()
+                    [END]
+                [END]
+            [CALLS]
+            Aanmelden
+            SelPrintOpdrachtbevestiging
+            [WINDOW]
+            AppFrame APPLICATION('INkoop VERkoop VOorraad')
+                      MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
+                        ITEM('Aanmelden'),USE(?Aanmelden),#ORDINAL(1)
+                        MENU('Groothandel bestellingen'),USE(?VerkopenModembestellingen),MSG('Inlezen, p' & |
+                            'rinten en verwerking van modembestellingen'),#ORDINAL(22)
+                            ITEM('Opdrachtbevestigingen aanmaken'),USE(?OpdrachtbevestigingenAanmaken), |
+                              #ORDINAL(2)
+                        END
+                      END
+        """.trimLines()
+
+        def scanner = new EntryProcedureScanner('Hoofdmenu')
+
+        new StreamingTxaReader()
+                .withHandler(scanner)
+                .parse('' << content)
+
+        assert scanner.entryProceduresFor('?Aanmelden') == ['Aanmelden']
+        assert scanner.entryProceduresFor('?VerkopenModembestellingen') == ['SelPrintOpdrachtbevestiging']
+    }
 }
