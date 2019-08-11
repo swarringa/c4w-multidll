@@ -7,10 +7,12 @@ package nl.practicom.c4w.multidll
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContentHandler
 import nl.practicom.c4w.txa.transform.TxaContext
+import nl.practicom.c4w.txa.transform.TxaLogicalContentHandler
+import nl.practicom.c4w.txa.transform.TxaSectionHandler
 
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 
-class EntryProcedureScanner implements TxaContentHandler {
+class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 
     private menuActions = [:]
 
@@ -93,14 +95,14 @@ class EntryProcedureScanner implements TxaContentHandler {
     void onSectionStart(TxaContext txaContext, SectionMark sectionMark) {}
 
     @Override
-    void onSectionContent(TxaContext ctx, SectionMark sectionMark, String s) {
+    void onSectionContent(TxaContext ctx, SectionMark sectionMark, Long lineNumber, String content) {
         if (ctx.currentProcedureName == this.procedureName){
-            processPrompts(ctx)
-            processMenu(ctx)
+            processPrompts(ctx, content)
+            processMenu(ctx, content)
         }
     }
 
-    void processPrompts(TxaContext ctx){
+    void processPrompts(TxaContext ctx, content){
 
         //Eg: %ButtonProcedure DEPEND %Control PROCEDURE TIMES 3
         final buttonProcedurePattern =
@@ -112,20 +114,20 @@ class EntryProcedureScanner implements TxaContentHandler {
 
         if (ctx.within(PROMPTS)){
             if (withinButtonProcedures){
-                if ( ctx.currentLine ==~ controlActionPattern){
-                    (ctx.currentLine =~ controlActionPattern).each {
+                if ( content ==~ controlActionPattern){
+                    (content =~ controlActionPattern).each {
                         _, controlUse, proc -> addOrUpdateMenuActions(controlUse,proc)
                     }
                 }
-            } else if (ctx.currentLine.trim().size() == 0) {
+            } else if (content.trim().size() == 0) {
                 withinButtonProcedures = false
-            } else if ( ctx.currentLine ==~ buttonProcedurePattern) {
+            } else if ( content ==~ buttonProcedurePattern) {
                 withinButtonProcedures = true
             }
         }
     }
 
-    void processMenu(TxaContext ctx){
+    void processMenu(TxaContext ctx, String content){
 
         //Eg: MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
         final menubarPattern = /^\s*MENUBAR.*USE\((\?\w+)\).*#ORDINAL\(([0-9]+)\)\s*$/
@@ -144,8 +146,8 @@ class EntryProcedureScanner implements TxaContentHandler {
 
             // Menubar control is always the top item of the menu tree
             // since items can be added to it directly
-            if (ctx.currentLine ==~ menubarPattern) {
-                (ctx.currentLine =~ menubarPattern).each {
+            if (content ==~ menubarPattern) {
+                (content =~ menubarPattern).each {
                     _, id, ordinal ->
                     menuTree[id as String] = []
                     menuParents = [id]
@@ -154,17 +156,17 @@ class EntryProcedureScanner implements TxaContentHandler {
 
             //... and needs to be present for subsequent processing
             if (!menuParents.isEmpty()){
-                if (ctx.currentLine ==~ menuPattern) {
-                    (ctx.currentLine =~ menuPattern).each {
+                if (content ==~ menuPattern) {
+                    (content =~ menuPattern).each {
                         _, label, id, ordinal ->
                             addOrUpdateMenuTree(menuParents?.last(), id)
                             menuParents << id
                     }
-                } else if ( ctx.currentLine ==~ menuItemPattern ) {
-                    (ctx.currentLine =~ menuItemPattern).each {
+                } else if ( content ==~ menuItemPattern ) {
+                    (content =~ menuItemPattern).each {
                         _,label,id,ordinal -> addOrUpdateMenuTree(menuParents?.last(),id)
                     }
-                } else if ( ctx.currentLine ==~ menuEndPattern ) {
+                } else if ( content ==~ menuEndPattern ) {
                     if (!menuParents.isEmpty()) {
                         menuParents.pop()
                     }
@@ -194,4 +196,5 @@ class EntryProcedureScanner implements TxaContentHandler {
 
     @Override
     void onProcessingFinished(TxaContext txaContext) {}
+
 }
