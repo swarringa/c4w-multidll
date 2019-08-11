@@ -15,14 +15,10 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
     boolean withinProcedurePrompt = false
 
     @Override
-    void onProcessingStart(TxaContext context) {
-
-    }
+    void onProcessingStart(TxaContext context) {}
 
     @Override
-    void onSectionStart(TxaContext context, SectionMark section) {
-
-    }
+    void onSectionStart(TxaContext context, SectionMark section) {}
 
     @Override
     void onSectionContent(TxaContext context, SectionMark section, String content) {
@@ -50,7 +46,7 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
                         }
                     } else if (content ==~ dependentProcedurePromptPattern) {
                         (content =~ dependentProcedurePromptPattern).each {
-                             _, times -> withinProcedurePrompt = (times as int) > 0 ? true : false
+                            _, times -> withinProcedurePrompt = (times as int) > 0 ? true : false
                         }
                     } else if (content.trim().isEmpty()) {
                         withinProcedurePrompt = false
@@ -76,9 +72,8 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
         }
     }
 
-    void onProcessingFinished(TxaContext context) {
+    void onProcessingFinished(TxaContext context) {}
 
-    }
 
     def addOrUpdateDependency(String parent, String child) {
         if ( isProcedureName(parent) && isProcedureName(child)) {
@@ -93,4 +88,51 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
 
     def isProcedureName = {s -> s != null && s.trim().size() > 0}
 
+    /**
+     * Collect transitive dependencies for a procedure
+     * @param procedure name of the procedure
+     * @param level maximum depth to descend into the dependency hierarchy
+     * @return List of procedures names on which the procedure is dependent
+     */
+    List<String> getTransitiveDependencies(String procedure, int level = -1) {
+        return getTransitiveDependencies([procedure],level)
+    }
+
+    /**
+     * Collect transitive dependencies for a set of procedures
+     * @param procedures list of procedures names
+     * @param level maximum depth to descend into the dependency hierarchy
+     * @return List of procedures names on which the procedures are dependent
+     */
+    List<String> getTransitiveDependencies(List<String> procedures, int level = -1) {
+        Set<String> result = procedures.inject([] as Set) {
+            collected, procedure ->
+                collected.addAll(dependencies[procedure])
+                collected
+        }
+        Set<String> candidates = []
+        candidates.addAll(result)
+        candidates.each { p ->
+            result.addAll(addTransitiveDependencies(result, p, level))
+        }
+        return result.toList()
+    }
+
+
+    private Set<String> addTransitiveDependencies(final Set<String> collected, String procedure, int level){
+        if ( level == 0) return []
+
+        Set<String> result  = []
+        result.addAll(collected)
+        Set<String> candidates = dependencies[procedure] as Set
+        candidates.removeAll(collected)
+        if ( !candidates.isEmpty() ){
+            collected.addAll(candidates)
+            candidates.each { p ->
+                result.addAll(addTransitiveDependencies(collected, p, level-1))
+            }
+        }
+
+        result
+    }
 }

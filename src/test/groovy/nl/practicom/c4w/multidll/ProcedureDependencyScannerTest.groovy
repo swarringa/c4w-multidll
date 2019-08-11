@@ -97,4 +97,104 @@ class ProcedureDependencyScannerTest extends GroovyTestCase {
         reader.parse('' << content)
         assert scanner.dependencies['Hoofdmenu'] == ['Splash']
     }
+
+    void testCollectTransitiveDependenciesOnSimpleTree() {
+        def scanner = new ProcedureDependencyScanner()
+        scanner.dependencies["P1"] = ["P2","P3"]
+        scanner.dependencies["P2"] = ["P4"]
+        scanner.dependencies["P3"] = []
+        scanner.dependencies["P4"] = ["P5"]
+        scanner.dependencies["P5"] = []
+
+        // Collect only direct dependencies
+        assert scanner.getTransitiveDependencies("P1",0) == ["P2","P3"]
+        assert scanner.getTransitiveDependencies("P2",0) == ["P4"]
+        assert scanner.getTransitiveDependencies("P3",0) == []
+        assert scanner.getTransitiveDependencies("P4",0) == ["P5"]
+        assert scanner.getTransitiveDependencies("P5",0) == []
+
+        // Collect one level deeper
+        assert scanner.getTransitiveDependencies("P1",1) == ["P2","P3","P4"]
+        assert scanner.getTransitiveDependencies("P2",1) == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P3",1) == []
+        assert scanner.getTransitiveDependencies("P4",1) == ["P5"]
+        assert scanner.getTransitiveDependencies("P5",1) == []
+
+        // Collect all
+        assert scanner.getTransitiveDependencies("P1") == ["P2","P3","P4","P5"]
+        assert scanner.getTransitiveDependencies("P2") == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P3") == []
+        assert scanner.getTransitiveDependencies("P4") == ["P5"]
+        assert scanner.getTransitiveDependencies("P5") == []
+    }
+
+    void testCollectTransitiveDependenciesWithDuplicates() {
+        def scanner = new ProcedureDependencyScanner()
+        scanner.dependencies["P1"] = ["P2","P3"]
+        scanner.dependencies["P2"] = ["P4","P5"]
+        scanner.dependencies["P3"] = ["P4"]
+        scanner.dependencies["P4"] = ["P5"]
+        scanner.dependencies["P5"] = []
+
+        // Collect only direct dependencies
+        assert scanner.getTransitiveDependencies("P1",0) == ["P2","P3"]
+        assert scanner.getTransitiveDependencies("P2",0) == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P3",0) == ["P4"]
+        assert scanner.getTransitiveDependencies("P4",0) == ["P5"]
+        assert scanner.getTransitiveDependencies("P5",0) == []
+
+        // Collect one level deeper
+        assert scanner.getTransitiveDependencies("P1",1) == ["P2","P3","P4","P5"]
+        assert scanner.getTransitiveDependencies("P2",1) == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P3",1) == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P4",1) == ["P5"]
+        assert scanner.getTransitiveDependencies("P5",1) == []
+
+        // Collect all
+        assert scanner.getTransitiveDependencies("P1") == ["P2","P3","P4","P5"]
+        assert scanner.getTransitiveDependencies("P2") == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P3") == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P4") == ["P5"]
+        assert scanner.getTransitiveDependencies("P5") == []
+    }
+
+
+    void testCollectTransitiveDependenciesWithCycles(){
+        def scanner = new ProcedureDependencyScanner()
+        scanner.dependencies["P1"] = ["P2","P3"]
+        scanner.dependencies["P2"] = ["P4","P5"]
+        scanner.dependencies["P3"] = ["P2","P5"]
+        scanner.dependencies["P4"] = ["P1"]
+        scanner.dependencies["P5"] = []
+
+        assert scanner.getTransitiveDependencies("P1",0) == ["P2","P3"]
+        assert scanner.getTransitiveDependencies("P2",0) == ["P4","P5"]
+        assert scanner.getTransitiveDependencies("P3",0) == ["P2","P5"]
+        assert scanner.getTransitiveDependencies("P4",0) == ["P1"]
+        assert scanner.getTransitiveDependencies("P5",0) == []
+
+        assert scanner.getTransitiveDependencies("P1",1).containsAll(["P2","P3","P4","P5"])
+        assert scanner.getTransitiveDependencies("P2",1).containsAll(["P4","P5","P1"])
+        assert scanner.getTransitiveDependencies("P3",1).containsAll(["P2","P5","P4"])
+        assert scanner.getTransitiveDependencies("P4",1).containsAll(["P1","P2","P3"])
+        assert scanner.getTransitiveDependencies("P5",1) == []
+
+        assert scanner.getTransitiveDependencies("P1").containsAll(["P1", "P2","P3","P4","P5"])
+        assert scanner.getTransitiveDependencies("P2").containsAll(["P1", "P2","P3","P4","P5"])
+        assert scanner.getTransitiveDependencies("P3").containsAll(["P1", "P2","P3","P4","P5"])
+        assert scanner.getTransitiveDependencies("P4").containsAll(["P1", "P2","P3","P4","P5"])
+        assert scanner.getTransitiveDependencies("P5") == []
+    }
+
+    void testCollectTransitiveDependenciesForProcedureList(){
+        def scanner = new ProcedureDependencyScanner()
+        scanner.dependencies["P1"] = ["P2","P3"]
+        scanner.dependencies["P2"] = ["P4","P5"]
+        scanner.dependencies["P3"] = ["P2","P5"]
+        scanner.dependencies["P4"] = ["P1"]
+        scanner.dependencies["P5"] = []
+
+        assert scanner.getTransitiveDependencies(["P1","P2"],0) == ["P2","P3","P4","P5"]
+        assert scanner.getTransitiveDependencies(["P1","P2"]).containsAll(["P1","P2","P3","P4","P5"])
+    }
 }
