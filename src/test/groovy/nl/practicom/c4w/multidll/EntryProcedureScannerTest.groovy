@@ -212,7 +212,6 @@ class EntryProcedureScannerTest extends GroovyTestCase {
      * a procedure directly or may do so via routine(s).
      * All routines called via source code should be specified in the
      * procedures' [CALL] section.
-     */
     @Test @Ignore("Not implemented yet")
     void testIndirectSourceDependencies(){
         def content ="""
@@ -286,4 +285,6 @@ class EntryProcedureScannerTest extends GroovyTestCase {
         assert scanner.entryProceduresFor('?Aanmelden') == ['Aanmelden']
         assert scanner.entryProceduresFor('?VerkopenModembestellingen') == ['SelPrintOpdrachtbevestiging']
     }
+     */
+
 }
