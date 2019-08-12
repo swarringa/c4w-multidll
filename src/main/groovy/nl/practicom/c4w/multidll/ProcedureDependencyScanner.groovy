@@ -26,8 +26,8 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
         final simpleProcedurePromptPattern = ~/^%\w+\s+PROCEDURE\s+\((\w+)\)\s*$/
         final dependentProcedurePromptPattern = ~/^%\w+\sDEPEND.*PROCEDURE\s.*TIMES\s([0-9]+)\s*$/
         final promptWhenPattern = /^WHEN\s+\((.*)\)\s+\((\w*)\)\s*$/
+        final procedureCallPattern = /^\s*(\w+)\(\)\s*$/
 
-        if ( context.currentProcedureName) {
             try {
                 if (context.within(CALLS)) {
                     addOrUpdateDependency(context.currentProcedureName, content)
@@ -35,6 +35,12 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
 
                 if (context.within(ADDITION) && content ==~ additionProcedurePattern) {
                     (content =~ additionProcedurePattern).each {
+                        _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
+                    }
+                }
+
+                if ( context.within(DEFINITION) && context.within(PROCEDURE) && content ==~ procedureCallPattern){
+                    (content =~ procedureCallPattern ).each {
                         _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
                     }
                 }
@@ -60,7 +66,6 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
                 println "Exception ${x.getMessage()} processing line ${context.getCurrentLineNumber()}:"
                 println context.getCurrentLine()
             }
-        }
     }
 
     @Override
@@ -76,6 +81,10 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
 
 
     def addOrUpdateDependency(String parent, String child) {
+        if ( parent == null) {
+            parent = "APPLICATION"
+        }
+
         if ( isProcedureName(parent) && isProcedureName(child)) {
             if (!dependencies.containsKey(parent)) {
                 dependencies.put(parent, [])
