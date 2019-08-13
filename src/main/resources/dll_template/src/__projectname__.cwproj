@@ -1,0 +1,82 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{465EC49A-ADA0-4EF5-B984-FB87A5EA7864}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>invervo_verkoop</RootNamespace>
+    <AssemblyName>invervo_verkoop</AssemblyName>
+    <OutputName>__projectname__</OutputName>
+    <DefineConstants>IPDRV=&gt;1%3bHyperActiveLinkMode=&gt;0%3bHyperActiveDllMode=&gt;1%3bFM2=&gt;1%3b_NT10_=&gt;1%3bNETTALKLOG=&gt;1%3bMD5=&gt;0%3bjFilesLinkMode=&gt;0%3bjFilesDllMode=&gt;1%3b_JFILES_=&gt;1%3b_NetTalkDllMode_=&gt;1%3b_NetTalkLinkMode_=&gt;0%3b_VSDllMode_=&gt;1%3b_VSLinkMode_=&gt;0%3b_ODDJOB_=&gt;0%3b_CRYPTONITE_=&gt;0%3b_DRAW_=&gt;0%3b_CCLSDllMode_=&gt;1%3b_CCLSLinkMode_=&gt;0%3bStringTheoryLinkMode=&gt;0%3bStringTheoryDllMode=&gt;1%3bxFilesLinkMode=&gt;0%3bxFilesDllMode=&gt;1%3bWinEventLinkMode=&gt;0%3bWinEventDLLMode=&gt;1%3b_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;0%3b_TBARDllMode_=&gt;0%3b_TBARLinkMode_=&gt;0</DefineConstants>
+    <CWOutputType>Exe</CWOutputType>
+    <Model>Dll</Model>
+    <stack_size>16384</stack_size>
+    <CopyCore>True</CopyCore>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>False</check_stack>
+    <check_index>False</check_index>
+    <warnings>on</warnings>
+    <GenerateMap>True</GenerateMap>
+    <line_numbers>False</line_numbers>
+  </PropertyGroup>
+  <ItemGroup>
+    <Library Include="dscrt40.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </Library>
+    <Library Include="ERP9X.LIB" />
+    <Library Include="EXL9X.LIB" />
+    <Library Include="fm40base.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </Library>
+    <Library Include="fm40tiff.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </Library>
+    <Library Include="IQXML90.LIB" />
+    <Library Include="ixclib40.lib" />
+    <Library Include="LibXL.lib" />
+    <Library Include="md5.lib" />
+    <Library Include="__projectname__.Version" />
+    <Library Include="pxclib40.lib" />
+    <Library Include="UDEADCT.LIB" />
+    <Library Include="WTSapi32.lib" />
+    <Library Include="xccdx40.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </Library>
+    <Library Include="xcpro40.lib" />
+    <FileDriver Include="ASCII" />
+    <FileDriver Include="BASIC" />
+    <FileDriver Include="DOS" />
+    <FileDriver Include="IPDRV" />
+    <FileDriver Include="MEMORY" />
+    <FileDriver Include="MSSQL" />
+    <FileDriver Include="TOPSPEED" />
+    <Compile Include="__projectname__.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <None Include="zlibwapi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+</Project>
