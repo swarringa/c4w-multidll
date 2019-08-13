@@ -3,16 +3,36 @@
 
 import nl.practicom.c4w.multidll.ProcedureDependencyScanner
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
+import nl.practicom.c4w.multidll.EntryProcedureScanner
 
-def txaFile = new File("/Volumes/Projects/Clients/Udea/tmp/historie10.txa")
-def scanner = new ProcedureDependencyScanner()
+def generateProcedureList(txaFile, targetFile, procedureName, menuControl) {
+    def entryScanner = new EntryProcedureScanner(procedureName)
+    def depsScanner = new ProcedureDependencyScanner()
 
-new StreamingTxaReader()
-    .withHandler(scanner)
-    .parse(txaFile)
+    println "Scanning ${txaFile}"
+    new StreamingTxaReader()
+            .withHandler(entryScanner, depsScanner)
+            .parse(txaFile)
 
-scanner.dependencies.Hoofdmenu.sort().each {
-    println it
+    println "Collecting entry procedures"
+    def entryProcedures = entryScanner.entryProceduresFor("?Stamgegevens")
+    println "Collecting dependent procedures"
+    def calledProcedures = depsScanner.getTransitiveDependencies(entryProcedures)
+
+    def EOL = System.lineSeparator()
+    targetFile.withWriter { writer ->
+        entryProcedures.each { writer << it << EOL }
+        if (calledProcedures.size() > 0) {
+            writer << "[private]"
+            calledProcedures.each { writer << EOL << it }
+        }
+    }
+
+    return new Tuple(entryProcedures.size() , calledProcedures.size())
 }
 
-assert scanner.dependencies.Hoofdmenu.size() == 71
+def txaFile = new File("/Volumes/Projects/Clients/Udea/tmp/invervo10.txa")
+def targetFile = new File("/Volumes/Projects/Clients/Udea/tmp/stamgegevens_procedures.txt")
+(nrofentries, nrofdeps) = generateProcedureList(txaFile,targetFile,"Hoofdmenu","?Stamgegevens")
+
+println("Wrote ${nrofentries} public procedures and ${nrofdeps} private procedures to ${targetFile}")
