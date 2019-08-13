@@ -3,12 +3,13 @@ package nl.practicom.c4w.multidll
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContentHandler
 import nl.practicom.c4w.txa.transform.TxaContext
+import nl.practicom.c4w.txa.transform.TxaLogicalContentHandler
 import nl.practicom.c4w.txa.transform.TxaRawContentHandler
 import nl.practicom.c4w.txa.transform.TxaSectionHandler
 
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 
-class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler, TxaRawContentHandler {
+class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 
     def dependencies = [:]
 
@@ -20,52 +21,53 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
     @Override
     void onSectionStart(TxaContext context, SectionMark section) {}
 
+
     @Override
-    void onSectionContent(TxaContext context, SectionMark section, String content) {
+    void onSectionContent(TxaContext context, SectionMark section, Long lineNo, String content) {
         final additionProcedurePattern = ~/^%\w+\s+PROCEDURE\s+\((\w+)\)/
         final simpleProcedurePromptPattern = ~/^%\w+\s+PROCEDURE\s+\((\w+)\)\s*$/
         final dependentProcedurePromptPattern = ~/^%\w+\sDEPEND.*PROCEDURE\s.*TIMES\s([0-9]+)\s*$/
         final promptWhenPattern = /^WHEN\s+\((.*)\)\s+\((\w*)\)\s*$/
         final procedureCallPattern = /^\s*(\w+)\(\)\s*$/
 
-            try {
-                if (context.within(CALLS)) {
-                    addOrUpdateDependency(context.currentProcedureName, content)
-                }
-
-                if (context.within(ADDITION) && content ==~ additionProcedurePattern) {
-                    (content =~ additionProcedurePattern).each {
-                        _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
-                    }
-                }
-
-                if ( context.within(DEFINITION) && context.within(PROCEDURE) && content ==~ procedureCallPattern){
-                    (content =~ procedureCallPattern ).each {
-                        _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
-                    }
-                }
-
-                if (context.within(PROMPTS)) {
-                    if ( content ==~ simpleProcedurePromptPattern){
-                        (content =~ simpleProcedurePromptPattern).each {
-                            _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
-                        }
-                    } else if (content ==~ dependentProcedurePromptPattern) {
-                        (content =~ dependentProcedurePromptPattern).each {
-                            _, times -> withinProcedurePrompt = (times as int) > 0 ? true : false
-                        }
-                    } else if (content.trim().isEmpty()) {
-                        withinProcedurePrompt = false
-                    } else if (withinProcedurePrompt && content ==~ promptWhenPattern) {
-                        (content =~ promptWhenPattern).each {
-                            _, key, val -> addOrUpdateDependency(context.currentProcedureName, val)
-                        }
-                    }
-                }
-            } catch ( Exception x){
-                println "Exception ${x.getMessage()} processing line ${context.getCurrentLineNumber()}:"
-                println context.getCurrentLine()
+        try {
+            if (context.within(CALLS)) {
+                addOrUpdateDependency(context.currentProcedureName, content)
             }
+
+            if (context.within(ADDITION) && content ==~ additionProcedurePattern) {
+                (content =~ additionProcedurePattern).each {
+                    _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
+                }
+            }
+
+            if ( context.within(DEFINITION, PROCEDURE) && content ==~ procedureCallPattern){
+                (content =~ procedureCallPattern ).each {
+                    _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
+                }
+            }
+
+            if (context.within(PROMPTS)) {
+                if ( content ==~ simpleProcedurePromptPattern){
+                    (content =~ simpleProcedurePromptPattern).each {
+                        _, proc -> addOrUpdateDependency(context.currentProcedureName, proc)
+                    }
+                } else if (content ==~ dependentProcedurePromptPattern) {
+                    (content =~ dependentProcedurePromptPattern).each {
+                        _, times -> withinProcedurePrompt = (times as int) > 0 ? true : false
+                    }
+                } else if (content.trim().isEmpty()) {
+                    withinProcedurePrompt = false
+                } else if (withinProcedurePrompt && content ==~ promptWhenPattern) {
+                    (content =~ promptWhenPattern).each {
+                        _, key, val -> addOrUpdateDependency(context.currentProcedureName, val)
+                    }
+                }
+            }
+        } catch ( Exception x){
+            println "Exception ${x.getMessage()} processing line ${context.getCurrentLineNumber()}:"
+            println context.getCurrentLine()
+        }
     }
 
     @Override
@@ -133,7 +135,8 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
 
         Set<String> result  = []
         result.addAll(collected)
-        Set<String> candidates = dependencies[procedure] as Set
+        Set<String> candidates = dependencies[procedure] as Set ?: [] as Set
+
         candidates.removeAll(collected)
         if ( !candidates.isEmpty() ){
             collected.addAll(candidates)
@@ -144,4 +147,5 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
 
         result
     }
+
 }

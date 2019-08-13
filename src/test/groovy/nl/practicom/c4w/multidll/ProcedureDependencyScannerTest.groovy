@@ -126,6 +126,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements TxaTestSu
                             PrintOmzetTopXXOmzet()
                             PRIORITY 4000
                         [END]
+                    [END]
                 [END]
             [END]
         """.trimLines()
@@ -169,6 +170,48 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements TxaTestSu
 
         assert scanner.dependencies["APPLICATION"] == ["RunScreenSelectColumns"]
 
+    }
+
+    void testIgnoreNonProcedureCalls(){
+        def content ="""\
+            [PROCEDURE]
+            NAME SelPrtOmzetTopXXOmzet
+            [COMMON]
+            DESCRIPTION 'Selecteer v-t week voor top 10 omzet'
+            FROM ABC Window
+            MODIFIED '2017/12/11' ' 9:05:35'
+            [COMMON]
+                [EMBED]
+                EMBED %ControlEventHandling
+                    [INSTANCES]
+                        WHEN '?OkButton'
+                        [INSTANCES]
+                            WHEN 'Accepted'
+                            [DEFINITION]
+                                [SOURCE]
+                                    PROPERTY:BEGIN
+                                    PRIORITY 4999
+                                    PROPERTY:END
+                                    Free(LOC:QueueProductgroep)
+                                    SETCURSOR(CURSOR:Wait)
+                                    Open(VerwerkenWindow)
+                                    Display()
+                                    Clear(ProdGroepen)
+                                    Settarget(Report)
+                                    SetTarget()
+                            [END]
+                        [END]
+                    [END]
+                [END]
+        """.trimLines()
+
+        assertSectionsClosedCorrectly(content)
+        StreamingTxaReader reader = new StreamingTxaReader()
+        def scanner = new ProcedureDependencyScanner()
+        reader.registerHandler(scanner)
+        reader.parse('' << content)
+
+        assert scanner.dependencies["SelPrtOmzetTopXXOmzet"].isEmpty()
     }
 
     void testCollectTransitiveDependenciesOnSimpleTree() {
