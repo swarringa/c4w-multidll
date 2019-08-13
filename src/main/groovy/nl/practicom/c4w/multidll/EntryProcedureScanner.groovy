@@ -118,9 +118,9 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
                     (content =~ controlActionPattern).each {
                         _, controlUse, proc -> addOrUpdateMenuActions(controlUse,proc)
                     }
+                } else if ( !content.trim().startsWith('WHEN')){
+                    withinButtonProcedures = false
                 }
-            } else if (content.trim().size() == 0) {
-                withinButtonProcedures = false
             } else if ( content ==~ buttonProcedurePattern) {
                 withinButtonProcedures = true
             }
