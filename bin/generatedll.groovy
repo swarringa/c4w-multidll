@@ -3,16 +3,22 @@ import java.nio.file.Path
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import java.io.File
-
-def projectName = "histomzet"
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 def bind(line, bindings) {
-
     bindings.inject(line){ s, placeholder, replacement -> 
           s = s.replaceAll(placeholder, replacement)
     }
 }
 
+def currentClarionDate() {
+    def clarionDateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+    def clarionTimeFormat = DateTimeFormatter.ofPattern("HH:mm:ss")
+    def timestamp = LocalDateTime.now()
+    return "'${timestamp.format(clarionDateFormat)}' ' ${timestamp.format(clarionTimeFormat)}'"
+}
+    
 def generateDllProject(projectName, projectTitle, Path targetFolder){ 
     def excluded = ['.DS_Store']
     def currentDir = Paths.get('.')
@@ -20,32 +26,35 @@ def generateDllProject(projectName, projectTitle, Path targetFolder){
     def templateSources = templateDir.resolve('src')
     def templateLibs = templateDir.resolve('lib')
     def templateData = templateDir.resolve('data')
+    def templateBin = templateDir.resolve('bin')
     
     if ( !new File(targetFolder.toString()).mkdirs() ){
         targetFolder.deleteDir()
         new File(targetFolder.toString()).mkdirs()
     }
-     
+    
     def bindings = [
       __projectname__: projectName,
       __PROJECTNAME__: projectName.toUpperCase(),
-      __projecttitle__: projectTitle
+      __projecttitle__: projectTitle,
+      __datemodified__: currentClarionDate()
     ]
     
     templateSources.eachFile { sourceFile ->
       generateFile(sourceFile, targetFolder, bindings)
     }
     
-    templateLibs.eachFile { sourceFile ->
-        def targetFile = targetFolder.resolve(sourceFile.getFileName())
+    copyFiles(templateLibs, targetFolder, bindings)
+    copyFiles(templateData, targetFolder, bindings)
+    copyFiles(templateBin, targetFolder, bindings)
+}
+
+def copyFiles(Path sourceFolder, Path destinationFolder, bindings){
+    sourceFolder.eachFile { sourceFile ->
+        def targetFileName = bind(sourceFile.getFileName().toString(), bindings)
+        def targetFile = destinationFolder.resolve(targetFileName)
         println targetFile
-        Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING)
-    }
-    
-    templateData.eachFile { sourceFile ->
-        def targetFile = targetFolder.resolve(sourceFile.getFileName())
-        println targetFile
-        Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING)
+        Files.copy(sourceFile,targetFile, StandardCopyOption.REPLACE_EXISTING)
     }
 }
 
@@ -60,4 +69,4 @@ def generateFile(Path inputFile, Path targetFolder, Map<String,String> bindings)
     }
 }
 
-generateDllProject('histomzet', 'historie omzet', Paths.get('/Volumes/Projects/Clients/Udea/tmp/histomzet'))
+generateDllProject('histdll01', 'historie omzet', Paths.get('E:/Develop/Clarion10.app/Ontwikkelaars/Stefan/MultiDLL/dllgen/histdll01'))
