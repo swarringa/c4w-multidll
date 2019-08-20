@@ -28,7 +28,7 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
      *    MENU2: [ITEM6]
      *  ]
      */
-    private menuTree = [:]
+    public menuTree = [:]
 
     /* The procedure containing the MENUBAR */
     def procedureName

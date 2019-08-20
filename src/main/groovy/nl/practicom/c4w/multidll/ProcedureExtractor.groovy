@@ -33,7 +33,11 @@ class ProcedureExtractor extends StreamingTxaTransform {
 
     List<Procedure> procedures = []
 
-    Procedure currentProcedure = null
+    Procedure getProcedureByName(String name){
+        procedures.find{ p -> p.name.equalsIgnoreCase(name)}
+    }
+
+    private Procedure currentProcedure = null
 
     @Override
     protected String transformSectionStart(TxaContext ctx, SectionMark section) {
