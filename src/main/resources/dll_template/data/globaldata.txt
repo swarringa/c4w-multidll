@@ -1,0 +1,3179 @@
+!region GloFlag STRING(1),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Flag:'),USE(?GloFlag:Prompt)
+! ENTRY(@s1),USE(GloFlag)
+[REPORTCONTROLS]
+! STRING(@s1),USE(GloFlag)
+GloFlag               STRING(1),EXTERNAL,Dll(dll_mode)
+!!> GUID(617fd5b9-6e71-42f0-923c-abf33c4effd5),PROMPT('Glo Flag:'),HEADER('Glo Flag'),PICTURE(@s1),TYPEMODE(OVR)
+!endregion
+!region GLO:PosSchuif1 LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Pos Schuif 1:'),USE(?GLO:PosSchuif1:Prompt)
+! ENTRY(@n-14),USE(GLO:PosSchuif1),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(GLO:PosSchuif1),RIGHT(1)
+GLO:PosSchuif1        LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(e406c798-6dc8-48e7-ae74-93299b3e01e8),PROMPT('GLO : Pos Schuif 1:'),HEADER('GLO : Pos Schuif 1'),PICTURE(@n-14),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloWijzigenVerkoper SHORT,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
+[REPORTCONTROLS]
+! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
+GloWijzigenVerkoper   SHORT,EXTERNAL,Dll(dll_mode)
+!!> GUID(d5a110cf-779d-43cc-8d47-c6e28c95618e),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloStatus STRING(30),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Status:'),USE(?GloStatus:Prompt)
+! ENTRY(@s30),USE(GloStatus)
+[REPORTCONTROLS]
+! STRING(@s30),USE(GloStatus)
+GloStatus             STRING(30),EXTERNAL,Dll(dll_mode)
+!!> GUID(86f447bb-b1a2-4fa5-81ac-b960f5bc27a6),PROMPT('Glo Status:'),HEADER('Glo Status'),PICTURE(@s30),TYPEMODE(OVR)
+!endregion
+!region GloSoortActie STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Soort Actie:'),USE(?GloSoortActie:Prompt)
+! LIST,USE(GloSoortActie),MSG('Soort opmerking'),TIP('Soort opmerking'),DROP(5),FROM('Verkoop |Inkoop |Algemeen')
+[REPORTCONTROLS]
+! STRING(@s20),USE(GloSoortActie)
+GloSoortActie         STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(580b6171-92d2-4d7b-ab3d-5f91caeaa8e9),VALID(INLIST('Verkoop |Inkoop |Algemeen')),PROMPT('Glo Soort Actie:'),HEADER('Glo Soort Actie'),MESSAGE('Soort opmerking'),TOOLTIP('Soort opmerking'),PICTURE(@s20),TYPEMODE(OVR),VALUES('Verkoop |Inkoop |Algemeen'),DERIVEDFROM('ACT:Soort')
+!endregion
+!region GloSoortDatum STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! OPTION('Soort Datum'),AT(,,50,48),USE(GloSoortDatum),BOXED,MSG('Soort datum'),TIP('Soort datum')
+! RADIO('Printen '),USE(?GloSoortDatum:Radio1),VALUE('Printen ')
+! RADIO('Geleverd '),USE(?GloSoortDatum:Radio2),VALUE('Geleverd ')
+! RADIO('Gemeld'),USE(?GloSoortDatum:Radio3),VALUE('Gemeld')
+! END
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloSoortDatum)
+GloSoortDatum         STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(cc27593e-a1f3-4e95-9724-5725b4b54559),VALID(INLIST('Printen |Geleverd |Gemeld')),PROMPT('Soort Datum:'),HEADER('Glo Soort Datum'),MESSAGE('Soort datum'),TOOLTIP('Soort datum'),PICTURE(@d6),TYPEMODE(OVR),VALUES('Printen |Geleverd |Gemeld')
+!endregion
+!region GloKeuze STRING(3),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! OPTION('Keuze'),AT(,,50,36),USE(GloKeuze),BOXED
+! RADIO('Ja '),USE(?GloKeuze:Radio1)
+! RADIO('Nee'),USE(?GloKeuze:Radio2)
+! END
+[REPORTCONTROLS]
+! STRING(@s3),USE(GloKeuze)
+GloKeuze              STRING(3),EXTERNAL,Dll(dll_mode)
+!!> GUID(e635f009-92d5-4ce9-9ae3-5ff5148598fe),VALID(INLIST('Ja |Nee')),PROMPT('Keuze:'),HEADER('Glo Keuze'),PICTURE(@s3),TYPEMODE(OVR)
+!endregion
+!region GloOrdernummer DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Ordernummer:'),USE(?GloOrdernummer:Prompt)
+! ENTRY(@n_6),USE(GloOrdernummer),DECIMAL(12),MSG('Ordernummer'),TIP('Ordernummer')
+[REPORTCONTROLS]
+! STRING(@n_6),USE(GloOrdernummer),DECIMAL(12)
+GloOrdernummer        DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(cbca0099-1ede-4ad3-8ea2-188ac59b0c0b),PROMPT('Glo Ordernummer:'),HEADER('Glo Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(DECIMAL,12)
+!endregion
+!region GloGroepNummer DECIMAL(17,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Groep Nummer:'),USE(?GloGroepNummer:Prompt)
+! ENTRY(@n_17),USE(GloGroepNummer),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n_17),USE(GloGroepNummer),DECIMAL(12)
+GloGroepNummer        DECIMAL(17,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(d505c3c3-96de-4710-ac87-0281364a9113),PROMPT('Glo Groep Nummer:'),HEADER('Glo Groep Nummer'),PICTURE(@n_17),TYPEMODE(OVR),JUSTIFY(DECIMAL,12)
+!endregion
+!region GloPakbonKey STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Pakbon volgorde'),AT(,,,10),USE(?GloPakbonKey:Prompt)
+! LIST,USE(GloPakbonKey),DROP(2),FROM('Op Magazijnroute |Op Omschrijving')
+[REPORTCONTROLS]
+! STRING(@s20),USE(GloPakbonKey)
+GloPakbonKey          STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(8ac24d42-35d4-4275-b360-fddc7c9b5ccd),VALID(INLIST('Op Magazijnroute |Op Omschrijving')),PROMPT('Pakbon volgorde'),HEADER('Glo Pakbon Key'),PICTURE(@s20),TYPEMODE(OVR)
+!endregion
+!region GloOpmerking STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Opmerking:'),USE(?GloOpmerking:Prompt)
+! ENTRY(@s255),AT(,,,10),USE(GloOpmerking),MSG('Opmerking'),TIP('Opmerking')
+[REPORTCONTROLS]
+! STRING(@s255),USE(GloOpmerking),TRN
+GloOpmerking          STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(d534a4e0-2c58-4c9a-ab13-cfbdab62befb),PROMPT('Opmerking:'),HEADER('Glo Opmerking'),MESSAGE('Opmerking'),TOOLTIP('Opmerking'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GloFactuurnummer DECIMAL(7,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Factuurnummer:'),USE(?GloFactuurnummer:Prompt)
+! ENTRY(@n_7),AT(,,,10),USE(GloFactuurnummer),RIGHT(1),MSG('Factuurnummer'),TIP('Factuurnummer')
+[REPORTCONTROLS]
+! STRING(@n_7),USE(GloFactuurnummer),TRN,RIGHT(1)
+GloFactuurnummer      DECIMAL(7,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(a9275b35-d719-437d-8871-a48c2eb238b0),PROMPT('&Factuurnummer:'),HEADER('Glo Factuurnummer'),MESSAGE('Factuurnummer'),TOOLTIP('Factuurnummer'),PICTURE(@n_7),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloLaatsteFactuurnummer DECIMAL(7,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Factuurnummer:'),USE(?GloLaatsteFactuurnummer:Prompt)
+! ENTRY(@n_7),AT(,,,10),USE(GloLaatsteFactuurnummer),RIGHT(1),MSG('Factuurnummer'),TIP('Factuurnummer')
+[REPORTCONTROLS]
+! STRING(@n_7),USE(GloLaatsteFactuurnummer),TRN,RIGHT(1)
+GloLaatsteFactuurnummer DECIMAL(7,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(3298f2c6-1f2d-4bc2-841a-e1e053d4cab8),PROMPT('&Factuurnummer:'),HEADER('Glo Factuurnummer'),MESSAGE('Factuurnummer'),TOOLTIP('Factuurnummer'),PICTURE(@n_7),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloFactuurdatum DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Factuur&datum:'),USE(?GloFactuurdatum:Prompt)
+! SPIN(@d6),AT(,,,10),USE(GloFactuurdatum),RIGHT(1),MSG('Factuurdatum'),TIP('Factuurdatum'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloFactuurdatum),TRN,RIGHT(1)
+GloFactuurdatum       DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(67bf87fe-978a-44b8-af00-412ef7c69428),PROMPT('Factuur&datum:'),HEADER('Glo Factuurdatum'),MESSAGE('Factuurdatum'),TOOLTIP('Factuurdatum'),PICTURE(@d6),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloFilterSoort STRING(40),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Filter Soort:'),USE(?GloFilterSoort:Prompt)
+! ENTRY(@s40),USE(GloFilterSoort),MSG('Filter soort opmerkingen'),TIP('Filter soort opmerkingen')
+[REPORTCONTROLS]
+! STRING(@s40),USE(GloFilterSoort)
+GloFilterSoort        STRING(40),EXTERNAL,Dll(dll_mode)
+!!> GUID(e94155dd-32d6-46dc-918f-a14581f15dff),PROMPT('Glo Filter Soort:'),HEADER('Glo Filter Soort'),MESSAGE('Filter soort opmerkingen'),TOOLTIP('Filter soort opmerkingen'),PICTURE(@s40),TYPEMODE(OVR)
+!endregion
+!region GloPrintDebiteuren STRING(50),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Print Debiteuren:'),USE(?GloPrintDebiteuren:Prompt)
+! ENTRY(@s50),USE(GloPrintDebiteuren)
+[REPORTCONTROLS]
+! STRING(@s50),USE(GloPrintDebiteuren)
+GloPrintDebiteuren    STRING(50),EXTERNAL,Dll(dll_mode)
+!!> GUID(2900f577-dd87-4908-9e6a-51465655fa64),PROMPT('Glo Print Debiteuren:'),HEADER('Glo Print Debiteuren'),PICTURE(@s50),TYPEMODE(OVR)
+!endregion
+!region GloPrintCrediteuren STRING(50),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Print Crediteuren:'),USE(?GloPrintCrediteuren:Prompt)
+! ENTRY(@s50),USE(GloPrintCrediteuren)
+[REPORTCONTROLS]
+! STRING(@s50),USE(GloPrintCrediteuren)
+GloPrintCrediteuren   STRING(50),EXTERNAL,Dll(dll_mode)
+!!> GUID(c8f37ca3-9f01-492e-890b-b9e33140b98a),PROMPT('Glo Print Crediteuren:'),HEADER('Glo Print Crediteuren'),PICTURE(@s50),TYPEMODE(OVR)
+!endregion
+!region VanDebiteurnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Debiteurnummer:'),USE(?VanDebiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(VanDebiteurnummer),RIGHT,MSG('Van debiteurnummer'),TIP('Van debiteurnummer')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(VanDebiteurnummer),TRN,RIGHT
+VanDebiteurnummer     DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(484ba452-2892-41b7-ade8-aa0cfee917da),PROMPT('Van Debiteurnummer:'),HEADER('Van Debiteurnummer'),MESSAGE('Van debiteurnummer'),TOOLTIP('Van debiteurnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region TotDebiteurnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Debiteurnummer:'),USE(?TotDebiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(TotDebiteurnummer),RIGHT,MSG('T/m debiteurnummer'),TIP('T/m debiteurnummer')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(TotDebiteurnummer),TRN,RIGHT
+TotDebiteurnummer     DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(287941ba-9e9e-4e4c-8f31-713b1b2cd9c5),PROMPT('T/m Debiteurnummer:'),HEADER('T/m Debiteurnummer'),MESSAGE('T/m debiteurnummer'),TOOLTIP('T/m debiteurnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region VanCrediteurnummer DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Crediteurnummer:'),USE(?VanCrediteurnummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(VanCrediteurnummer),RIGHT,MSG('Van crediteurnummer'),TIP('Van crediteurnummer')
+[REPORTCONTROLS]
+! STRING(@n_6),USE(VanCrediteurnummer),TRN,RIGHT
+VanCrediteurnummer    DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(4f5f76da-1b8c-4a56-8a7a-96722f44ecb1),PROMPT('Van Crediteurnummer:'),HEADER('Van Crediteurnummer'),MESSAGE('Van crediteurnummer'),TOOLTIP('Van crediteurnummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region TotCrediteurnummer DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Crediteurnummer:'),USE(?TotCrediteurnummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(TotCrediteurnummer),RIGHT,MSG('T/m crediteurnummer'),TIP('T/m crediteurnummer')
+[REPORTCONTROLS]
+! STRING(@n_6),USE(TotCrediteurnummer),TRN,RIGHT
+TotCrediteurnummer    DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(9dce589b-58b4-49c2-bf9a-5c4cad5f77bd),PROMPT('T/m Crediteurnummer:'),HEADER('T/m Crediteurnummer'),MESSAGE('T/m crediteurnummer'),TOOLTIP('T/m crediteurnummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region VanZoekcode STRING(8),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Zoekcode:'),USE(?VanZoekcode:Prompt)
+! ENTRY(@s8),AT(,,,10),USE(VanZoekcode),MSG('Van zoekcode'),TIP('Van zoekcode'),UPR
+[REPORTCONTROLS]
+! STRING(@s8),USE(VanZoekcode)
+VanZoekcode           STRING(8),EXTERNAL,Dll(dll_mode)
+!!> GUID(8838a053-25f9-4ec0-8a62-a93385f16c55),PROMPT('Van Zoekcode:'),HEADER('Van Zoekcode'),MESSAGE('Van zoekcode'),TOOLTIP('Van zoekcode'),PICTURE(@s8),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region TotZoekcode STRING(8),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Zoekcode:'),USE(?TotZoekcode:Prompt)
+! ENTRY(@s8),AT(,,,10),USE(TotZoekcode),MSG('T/m zoekcode'),TIP('Y/m zoekcode'),UPR
+[REPORTCONTROLS]
+! STRING(@s8),USE(TotZoekcode)
+TotZoekcode           STRING(8),EXTERNAL,Dll(dll_mode)
+!!> GUID(aa2e4a06-dfec-4ca1-95d6-8a01992f5d0a),PROMPT('T/m Zoekcode:'),HEADER('T/m Zoekcode'),MESSAGE('T/m zoekcode'),TOOLTIP('Y/m zoekcode'),PICTURE(@s8),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region VanPostcode STRING(10),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Postcode:'),USE(?VanPostcode:Prompt)
+! ENTRY(@s10),AT(,,,10),USE(VanPostcode),MSG('Van postcode'),TIP('Van postcode'),UPR
+[REPORTCONTROLS]
+! STRING(@s10),USE(VanPostcode)
+VanPostcode           STRING(10),EXTERNAL,Dll(dll_mode)
+!!> GUID(867280ed-957a-4376-843a-35e897a68d0c),PROMPT('Van Postcode:'),HEADER('Van Postcode'),MESSAGE('Van postcode'),TOOLTIP('Van postcode'),PICTURE(@s10),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region TotPostcode STRING(10),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Postcode:'),USE(?TotPostcode:Prompt)
+! ENTRY(@s10),AT(,,,10),USE(TotPostcode),MSG('T/m postcode'),TIP('T/m postcode'),UPR
+[REPORTCONTROLS]
+! STRING(@s10),USE(TotPostcode)
+TotPostcode           STRING(10),EXTERNAL,Dll(dll_mode)
+!!> GUID(d4a3f8a0-eb76-4de6-b231-d2da752f6c4f),PROMPT('T/m Postcode:'),HEADER('T/m Postcode'),MESSAGE('T/m postcode'),TOOLTIP('T/m postcode'),PICTURE(@s10),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region VanPlaats STRING(40),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Plaats:'),USE(?VanPlaats:Prompt)
+! ENTRY(@s40),AT(,,,10),USE(VanPlaats),MSG('Van plaats'),TIP('Van plaats')
+[REPORTCONTROLS]
+! STRING(@s40),USE(VanPlaats)
+VanPlaats             STRING(40),EXTERNAL,Dll(dll_mode)
+!!> GUID(12970756-822d-4ca1-a802-a654a011546f),PROMPT('Van Plaats:'),HEADER('Van Plaats'),MESSAGE('Van plaats'),TOOLTIP('Van plaats'),PICTURE(@s40),TYPEMODE(OVR)
+!endregion
+!region TotPlaats STRING(40),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Plaats:'),USE(?TotPlaats:Prompt)
+! ENTRY(@s40),AT(,,,10),USE(TotPlaats),MSG('T/m plaats'),TIP('T/m plaats')
+[REPORTCONTROLS]
+! STRING(@s40),USE(TotPlaats)
+TotPlaats             STRING(40),EXTERNAL,Dll(dll_mode)
+!!> GUID(9038425e-df90-44eb-a2e1-b77cadc4f976),PROMPT('T/m Plaats:'),HEADER('T/m Plaats'),MESSAGE('T/m plaats'),TOOLTIP('T/m plaats'),PICTURE(@s40),TYPEMODE(OVR)
+!endregion
+!region VanHoofdroute DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Van Hoofdroute:'),USE(?VanHoofdroute:Prompt)
+! SPIN(@n_4),AT(,,,10),USE(VanHoofdroute),RIGHT,MSG('Van hoofdroute'),TIP('Van hoofdroute'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n_4),USE(VanHoofdroute),TRN,RIGHT
+VanHoofdroute         DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(3fba8584-29ef-4aaa-9ba6-e406cb1ece1c),PROMPT('&Van Hoofdroute:'),HEADER('Van Hoofdroute'),MESSAGE('Van hoofdroute'),TOOLTIP('Van hoofdroute'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region TotHoofdroute DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&T/m Hoofdroute:'),USE(?TotHoofdroute:Prompt)
+! SPIN(@n_4),AT(,,,10),USE(TotHoofdroute),RIGHT,MSG('T/m hoofdroute'),TIP('T/m hoofdroute'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n_4),USE(TotHoofdroute),TRN,RIGHT
+TotHoofdroute         DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(b0275030-f144-4f1c-8a79-a9d674a70450),PROMPT('&T/m Hoofdroute:'),HEADER('Tot Hoofdroute'),MESSAGE('T/m hoofdroute'),TOOLTIP('T/m hoofdroute'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region DatumLeveren DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Datum leveren:'),USE(?DatumLeveren:Prompt)
+! SPIN(@d6),AT(,,,10),USE(DatumLeveren),MSG('Datum leveren'),TIP('Datum leveren'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(DatumLeveren),TRN
+DatumLeveren          DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(170996b5-c087-496e-8fdc-f5dbcfb4356f),PROMPT('Datum leveren:'),HEADER('Datum Leveren'),MESSAGE('Datum leveren'),TOOLTIP('Datum leveren'),PICTURE(@d6),TYPEMODE(OVR)
+!endregion
+!region GloUitleverdatum DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Uitleverdatum:'),USE(?GloUitleverdatum:Prompt)
+! ENTRY(@d6b),USE(GloUitleverdatum)
+[REPORTCONTROLS]
+! STRING(@d6b),USE(GloUitleverdatum)
+GloUitleverdatum      DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(f7631866-871a-4645-ac3a-9f7202a0a56d),PROMPT('Glo Uitleverdatum:'),HEADER('Glo Uitleverdatum'),PICTURE(@d6b)
+!endregion
+!region GloCrediteurnummer DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Crediteurnummer:'),USE(?GloCrediteurnummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(GloCrediteurnummer),RIGHT,MSG('Crediteurnummer'),TIP('Crediteurnummer')
+[REPORTCONTROLS]
+! STRING(@n_6),USE(GloCrediteurnummer),TRN,RIGHT
+GloCrediteurnummer    DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(ec911e10-8e4f-4ebb-994c-ced2e421fffa),PROMPT('Glo Crediteurnummer:'),HEADER('Glo Crediteurnummer'),MESSAGE('Crediteurnummer'),TOOLTIP('Crediteurnummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloDebiteurnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Debiteurnummer:'),USE(?GloDebiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloDebiteurnummer),RIGHT,MSG('Debiteurnummer'),TIP('Debiteurnummer')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloDebiteurnummer),TRN,RIGHT
+GloDebiteurnummer     DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(8eb235b7-3ebf-467d-9eb6-251730f47394),PROMPT('Debiteurnummer:'),HEADER('Glo Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloInkoper STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Inkoper:'),USE(?GloInkoper:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloInkoper),MSG('Inkoper/Mederwerkerscode'),TIP('Inkoper/Mederwerkerscode')
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloInkoper),TRN
+GloInkoper            STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(0e1fdc9e-a48d-4d67-8a77-3f224faee661),PROMPT('Glo Inkoper:'),HEADER('Glo Inkoper'),MESSAGE('Inkoper/Mederwerkerscode'),TOOLTIP('Inkoper/Mederwerkerscode'),PICTURE(@s5),TYPEMODE(OVR)
+!endregion
+!region GloDatumLeveren DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Datum inkoop:'),USE(?GloDatumLeveren:Prompt)
+! SPIN(@d6),AT(,,,10),USE(GloDatumLeveren),MSG('Datum inkoop'),TIP('Datum inkoop'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloDatumLeveren),TRN
+GloDatumLeveren       DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(399408ad-b139-49c6-a5ef-61db4cde10fa),PROMPT('Datum inkoop:'),HEADER('Datum Leveren'),MESSAGE('Datum inkoop'),TOOLTIP('Datum inkoop'),PICTURE(@d6),TYPEMODE(OVR)
+!endregion
+!region GloDatumInkoop DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Datum inkoop:'),USE(?GloDatumInkoop:Prompt)
+! SPIN(@d6),AT(,,,10),USE(GloDatumInkoop),MSG('Datum inkoop'),TIP('Datum inkoop'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloDatumInkoop),TRN
+GloDatumInkoop        DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(a56bd3e1-f0e4-48aa-9e14-27350960c6f7),PROMPT('Datum inkoop:'),HEADER('Datum inkoop:'),MESSAGE('Datum inkoop'),TOOLTIP('Datum inkoop'),PICTURE(@d6),TYPEMODE(OVR)
+!endregion
+!region GloProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Productgroep:'),USE(?GloProductgroep:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloProductgroep),RIGHT,MSG('Productgroep'),TIP('Productgroep')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloProductgroep),TRN,RIGHT
+GloProductgroep       DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(b99532ff-6e55-471a-b869-2a71fb428e74),PROMPT('Glo Productgroep:'),HEADER('Glo Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Productnummer:'),USE(?GloProductnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloProductnummer),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloProductnummer),TRN,RIGHT
+GloProductnummer      DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(ff58afd0-170b-4def-baa1-14732cff6f0f),PROMPT('Productnummer:'),HEADER('Glo Productnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloOrigineelProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Bestelnummer:'),USE(?GloOrigineelProductgroep:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloOrigineelProductgroep),RIGHT,MSG('Productgroep'),TIP('Productgroep')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloOrigineelProductgroep),TRN,RIGHT
+GloOrigineelProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(58a2619a-bc9a-49ba-833a-b3e48749dcbb),PROMPT('Bestelnummer:'),HEADER('Glo Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloOrigineelProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Productnummer:'),USE(?GloOrigineelProductnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloOrigineelProductnummer),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloOrigineelProductnummer),TRN,RIGHT
+GloOrigineelProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(f4b5f179-838e-4a04-bc31-39ddd1f31f49),PROMPT('Productnummer:'),HEADER('Glo Productnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloNieuwProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Bestelnummer:'),USE(?GloNieuwProductgroep:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloNieuwProductgroep),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloNieuwProductgroep),TRN,RIGHT(1)
+GloNieuwProductgroep  DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(0fe0faf9-2544-4316-9e4c-d0e9bda336c0),PROMPT('Bestelnummer:'),HEADER('Glo Nieuw Productgroep'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloNieuwProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Productnummer:'),USE(?GloNieuwProductnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloNieuwProductnummer),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloNieuwProductnummer),TRN,RIGHT(1)
+GloNieuwProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(be3fb9b1-9b17-41e7-a520-5fa595774aac),PROMPT('Productnummer:'),HEADER('Glo Nieuw Productnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloAfdelingscode DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?GloAfdelingscode:Prompt)
+! ENTRY(@n_4),AT(,,,10),USE(GloAfdelingscode),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_4),USE(GloAfdelingscode),TRN,RIGHT
+GloAfdelingscode      DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(b8e66738-b3e1-4436-90a8-bc192addde74),PROMPT('Afdelingscode:'),HEADER('Glo Afdelingscode'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloKopie STRING(8),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Kopie:'),USE(?GloKopie:Prompt)
+! ENTRY(@s8),USE(GloKopie)
+[REPORTCONTROLS]
+! STRING(@s8),USE(GloKopie)
+GloKopie              STRING(8),EXTERNAL,Dll(dll_mode)
+!!> GUID(8ff21910-ba25-4e81-b1d3-a9d46a956868),PROMPT('Glo Kopie:'),HEADER('Glo Kopie'),PICTURE(@s8),TYPEMODE(OVR)
+!endregion
+!region GloVanProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Bestelnummer:'),USE(?GloVanProductnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloVanProductnummer),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloVanProductnummer),TRN,RIGHT
+GloVanProductnummer   DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(132fbcb1-2ac8-4350-8e15-b18a7bbb7042),PROMPT('Van Bestelnummer:'),HEADER('Glo Productnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloTotProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Productnummer:'),USE(?GloTotProductnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloTotProductnummer),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloTotProductnummer),TRN,RIGHT
+GloTotProductnummer   DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(cfda56f3-bc6f-42a9-81ef-ea2aa9cb5361),PROMPT('T/m Productnummer:'),HEADER('Glo Productnummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloVanProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Productgroep:'),USE(?GloVanProductgroep:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloVanProductgroep),RIGHT,MSG('Productgroep'),TIP('Productgroep')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloVanProductgroep),TRN,RIGHT
+GloVanProductgroep    DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(17b287fd-8425-4dbb-9228-7e0bbe0141c7),PROMPT('Van Productgroep:'),HEADER('Glo Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloTotProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Productgroep:'),USE(?GloTotProductgroep:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloTotProductgroep),RIGHT,MSG('Productgroep'),TIP('Productgroep')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloTotProductgroep),TRN,RIGHT
+GloTotProductgroep    DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(e95b73be-2333-4773-b976-bad0d78453fa),PROMPT('T/m Productgroep:'),HEADER('Glo Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloVerwerkDatum STRING(8),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkdatum:'),USE(?GloVerwerkDatum:Prompt)
+! ENTRY(@s8),AT(,,,10),USE(GloVerwerkDatum),MSG('Verwerkdatum FBS'),TIP('Verwerkdatum FBS')
+[REPORTCONTROLS]
+! STRING(@s8),USE(GloVerwerkDatum),TRN
+GloVerwerkDatum       STRING(8),EXTERNAL,Dll(dll_mode)
+!!> GUID(bb230eb6-760e-424b-8493-4711d5ea377d),PROMPT('Verwerkdatum:'),HEADER('Glo Verwerk Datum'),MESSAGE('Verwerkdatum FBS'),TOOLTIP('Verwerkdatum FBS'),PICTURE(@s8),TYPEMODE(OVR)
+!endregion
+!region GloPeriode STRING(2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Periode:'),USE(?GloPeriode:Prompt)
+! ENTRY(@s2),AT(,,,10),USE(GloPeriode),MSG('Periode'),TIP('Periode'),REQ
+[REPORTCONTROLS]
+! STRING(@s2),USE(GloPeriode)
+GloPeriode            STRING(2),EXTERNAL,Dll(dll_mode)
+!!> GUID(3572629a-a9f5-4ab2-82c3-8ca465af988e),VALID(NONZERO),PROMPT('&Periode:'),HEADER('Glo Periode'),MESSAGE('Periode'),TOOLTIP('Periode'),PICTURE(@s2),TYPEMODE(OVR)
+!endregion
+!region GloBoekjaar STRING(4),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Boekjaar:'),USE(?GloBoekjaar:Prompt)
+! ENTRY(@s4),AT(,,,10),USE(GloBoekjaar),MSG('Boekjaar'),TIP('Boekjaar')
+[REPORTCONTROLS]
+! STRING(@s4),USE(GloBoekjaar)
+GloBoekjaar           STRING(4),EXTERNAL,Dll(dll_mode)
+!!> GUID(b974fdca-a85b-4046-83ec-d5e7a27cc1ca),PROMPT('Boekjaar:'),HEADER('Glo Boekjaar'),MESSAGE('Boekjaar'),TOOLTIP('Boekjaar'),PICTURE(@s4),TYPEMODE(OVR)
+!endregion
+!region GloVerwDatumBank STRING(6),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkingsdatum Bank:'),USE(?GloVerwDatumBank:Prompt)
+! ENTRY(@s6),USE(GloVerwDatumBank),MSG('Verwerkingsdatum Bank'),TIP('Verwerkingsdatum Bank')
+[REPORTCONTROLS]
+! STRING(@s6),USE(GloVerwDatumBank)
+GloVerwDatumBank      STRING(6),EXTERNAL,Dll(dll_mode)
+!!> GUID(380089c8-a8fd-455c-82e3-3ca5903fb5e0),PROMPT('Verwerkingsdatum Bank:'),HEADER('Glo Verw Datum Bank'),MESSAGE('Verwerkingsdatum Bank'),TOOLTIP('Verwerkingsdatum Bank'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+!region GloVerwDatumGiro STRING(6),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkingsdatum Giro:'),USE(?GloVerwDatumGiro:Prompt)
+! ENTRY(@s6),USE(GloVerwDatumGiro),MSG('Verwerkingsdatum Bank'),TIP('Verwerkingsdatum Bank')
+[REPORTCONTROLS]
+! STRING(@s6),USE(GloVerwDatumGiro)
+GloVerwDatumGiro      STRING(6),EXTERNAL,Dll(dll_mode)
+!!> GUID(0ed833d8-482e-4dca-b7c5-e782fa83d20c),PROMPT('Verwerkingsdatum Giro:'),HEADER('Glo Verw Datum Bank'),MESSAGE('Verwerkingsdatum Bank'),TOOLTIP('Verwerkingsdatum Bank'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum0Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkingsdatum 0 Dagen:'),USE(?GloVerwerkDatum0Dagen:Prompt)
+! ENTRY(@s6),AT(,,,10),USE(GloVerwerkDatum0Dagen)
+[REPORTCONTROLS]
+! STRING(@s6),USE(GloVerwerkDatum0Dagen)
+GloVerwerkDatum0Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+!!> GUID(21587045-6177-4584-8316-f5729ff864c4),PROMPT('Verwerkingsdatum 0 Dagen:'),HEADER('Glo Verwerk Datum 0 Dagen'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum7Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkingsdatum 7 Dagen:'),USE(?GloVerwerkDatum7Dagen:Prompt)
+! ENTRY(@s6),AT(,,,10),USE(GloVerwerkDatum7Dagen)
+[REPORTCONTROLS]
+! STRING(@s6),USE(GloVerwerkDatum7Dagen)
+GloVerwerkDatum7Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+!!> GUID(34bdb302-77a1-4b41-a657-acf0b38edcff),PROMPT('Verwerkingsdatum 7 Dagen:'),HEADER('Glo Verwerk Datum 7 Dagen'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum14Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkingsdatum 14 Dagen:'),USE(?GloVerwerkDatum14Dagen:Prompt)
+! ENTRY(@s6),AT(,,,10),USE(GloVerwerkDatum14Dagen)
+[REPORTCONTROLS]
+! STRING(@s6),USE(GloVerwerkDatum14Dagen)
+GloVerwerkDatum14Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+!!> GUID(28e0e5c4-b49d-46d9-84b0-ecb466ac8f16),PROMPT('Verwerkingsdatum 14 Dagen:'),HEADER('Glo Verwerk Datum 14 Dagen'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum21Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Verwerkingsdatum 21 Dagen:'),USE(?GloVerwerkDatum21Dagen:Prompt)
+! ENTRY(@s6),AT(,,,10),USE(GloVerwerkDatum21Dagen)
+[REPORTCONTROLS]
+! STRING(@s6),USE(GloVerwerkDatum21Dagen)
+GloVerwerkDatum21Dagen STRING(6),EXTERNAL,Dll(dll_mode)
+!!> GUID(9b2fbde7-42a1-42d5-8f63-877f7128c9d8),PROMPT('Verwerkingsdatum 21 Dagen:'),HEADER('Glo Verwerk Datum 21 Dagen'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum0DagenDate DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Verwerk Datum 0 Dagen Date:'),USE(?GloVerwerkDatum0DagenDate:Prompt)
+! ENTRY(@d6),USE(GloVerwerkDatum0DagenDate)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloVerwerkDatum0DagenDate)
+GloVerwerkDatum0DagenDate DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(d37fe210-1dbf-4466-97eb-61a6b8d6ead8),PROMPT('Glo Verwerk Datum 0 Dagen Date:'),HEADER('Glo Verwerk Datum 0 Dagen Date'),PICTURE(@d6),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum7DagenDate DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Verwerk Datum 7 Dagen Date:'),USE(?GloVerwerkDatum7DagenDate:Prompt)
+! ENTRY(@d17),USE(GloVerwerkDatum7DagenDate)
+[REPORTCONTROLS]
+! STRING(@d17),USE(GloVerwerkDatum7DagenDate)
+GloVerwerkDatum7DagenDate DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(e8f6a958-47e8-48e6-9a1e-5fccb8743531),PROMPT('Glo Verwerk Datum 7 Dagen Date:'),HEADER('Glo Verwerk Datum 7 Dagen Date'),PICTURE(@d17),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum14DagenDate DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Verwerk Datum 14 Dagen Date:'),USE(?GloVerwerkDatum14DagenDate:Prompt)
+! ENTRY(@d17),USE(GloVerwerkDatum14DagenDate)
+[REPORTCONTROLS]
+! STRING(@d17),USE(GloVerwerkDatum14DagenDate)
+GloVerwerkDatum14DagenDate DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(e5658e82-fce0-495e-a7b4-766cc7102287),PROMPT('Glo Verwerk Datum 14 Dagen Date:'),HEADER('Glo Verwerk Datum 14 Dagen Date'),PICTURE(@d17),TYPEMODE(OVR)
+!endregion
+!region GloVerwerkDatum21DagenDate STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Verwerk Datum 21 Dagen Date:'),USE(?GloVerwerkDatum21DagenDate:Prompt)
+! ENTRY(@s20),USE(GloVerwerkDatum21DagenDate)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GloVerwerkDatum21DagenDate)
+GloVerwerkDatum21DagenDate STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(448a6a78-73d8-4378-b1ee-8c7d5e9a0c4a),PROMPT('Glo Verwerk Datum 21 Dagen Date:'),HEADER('Glo Verwerk Datum 21 Dagen Date'),PICTURE(@s20),TYPEMODE(OVR)
+!endregion
+!region GloStaffel LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Staffel:'),USE(?GloStaffel:Prompt)
+! LIST,AT(,,,10),USE(GloStaffel),VSCROLL,RIGHT(1),DROP(10),FROM('1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40')
+[REPORTCONTROLS]
+! LIST,USE(GloStaffel),RIGHT(1),DROP(5),FROM('1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40')
+GloStaffel            LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(9ae8b100-aafe-48ca-887a-02e0e6b2e4bb),VALID(INLIST('1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40')),PROMPT('&Staffel:'),HEADER('Glo Staffel'),PICTURE(@n2),TYPEMODE(OVR),JUSTIFY(RIGHT,1),VALUES('1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40')
+!endregion
+!region GloStaffelKortingSoort STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Soort:'),USE(?GloStaffelKortingSoort:Prompt)
+! LIST,AT(,,,10),USE(GloStaffelKortingSoort),DROP(5),FROM('Percentage |Bedrag |Nvt')
+[REPORTCONTROLS]
+! STRING(@s20),USE(GloStaffelKortingSoort)
+GloStaffelKortingSoort STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(6c4ecf43-6fdb-4b4d-99f9-ce2c668cfdf9),VALID(INLIST('Percentage |Bedrag |Nvt')),PROMPT('&Soort:'),HEADER('Glo Staffel Korting Soort'),PICTURE(@s20),TYPEMODE(OVR)
+!endregion
+!region GloStaffelKortingPercentage DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Percentage:'),USE(?GloStaffelKortingPercentage:Prompt)
+! SPIN(@n_6.2),AT(,,,10),USE(GloStaffelKortingPercentage),RIGHT,STEP(1)
+[REPORTCONTROLS]
+! STRING(@n_6.2),USE(GloStaffelKortingPercentage),RIGHT
+GloStaffelKortingPercentage DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(02fc3df8-ee5a-40ff-a79c-2f234154e361),PROMPT('Percentage:'),HEADER('Glo Staffel Korting Percentage'),PICTURE(@n_6.2),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloStaffelKortingBedrag DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Bedrag:'),USE(?GloStaffelKortingBedrag:Prompt)
+! ENTRY(@n_6.2),AT(,,,10),USE(GloStaffelKortingBedrag),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_6.2),USE(GloStaffelKortingBedrag),RIGHT
+GloStaffelKortingBedrag DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(8dd936c7-3473-4011-a48f-f3a72a5b70f2),PROMPT('&Bedrag:'),HEADER('Glo Staffel Korting Bedrag'),PICTURE(@n_6.2),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloHoofdgroep DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Hoofdgroep:'),USE(?GloHoofdgroep:Prompt)
+! ENTRY(@n_4),AT(,,,10),USE(GloHoofdgroep),RIGHT
+[REPORTCONTROLS]
+! STRING(@n_4),USE(GloHoofdgroep),RIGHT
+GloHoofdgroep         DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(91af32f6-9585-48b6-a53c-66319e31ffd5),PROMPT('Hoofdgroep:'),HEADER('Glo Hoofdgroep'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloSoortKlacht STRING(40),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Soort Klacht:'),USE(?GloSoortKlacht:Prompt)
+! ENTRY(@s40),AT(,,,10),USE(GloSoortKlacht),MSG('Soort klacht'),TIP('Soort klacht')
+[REPORTCONTROLS]
+! STRING(@s40),USE(GloSoortKlacht),TRN
+GloSoortKlacht        STRING(40),EXTERNAL,Dll(dll_mode)
+!!> GUID(a7444b48-9046-41ab-b9bf-50194919b9c3),PROMPT('Soort Klacht:'),HEADER('Glo Soort Klacht'),MESSAGE('Soort klacht'),TOOLTIP('Soort klacht'),PICTURE(@s40),TYPEMODE(OVR)
+!endregion
+!region GloVanDatum DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Datum:'),USE(?GloVanDatum:Prompt)
+! SPIN(@d6),AT(,,,10),USE(GloVanDatum),RIGHT,MSG('Van Datum'),TIP('Van Datum'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloVanDatum),TRN,RIGHT
+GloVanDatum           DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(8a4bdf52-200e-4928-b73f-d36adee62501),PROMPT('Van Datum:'),HEADER('Glo Van Datum'),MESSAGE('Van Datum'),TOOLTIP('Van Datum'),PICTURE(@d6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloTotDatum DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m Datum:'),USE(?GloTotDatum:Prompt)
+! SPIN(@d6),AT(,,,10),USE(GloTotDatum),RIGHT,MSG('T/m datum'),TIP('T/m datum'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloTotDatum),TRN,RIGHT
+GloTotDatum           DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(01e2371a-e715-4dcd-b44a-5c81228d293f),PROMPT('T/m Datum:'),HEADER('Glo Tot Datum'),MESSAGE('T/m datum'),TOOLTIP('T/m datum'),PICTURE(@d6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloMedewerkersCode STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Medewerkers Code:'),USE(?GloMedewerkersCode:Prompt)
+! ENTRY(@s5),USE(GloMedewerkersCode),MSG('Medewerkerscode'),TIP('Medewerkerscode')
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloMedewerkersCode)
+GloMedewerkersCode    STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(c7c9889f-e8c6-4ad3-8f5b-a3e9dfedf702),PROMPT('Glo Medewerkers Code:'),HEADER('Glo Medewerkers Code'),MESSAGE('Medewerkerscode'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),TYPEMODE(OVR)
+!endregion
+!region GloVanMedewerkerscode STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Van Medewerkerscode:'),USE(?GloVanMedewerkerscode:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloVanMedewerkerscode),MSG('Medewerkerscode (bijv. initialen)'),TIP('Medewerkerscode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloVanMedewerkerscode),TRN
+GloVanMedewerkerscode STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(f7bce95e-5571-4fca-a070-3a5ec8de3454),VALID(NONZERO),PROMPT('&Van Medewerkerscode:'),HEADER('Medewerkerscode'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GloTotMedewerkerscode STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('T/m &Medewerkerscode:'),USE(?GloTotMedewerkerscode:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloTotMedewerkerscode),MSG('Medewerkerscode (bijv. initialen)'),TIP('Medewerkerscode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloTotMedewerkerscode),TRN
+GloTotMedewerkerscode STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(d7836891-c99d-44d9-a3f0-58caa40a16f8),VALID(NONZERO),PROMPT('T/m &Medewerkerscode:'),HEADER('Medewerkerscode'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GloDag STRING(15),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Dag:'),USE(?GloDag:Prompt)
+! LIST,AT(,,,10),USE(GloDag),MSG('Dag'),TIP('Dag'),DROP(7),FROM('Maandag |Dinsdag |Woensdag |Donderdag |Vrijdag |Zaterdag |Zondag')
+[REPORTCONTROLS]
+! STRING(@s15),USE(GloDag),TRN
+GloDag                STRING(15),EXTERNAL,Dll(dll_mode)
+!!> GUID(9ddeb014-dcd3-4dae-9914-2fc31a3aba90),VALID(INLIST('Maandag |Dinsdag |Woensdag |Donderdag |Vrijdag |Zaterdag |Zondag')),PROMPT('Dag:'),HEADER('Glo Dag'),MESSAGE('Dag'),TOOLTIP('Dag'),PICTURE(@s15),TYPEMODE(OVR)
+!endregion
+!region GloWeek SHORT,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Week:'),USE(?GloWeek:Prompt)
+! SPIN(@n2),USE(GloWeek),RIGHT(1),MSG('Weeknr'),TIP('Weeknr'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n2),USE(GloWeek),TRN,RIGHT(1)
+GloWeek               SHORT,EXTERNAL,Dll(dll_mode)
+!!> GUID(9c67649e-aae7-4d09-8aad-701f71c8538e),PROMPT('Week:'),HEADER('Glo Week'),MESSAGE('Weeknr'),TOOLTIP('Weeknr'),PICTURE(@n2),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloLandcode STRING(3),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Landcode:'),USE(?GloLandcode:Prompt)
+! ENTRY(@s3),USE(GloLandcode),MSG('Landcode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(GloLandcode)
+GloLandcode           STRING(3),EXTERNAL,Dll(dll_mode)
+!!> GUID(8dea82a6-fab4-4929-b779-4209bc57a053),VALID(NONZERO),PROMPT('&Landcode:'),HEADER('Glo Landcode'),MESSAGE('Landcode'),PICTURE(@s3),CASE(UPPER),TYPEMODE(OVR),DERIVEDFROM('LAN:Landcode')
+!endregion
+!region GloWijzigen STRING(1),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! CHECK('Glo Wijzigen'),USE(GloWijzigen),MSG('Mogelijkheid voor gegevens te wijzigen'),TIP('Mogelijkheid voor gegevens te wijzigen')
+[REPORTCONTROLS]
+! CHECK('Glo Wijzigen'),USE(GloWijzigen)
+GloWijzigen           STRING(1),EXTERNAL,Dll(dll_mode)
+!!> GUID(63016a94-5047-45aa-9074-3289a832442b),VALID(BOOLEAN),PROMPT('Glo Wijzigen:'),HEADER('Glo Wijzigen'),MESSAGE('Mogelijkheid voor gegevens te wijzigen'),TOOLTIP('Mogelijkheid voor gegevens te wijzigen'),PICTURE(@s1),TYPEMODE(OVR)
+!endregion
+!region GloVanWeek SHORT(1),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Van Week:'),USE(?GloVanWeek:Prompt)
+! SPIN(@n2),USE(GloVanWeek),RIGHT(1),MSG('Van Week'),TIP('Van Week'),RANGE(1,35),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n2),USE(GloVanWeek),RIGHT(1)
+GloVanWeek            SHORT(1),EXTERNAL,Dll(dll_mode)
+!!> GUID(f222b0cb-e4d5-4f53-9c66-ef95e80767e2),VALID(INRANGE(1,35)),INITIAL('1'),PROMPT('Van Week:'),HEADER('Glo Van Week'),MESSAGE('Van Week'),TOOLTIP('Van Week'),PICTURE(@n2),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloTotWeek SHORT,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Tot/met Week:'),USE(?GloTotWeek:Prompt)
+! SPIN(@n2),USE(GloTotWeek),RIGHT(1),MSG('T/m week'),TIP('T/m week'),RANGE(1,52),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n2),USE(GloTotWeek),RIGHT(1)
+GloTotWeek            SHORT,EXTERNAL,Dll(dll_mode)
+!!> GUID(f326e967-9c4e-46a5-bc45-2fc910f159d5),VALID(INRANGE(1,52)),PROMPT('Tot/met Week:'),HEADER('Glo Tot Week'),MESSAGE('T/m week'),TOOLTIP('T/m week'),PICTURE(@n2),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloHoofdroute DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Hoofdroute:'),USE(?GloHoofdroute:Prompt)
+! SPIN(@n_4),AT(,,,10),USE(GloHoofdroute),DECIMAL(12),MSG('Hoofdroute'),TIP('Hoofdroute')
+[REPORTCONTROLS]
+! STRING(@n_4),USE(GloHoofdroute),TRN,DECIMAL(12)
+GloHoofdroute         DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(9a11fcde-43ec-421f-a380-cc216120c142),PROMPT('&Hoofdroute:'),HEADER('Glo Hoofdroute'),MESSAGE('Hoofdroute'),TOOLTIP('Hoofdroute'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(DECIMAL,12)
+!endregion
+!region GloVanMagazijnroute LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Magazijnroute:'),USE(?GloVanMagazijnroute:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloVanMagazijnroute),RIGHT,MSG('Magazijnroute'),TIP('Magazijnroute')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloVanMagazijnroute),TRN,RIGHT
+GloVanMagazijnroute   LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(a2de72fe-9966-48f6-85df-fb46d2604d3b),PROMPT('&Magazijnroute:'),HEADER('Magazijnroute'),MESSAGE('Magazijnroute'),TOOLTIP('Magazijnroute'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT),DERIVEDFROM('PRO:Magazijnroute')
+!endregion
+!region GloTotMagazijnroute LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Magazijnroute:'),USE(?GloTotMagazijnroute:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloTotMagazijnroute),RIGHT,MSG('Magazijnroute'),TIP('Magazijnroute')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloTotMagazijnroute),TRN,RIGHT
+GloTotMagazijnroute   LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(45f6489c-97f3-4eb9-ae0e-ea5a0b6cfeed),PROMPT('&Magazijnroute:'),HEADER('Magazijnroute'),MESSAGE('Magazijnroute'),TOOLTIP('Magazijnroute'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT),DERIVEDFROM('PRO:Magazijnroute')
+!endregion
+!region GloLabelType STRING(25),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Label Type:'),USE(?GloLabelType:Prompt)
+! ENTRY(@s25),USE(GloLabelType),MSG('Label type'),REQ,OVR
+[REPORTCONTROLS]
+! STRING(@s25),USE(GloLabelType)
+GloLabelType          STRING(25),EXTERNAL,Dll(dll_mode)
+!!> GUID(3bac5289-28cc-4d43-abaa-ad5f3c524bfd),VALID(NONZERO),PROMPT('Label Type:'),HEADER('Glo Label Type'),MESSAGE('Label type'),PICTURE(@s25),TYPEMODE(INS),DERIVEDFROM('ETI:LabelType')
+!endregion
+!region GloTransporteur DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Transporteur:'),USE(?GloTransporteur:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(GloTransporteur),MSG('Transporteur'),TIP('Transporteur'),INS
+[REPORTCONTROLS]
+! STRING(@n_6),USE(GloTransporteur),TRN
+GloTransporteur       DECIMAL(6,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(bcf1ee36-f8e0-4781-ab31-70de7559ddf4),PROMPT('&Transporteur:'),HEADER('Transporteur'),MESSAGE('Transporteur'),TOOLTIP('Transporteur'),PICTURE(@n_6),TYPEMODE(INS)
+!endregion
+!region GloDatumOphalen DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Datum ophalen:'),USE(?GloDatumOphalen:Prompt)
+! SPIN(@d6),AT(,,,10),USE(GloDatumOphalen),MSG('Datum ophalen'),TIP('Datum ophalen'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GloDatumOphalen),TRN
+GloDatumOphalen       DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(f21eb1bf-ab92-4274-aa95-bd94d7e3bbe7),PROMPT('&Datum ophalen:'),HEADER('Datum ophalen'),MESSAGE('Datum ophalen'),TOOLTIP('Datum ophalen'),PICTURE(@d6),TYPEMODE(OVR),DERIVEDFROM('INK:DatumOphalen')
+!endregion
+!region GloTijdOphalen TIME,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Tijd Ophalen:'),USE(?GloTijdOphalen:Prompt)
+! ENTRY(@t7),USE(GloTijdOphalen)
+[REPORTCONTROLS]
+! STRING(@t7),USE(GloTijdOphalen)
+GloTijdOphalen        TIME,EXTERNAL,Dll(dll_mode)
+!!> GUID(e39a693e-de97-4f76-824b-7af19c4c78ea),PROMPT('Tijd Ophalen:'),HEADER('Glo Tijd Ophalen'),PICTURE(@t7),TYPEMODE(OVR)
+!endregion
+!region GloInkoopOpmerking1 STRING(500),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Opmerking 1:'),USE(?GloInkoopOpmerking1:Prompt)
+! TEXT,USE(GloInkoopOpmerking1),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GloInkoopOpmerking1),BOXED,TRN
+GloInkoopOpmerking1   STRING(500),EXTERNAL,Dll(dll_mode)
+!!> GUID(a3477dca-c15f-4b43-87ed-3e2d0a4110e7),PROMPT('Opmerking 1:'),HEADER('Glo Inkoop Opmerking 1'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GloInkoopOpmerking2 STRING(500),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Opmerking 2:'),USE(?GloInkoopOpmerking2:Prompt)
+! TEXT,USE(GloInkoopOpmerking2),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GloInkoopOpmerking2),BOXED,TRN
+GloInkoopOpmerking2   STRING(500),EXTERNAL,Dll(dll_mode)
+!!> GUID(5a713a4c-c9f8-4652-97b1-26e34704f132),PROMPT('Opmerking 2:'),HEADER('Glo Inkoop Opmerking 2'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GloMedewerkerscodeAanmelden STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Medewerkerscode:'),USE(?GloMedewerkerscodeAanmelden:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloMedewerkerscodeAanmelden),MSG('Medewerkerscode (bijv. initialen)'),TIP('Medewerkerscode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloMedewerkerscodeAanmelden),TRN
+GloMedewerkerscodeAanmelden STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(4a1bd30a-0e33-478b-a2bf-b6f3f1bd6253),VALID(NONZERO),PROMPT('&Medewerkerscode:'),HEADER('Medewerkerscode'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GloWachtwoord STRING(10),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Wachtwoord:'),USE(?GloWachtwoord:Prompt)
+! ENTRY(@s10),USE(GloWachtwoord),MSG('Wachtwoord'),TIP('Wachtwoord'),PASSWORD
+[REPORTCONTROLS]
+! STRING(@s10),USE(GloWachtwoord)
+GloWachtwoord         STRING(10),EXTERNAL,Dll(dll_mode)
+!!> GUID(8ece856c-2469-4c1e-9c1a-7ffaafc97fbf),PROMPT('Glo Wachtwoord:'),HEADER('Glo Wachtwoord'),MESSAGE('Wachtwoord'),TOOLTIP('Wachtwoord'),PICTURE(@s10),TYPEMODE(OVR),PASSWORD,DERIVEDFROM('MED:Wachtwoord')
+!endregion
+!region GloAanmelden STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Aanmelden:'),USE(?GloAanmelden:Prompt)
+! ENTRY(@s20),USE(GloAanmelden)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GloAanmelden)
+GloAanmelden          STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(10cd0c44-921e-4ee3-a85c-4df520f68d07),PROMPT('Glo Aanmelden:'),HEADER('Glo Aanmelden'),PICTURE(@s20),TYPEMODE(OVR)
+!endregion
+!region GloMagazijnroute LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Magazijnroute:'),USE(?GloMagazijnroute:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GloMagazijnroute),RIGHT,MSG('Magazijnroute'),TIP('Magazijnroute')
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GloMagazijnroute),TRN,RIGHT
+GloMagazijnroute      LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(f31d6d92-4f87-47c3-8a89-c89e697aa5ef),PROMPT('&Magazijnroute:'),HEADER('Magazijnroute'),MESSAGE('Magazijnroute'),TOOLTIP('Magazijnroute'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT),DERIVEDFROM('PRO:Magazijnroute')
+!endregion
+!region GloConsumentenStaffel STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Staffel:'),USE(?GloConsumentenStaffel:Prompt)
+! LIST,USE(GloConsumentenStaffel),DROP(6),FROM('Geen |A |B |C |D |E')
+[REPORTCONTROLS]
+! STRING(@s20),USE(GloConsumentenStaffel)
+GloConsumentenStaffel STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(16918e63-d664-44e1-8c32-79d465b2cfdc),VALID(INLIST('Geen |A |B |C |D |E')),PROMPT('Staffel:'),HEADER('Glo Consumenten Staffel'),PICTURE(@s20),TYPEMODE(OVR),VALUES('Geen |A |B |C |D |E')
+!endregion
+!region GloAantal DECIMAL(7,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Aantal:'),USE(?GloAantal:Prompt)
+! SPIN(@n-_7.2),AT(,,,10),USE(GloAantal),RIGHT,MSG('Aantal'),TIP('Aantal'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n-_7.2),USE(GloAantal),TRN,RIGHT
+GloAantal             DECIMAL(7,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(ced88336-9c5d-4855-b07c-1930febfd8be),INITIAL('1'),PROMPT('&Aantal:'),HEADER('Glo Aantal'),MESSAGE('Aantal'),TOOLTIP('Aantal'),PICTURE(@n-_7.2),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloOpslagAanbod DECIMAL(5,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Opslagpercentage:'),USE(?GloOpslagAanbod:Prompt)
+! ENTRY(@n-7.2),USE(GloOpslagAanbod),RIGHT,MSG('Opslag perc. voor aanbod'),TIP('Opslag perc. voor aanbod')
+[REPORTCONTROLS]
+! STRING(@n-7.2),USE(GloOpslagAanbod),RIGHT
+GloOpslagAanbod       DECIMAL(5,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(bcd534e0-c75e-4625-a7c4-b0b475faeec7),PROMPT('Opslagpercentage:'),HEADER('Glo Opslag Aanbod'),MESSAGE('Opslag perc. voor aanbod'),TOOLTIP('Opslag perc. voor aanbod'),PICTURE(@n-7.2),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloModemNummer DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Modem Nummer:'),USE(?GloModemNummer:Prompt)
+! ENTRY(@n_4),AT(,,,10),USE(GloModemNummer),RIGHT,MSG('Nummer van modembestellinge'),TIP('Nummer van modembestellinge')
+[REPORTCONTROLS]
+! STRING(@n_4),USE(GloModemNummer),TRN,RIGHT
+GloModemNummer        DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(82b8eeac-304d-44f9-a6c1-19792da4eff0),PROMPT('Glo Modem Nummer:'),HEADER('Glo Modem Nummer'),MESSAGE('Nummer van modembestellinge'),TOOLTIP('Nummer van modembestellinge'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GloProcedure STRING(50),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Procedure:'),USE(?GloProcedure:Prompt)
+! ENTRY(@s50),USE(GloProcedure)
+[REPORTCONTROLS]
+! STRING(@s50),USE(GloProcedure)
+GloProcedure          STRING(50),EXTERNAL,Dll(dll_mode)
+!!> GUID(12aafd8a-fc82-458a-ac12-19ba54fdb564),PROMPT('Glo Procedure:'),HEADER('Glo Procedure'),PICTURE(@s50),TYPEMODE(OVR)
+!endregion
+!region GloCradlenummer LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Cradlenummer:'),USE(?GloCradlenummer:Prompt)
+! ENTRY(@n02),USE(GloCradlenummer),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n02),USE(GloCradlenummer),RIGHT(1)
+GloCradlenummer       LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(aaf092f4-a02e-47f7-9bf3-acdcec6ca8a4),PROMPT('Cradlenummer:'),HEADER('Glo Cradlenummer'),PICTURE(@n02),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GLO:VanProductcategorie DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Productcategorie:'),USE(?GLO:VanProductcategorie:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:VanProductcategorie),RIGHT,MSG('Productcategorie'),TIP('Productcategorie'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:VanProductcategorie),TRN,RIGHT
+GLO:VanProductcategorie DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(15463b7f-ec98-4f92-b46c-084f9a760377),VALID(NONZERO),PROMPT('Productcategorie:'),HEADER('Categorie'),MESSAGE('Productcategorie'),TOOLTIP('Productcategorie'),PICTURE(@n_4.0),TYPEMODE(INS),JUSTIFY(RIGHT)
+!endregion
+!region GLO:TmProductcategorie DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Productcategorie:'),USE(?GLO:TmProductcategorie:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:TmProductcategorie),RIGHT,MSG('Productcategorie'),TIP('Productcategorie'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:TmProductcategorie),TRN,RIGHT
+GLO:TmProductcategorie DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(a4b26990-0e50-4d2c-a714-76b38bb6f12c),VALID(NONZERO),PROMPT('Productcategorie:'),HEADER('Categorie'),MESSAGE('Productcategorie'),TOOLTIP('Productcategorie'),PICTURE(@n_4.0),TYPEMODE(INS),JUSTIFY(RIGHT)
+!endregion
+!region GLO:MailSoort STRING(50),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! OPTION('Soort'),AT(,,50,48),USE(GLO:MailSoort),BOXED,MSG('Soort mail (e-mail/fax/eigen'),TIP('Soort mail (e-mail/fax/eigen')
+! RADIO('E-mail'),USE(?GLO:MailSoort:Radio1),VALUE('E-mail')
+! RADIO('Fax'),USE(?GLO:MailSoort:Radio2),VALUE('Fax')
+! RADIO('Eigen'),USE(?GLO:MailSoort:Radio3),VALUE('Eigen')
+! END
+[REPORTCONTROLS]
+! STRING(@s50),USE(GLO:MailSoort)
+GLO:MailSoort         STRING(50),EXTERNAL,Dll(dll_mode)
+!!> GUID(9a90ac15-2026-4808-842c-0c5c0615c6a0),VALID(INLIST('E-mail|Fax|Eigen')),PROMPT('Soort:'),HEADER('GLO : Mail Soort'),MESSAGE('Soort mail (e-mail/fax/eigen'),TOOLTIP('Soort mail (e-mail/fax/eigen'),PICTURE(@s50),TYPEMODE(OVR),VALUES('E-mail|Fax|Eigen')
+!endregion
+!region GLO:NoEmail BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : No Email:'),USE(?GLO:NoEmail:Prompt)
+! ENTRY(@n3),USE(GLO:NoEmail)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:NoEmail)
+GLO:NoEmail           BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(b95bcd52-73ce-4c7b-964f-a9fcff67e107),PROMPT('GLO : No Email:'),HEADER('GLO : No Email'),PICTURE(@n3),TYPEMODE(OVR)
+!endregion
+!region GLO:NoPreview BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : No Preview:'),USE(?GLO:NoPreview:Prompt)
+! ENTRY(@n3),USE(GLO:NoPreview)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:NoPreview)
+GLO:NoPreview         BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(db30d0f9-40d4-40bc-9241-1d49acdfca76),PROMPT('GLO : No Preview:'),HEADER('GLO : No Preview'),PICTURE(@n3),TYPEMODE(OVR)
+!endregion
+!region GLO:RandNo BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Rand No:'),USE(?GLO:RandNo:Prompt)
+! ENTRY(@n3),USE(GLO:RandNo)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:RandNo)
+GLO:RandNo            BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(79735e75-3080-480b-8ad7-10c03d7c7512),PROMPT('GLO : Rand No:'),HEADER('GLO : Rand No'),PICTURE(@n3),TYPEMODE(OVR)
+!endregion
+!region GLO:RTFname STRING('Report {44}'),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : RTF name:'),USE(?GLO:RTFname:Prompt)
+! ENTRY(@s50),USE(GLO:RTFname)
+[REPORTCONTROLS]
+! STRING(@s50),USE(GLO:RTFname)
+GLO:RTFname           STRING('Report {44}'),EXTERNAL,Dll(dll_mode)
+!!> GUID(73409b45-12b4-47e6-bcf4-96a52d9b0e2c),INITIAL('Report'),PROMPT('GLO : RTF name:'),HEADER('GLO : RTF name'),PICTURE(@s50),TYPEMODE(OVR)
+!endregion
+!region GLO:RTFpath STRING(200),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : RTF path:'),USE(?GLO:RTFpath:Prompt)
+! ENTRY(@s200),USE(GLO:RTFpath)
+[REPORTCONTROLS]
+! STRING(@s200),USE(GLO:RTFpath)
+GLO:RTFpath           STRING(200),EXTERNAL,Dll(dll_mode)
+!!> GUID(873f0d8f-3038-4a54-88f1-e07c65f62e2c),PROMPT('GLO : RTF path:'),HEADER('GLO : RTF path'),PICTURE(@s200),TYPEMODE(OVR)
+!endregion
+!region GLO:MailTo STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('To:'),USE(?GLO:MailTo:Prompt)
+! ENTRY(@s255),USE(GLO:MailTo),MSG('Mail to:'),TIP('Mail to:')
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:MailTo)
+GLO:MailTo            STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(137a6d5d-cb0b-44fc-b8b7-4a649dda5714),PROMPT('To:'),HEADER('GLO : Mail To'),MESSAGE('Mail to:'),TOOLTIP('Mail to:'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:MailCC STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('CC:'),USE(?GLO:MailCC:Prompt)
+! ENTRY(@s255),USE(GLO:MailCC),MSG('Mail CC:'),TIP('Mail CC:')
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:MailCC)
+GLO:MailCC            STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(e786d1fd-556c-4e4f-b3bb-507a060190f7),PROMPT('CC:'),HEADER('GLO : Mail CC'),MESSAGE('Mail CC:'),TOOLTIP('Mail CC:'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:MailBCC STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('BCC:'),USE(?GLO:MailBCC:Prompt)
+! ENTRY(@s255),USE(GLO:MailBCC),MSG('Mail BCC:'),TIP('Mail BCC:')
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:MailBCC)
+GLO:MailBCC           STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(32173a95-fc87-43bc-a4ee-7099bb507697),PROMPT('BCC:'),HEADER('GLO : Mail BCC'),MESSAGE('Mail BCC:'),TOOLTIP('Mail BCC:'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:Subject STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Subject:'),USE(?GLO:Subject:Prompt)
+! ENTRY(@s255),USE(GLO:Subject),MSG('Onderwerp'),TIP('Onderwerp')
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:Subject)
+GLO:Subject           STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(cdebd619-0fe0-4690-8a4a-ea6c9190660f),PROMPT('Subject:'),HEADER('GLO : Subject'),MESSAGE('Onderwerp'),TOOLTIP('Onderwerp'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:RTFleft LONG(500),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : RTF left:'),USE(?GLO:RTFleft:Prompt)
+! ENTRY(@n-14),USE(GLO:RTFleft)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(GLO:RTFleft)
+GLO:RTFleft           LONG(500),EXTERNAL,Dll(dll_mode)
+!!> GUID(8739cd7b-47e4-4201-9a21-c61667d1c977),INITIAL('500'),PROMPT('GLO : RTF left:'),HEADER('GLO : RTF left'),PICTURE(@n-14),TYPEMODE(OVR)
+!endregion
+!region GLO:RTFtop LONG(500),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : RTF top:'),USE(?GLO:RTFtop:Prompt)
+! ENTRY(@n-14),USE(GLO:RTFtop)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(GLO:RTFtop)
+GLO:RTFtop            LONG(500),EXTERNAL,Dll(dll_mode)
+!!> GUID(4cfd8d81-fedb-44ae-a363-8ed9d77942b7),INITIAL('500'),PROMPT('GLO : RTF top:'),HEADER('GLO : RTF top'),PICTURE(@n-14),TYPEMODE(OVR)
+!endregion
+!region Glo:Thread LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo : Thread:'),USE(?Glo:Thread:Prompt)
+! ENTRY(@n-14),USE(Glo:Thread),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(Glo:Thread),RIGHT(1)
+Glo:Thread            LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(21739aea-6754-404d-b7dd-c2609094dae5),PROMPT('Glo : Thread:'),HEADER('Glo : Thread'),PICTURE(@n-14),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloMagazijnpicker STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Magazijnpicker'),USE(?GloMagazijnpicker:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloMagazijnpicker),MSG('Medewerkerscode (bijv. initialen)'),TIP('Magazijnpicker'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloMagazijnpicker),TRN
+GloMagazijnpicker     STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(a468acfc-d282-42aa-9754-a59d79a1af52),VALID(NONZERO),PROMPT('&Magazijnpicker'),HEADER('Glo Magazijnpicker'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Magazijnpicker'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GloMagazijnpickerBatch STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Magazijnpicker'),USE(?GloMagazijnpickerBatch:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloMagazijnpickerBatch),MSG('Medewerkerscode (bijv. initialen)'),TIP('Magazijnpicker'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloMagazijnpickerBatch),TRN
+GloMagazijnpickerBatch STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(f9a6b2a8-02e4-4973-a5d5-b4efb496ee7f),VALID(NONZERO),PROMPT('&Magazijnpicker'),HEADER('Glo Magazijnpicker'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Magazijnpicker'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GloMagazijnpickerAparteOrder STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Medewerkerscode:'),USE(?GloMagazijnpickerAparteOrder:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GloMagazijnpickerAparteOrder),MSG('Medewerkerscode (bijv. initialen)'),TIP('Medewerkerscode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GloMagazijnpickerAparteOrder),TRN
+GloMagazijnpickerAparteOrder STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(6eea36b2-103f-4078-bb30-64005d6b86d3),VALID(NONZERO),PROMPT('&Medewerkerscode:'),HEADER('Medewerkerscode'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GloVastePrinter CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Vaste Printer:'),USE(?GloVastePrinter:Prompt)
+! TEXT,USE(GloVastePrinter),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GloVastePrinter),BOXED
+GloVastePrinter       CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(37f9e3d9-0735-4376-a096-7132d3729572),PROMPT('Vaste Printer:'),HEADER('Vaste Printer'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GloSoortPrint SHORT,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo Soort Print:'),USE(?GloSoortPrint:Prompt)
+! ENTRY(@n-7),USE(GloSoortPrint),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-7),USE(GloSoortPrint),RIGHT(1)
+GloSoortPrint         SHORT,EXTERNAL,Dll(dll_mode)
+!!> GUID(0d11e8d3-316c-4e81-9053-b699e2c775f1),PROMPT('Glo Soort Print:'),HEADER('Glo Soort Print'),PICTURE(@n-7),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GloCBLafdeling LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo CBL afdeling:'),USE(?GloCBLafdeling:Prompt)
+! ENTRY(@n2),USE(GloCBLafdeling),RIGHT,MSG('CBL afdeling'),TIP('CBL afdeling')
+[REPORTCONTROLS]
+! STRING(@n2),USE(GloCBLafdeling),RIGHT
+GloCBLafdeling        LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(88ecdc91-e32a-484c-b7f9-44ceec95a07e),PROMPT('Glo CBL afdeling:'),HEADER('Glo CBL afdeling'),MESSAGE('CBL afdeling'),TOOLTIP('CBL afdeling'),PICTURE(@n2),TYPEMODE(OVR),JUSTIFY(RIGHT),DERIVEDFROM('CBLA:CBLafdeling')
+!endregion
+!region GloCBLhoofdgroep LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo CBL hoofdgroep:'),USE(?GloCBLhoofdgroep:Prompt)
+! ENTRY(@n3),USE(GloCBLhoofdgroep),RIGHT,MSG('CBL hoofdgroep'),TIP('CBL hoofdgroep')
+[REPORTCONTROLS]
+! STRING(@n3),USE(GloCBLhoofdgroep),RIGHT
+GloCBLhoofdgroep      LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(994e869b-78b3-431a-bb91-13b49761f48c),PROMPT('Glo CBL hoofdgroep:'),HEADER('Glo CBL hoofdgroep'),MESSAGE('CBL hoofdgroep'),TOOLTIP('CBL hoofdgroep'),PICTURE(@n3),TYPEMODE(OVR),JUSTIFY(RIGHT),DERIVEDFROM('CBLH:CBLhoofdgroep')
+!endregion
+!region GLO:Bestandsnaam CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Bestandsnaam:'),USE(?GLO:Bestandsnaam:Prompt)
+! TEXT,USE(GLO:Bestandsnaam),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GLO:Bestandsnaam),BOXED
+GLO:Bestandsnaam      CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(614d8c33-e93b-44ad-89bc-0c538751e6ca),PROMPT('GLO : Bestandsnaam:'),HEADER('GLO : Bestandsnaam'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:BestandsCopy CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Bestands Copy:'),USE(?GLO:BestandsCopy:Prompt)
+! ENTRY(@s255),USE(GLO:BestandsCopy)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:BestandsCopy)
+GLO:BestandsCopy      CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(e97ad19b-310b-4280-9d1a-080b03ee6029),PROMPT('GLO : Bestands Copy:'),HEADER('GLO : Bestands Copy'),PICTURE(@s255)
+!endregion
+!region GLO:GebruikersValutaProduct STRING(3),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Valutacode:'),USE(?GLO:GebruikersValutaProduct:Prompt)
+! ENTRY(@s3),AT(,,,10),USE(GLO:GebruikersValutaProduct),MSG('Valutacode'),TIP('Valutacode'),UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(GLO:GebruikersValutaProduct),TRN
+GLO:GebruikersValutaProduct STRING(3),EXTERNAL,Dll(dll_mode)
+!!> GUID(8425a8ac-2573-4770-993c-917f62cf6eef),PROMPT('&Valutacode:'),HEADER('Valutacode'),MESSAGE('Valutacode'),TOOLTIP('Valutacode'),PICTURE(@s3),CASE(UPPER),TYPEMODE(OVR),DERIVEDFROM('VAL:Valutacode')
+!endregion
+!region GLO:GebruikersDebOmzetScherm STRING(3),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Gebruikers Deb Omzet Scherm:'),USE(?GLO:GebruikersDebOmzetScherm:Prompt)
+! ENTRY(@s3),USE(GLO:GebruikersDebOmzetScherm)
+[REPORTCONTROLS]
+! STRING(@s3),USE(GLO:GebruikersDebOmzetScherm)
+GLO:GebruikersDebOmzetScherm STRING(3),EXTERNAL,Dll(dll_mode)
+!!> GUID(20c67047-c6a8-4f3f-b607-40937244aa46),PROMPT('GLO : Gebruikers Deb Omzet Scherm:'),HEADER('GLO : Gebruikers Deb Omzet Scherm'),PICTURE(@s3),TYPEMODE(OVR)
+!endregion
+!region GLO:VBAF::ViewMode BYTE,EXTERNAL,Dll(dll_mode),THREAD
+[SCREENCONTROLS]
+! PROMPT('GLO : VBAF :: View Mode:'),USE(?GLO:VBAF::ViewMode:Prompt)
+! ENTRY(@n3),USE(GLO:VBAF::ViewMode)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:VBAF::ViewMode)
+GLO:VBAF::ViewMode    BYTE,EXTERNAL,Dll(dll_mode),THREAD
+!!> GUID(922add48-fc0d-4bca-b97d-e62f31977610),PROMPT('GLO : VBAF :: View Mode:'),HEADER('GLO : VBAF :: View Mode'),PICTURE(@n3),TYPEMODE(OVR)
+!endregion
+!region GLO:RetourView BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Retour View:'),USE(?GLO:RetourView:Prompt)
+! ENTRY(@n1),USE(GLO:RetourView)
+[REPORTCONTROLS]
+! STRING(@n1),USE(GLO:RetourView)
+GLO:RetourView        BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(061b4efc-eee5-4165-8eaf-b369eb1df0fe),PROMPT('GLO : Retour View:'),HEADER('GLO : Retour View'),PICTURE(@n1),TYPEMODE(OVR)
+!endregion
+!region GLO:StatusPrintMedewerker STRING(15),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Status:'),USE(?GLO:StatusPrintMedewerker:Prompt)
+! LIST,USE(GLO:StatusPrintMedewerker),DROP(5),FROM('Alles|In Dienst|Uit Dienst')
+[REPORTCONTROLS]
+! STRING(@s15),USE(GLO:StatusPrintMedewerker)
+GLO:StatusPrintMedewerker STRING(15),EXTERNAL,Dll(dll_mode)
+!!> GUID(f6cab2c6-13e6-43ae-909e-be78372428d0),VALID(INLIST('Alles|In Dienst|Uit Dienst')),PROMPT('Status:'),HEADER('GLO : Status Print Medewerker'),PICTURE(@s15),TYPEMODE(OVR),VALUES('Alles|In Dienst|Uit Dienst')
+!endregion
+!region GLO:SortPrintMedewerker STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Sort Print Medewerker:'),USE(?GLO:SortPrintMedewerker:Prompt)
+! LIST,USE(GLO:SortPrintMedewerker),DROP(5),FROM('Op Nummer|Op Achternaam')
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:SortPrintMedewerker)
+GLO:SortPrintMedewerker STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(a341c4e7-e2dd-40b8-9f56-ab6190d017cc),VALID(INLIST('Op Nummer|Op Achternaam')),PROMPT('GLO : Sort Print Medewerker:'),HEADER('GLO : Sort Print Medewerker'),PICTURE(@s20),TYPEMODE(OVR),VALUES('Op Nummer|Op Achternaam')
+!endregion
+!region GLO:AGFMedewerkerscode STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Medewerkerscode:'),USE(?GLO:AGFMedewerkerscode:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GLO:AGFMedewerkerscode),MSG('Medewerkerscode (bijv. initialen)'),TIP('Medewerkerscode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GLO:AGFMedewerkerscode),TRN
+GLO:AGFMedewerkerscode STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(8e70070b-a7e4-44a4-8b28-6e3fa2699ec3),VALID(NONZERO),PROMPT('&Medewerkerscode:'),HEADER('Medewerkerscode'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GLO:TempBestandDiepvrieslijst CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Diepvrieslijst:'),USE(?GLO:TempBestandDiepvrieslijst:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandDiepvrieslijst)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandDiepvrieslijst),BOXED
+GLO:TempBestandDiepvrieslijst CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(3f376679-2306-414e-8740-70aa92455840),PROMPT('GLO : Temp Bestand Diepvrieslijst:'),HEADER('GLO : Temp Bestand Diepvrieslijst'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:TempBestandChauffeurslijst CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Chauffeurslijst:'),USE(?GLO:TempBestandChauffeurslijst:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandChauffeurslijst)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandChauffeurslijst),BOXED
+GLO:TempBestandChauffeurslijst CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(d9c9a1af-4e32-4936-b200-30cff15d8db6),PROMPT('GLO : Temp Bestand Chauffeurslijst:'),HEADER('GLO : Temp Bestand Chauffeurslijst'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:TempBestandChLijstOphaal CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Ch Lijst Ophaal:'),USE(?GLO:TempBestandChLijstOphaal:Prompt)
+! TEXT,USE(GLO:TempBestandChLijstOphaal)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandChLijstOphaal)
+GLO:TempBestandChLijstOphaal CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(33b8332d-02c0-43c3-8ad9-c725ecc15812),PROMPT('GLO : Temp Bestand Ch Lijst Ophaal:'),HEADER('GLO : Temp Bestand Ch Lijst Ophaal'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:TempBestandKlantenDKW STRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Klanten DKW:'),USE(?GLO:TempBestandKlantenDKW:Prompt)
+! TEXT,USE(GLO:TempBestandKlantenDKW),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandKlantenDKW),BOXED
+GLO:TempBestandKlantenDKW STRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(aba87a38-0a14-47db-bf02-9dc201a7df89),PROMPT('GLO : Temp Bestand Klanten DKW:'),HEADER('GLO : Temp Bestand Klanten DKW'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:TempBestandAfbeeldingen CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Afbeeldingen:'),USE(?GLO:TempBestandAfbeeldingen:Prompt)
+! TEXT,USE(GLO:TempBestandAfbeeldingen)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandAfbeeldingen)
+GLO:TempBestandAfbeeldingen CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(52ef452c-3dcf-47eb-9eeb-10adcc3df2df),PROMPT('GLO : Temp Bestand Afbeeldingen:'),HEADER('GLO : Temp Bestand Afbeeldingen'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:CalculatieBestelnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Product&groep:'),USE(?GLO:CalculatieBestelnummer:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(GLO:CalculatieBestelnummer),RIGHT,MSG('Productgroep'),TIP('Productgroep'),INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(GLO:CalculatieBestelnummer),TRN,RIGHT
+GLO:CalculatieBestelnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(fe20f59f-2a20-4a84-955b-e76105febf60),PROMPT('Product&groep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:CalculatieProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Productnummer:'),USE(?GLO:CalculatieProductnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GLO:CalculatieProductnummer),RIGHT,MSG('Productnummer'),TIP('Productnummer'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GLO:CalculatieProductnummer),TRN,RIGHT
+GLO:CalculatieProductnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(a34faec9-30ff-407a-975b-2bb690541e37),VALID(NONZERO),PROMPT('&Productnummer:'),HEADER('Productnummer'),MESSAGE('Productnummer'),TOOLTIP('Productnummer'),PICTURE(@n_8),CASE(UPPER),TYPEMODE(OVR),JUSTIFY(RIGHT)
+!endregion
+!region GLO:CalculatieStatus BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Calculatie Status:'),USE(?GLO:CalculatieStatus:Prompt)
+! ENTRY(@n1),USE(GLO:CalculatieStatus)
+[REPORTCONTROLS]
+! STRING(@n1),USE(GLO:CalculatieStatus)
+GLO:CalculatieStatus  BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(49a5e27e-8f72-4304-8460-2211b44b80a3),PROMPT('GLO : Calculatie Status:'),HEADER('GLO : Calculatie Status'),PICTURE(@n1),TYPEMODE(OVR)
+!endregion
+!region GLO:CalculatiePressOK BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Calculatie Press OK:'),USE(?GLO:CalculatiePressOK:Prompt)
+! ENTRY(@n1),USE(GLO:CalculatiePressOK)
+[REPORTCONTROLS]
+! STRING(@n1),USE(GLO:CalculatiePressOK)
+GLO:CalculatiePressOK BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(24b7b88a-720c-4a48-b68f-dbde09160caa),PROMPT('GLO : Calculatie Press OK:'),HEADER('GLO : Calculatie Press OK'),PICTURE(@n1),TYPEMODE(OVR)
+!endregion
+!region GLO:ComputerName STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Computer Name:'),USE(?GLO:ComputerName:Prompt)
+! ENTRY(@s255),USE(GLO:ComputerName)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:ComputerName)
+GLO:ComputerName      STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(556174a4-6bb7-4ab6-aab6-9e52ec4ff564),PROMPT('GLO : Computer Name:'),HEADER('GLO : Computer Name'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:TempBestandGBVoorraad CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand GBV oorraad:'),USE(?GLO:TempBestandGBVoorraad:Prompt)
+! TEXT,USE(GLO:TempBestandGBVoorraad),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandGBVoorraad),BOXED
+GLO:TempBestandGBVoorraad CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(a8b14b8f-2862-41e2-ac33-e5e2bf0d6c6c),PROMPT('GLO : Temp Bestand GBV oorraad:'),HEADER('GLO : Temp Bestand GBV oorraad'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:ToegestaanOrderVerwijderen BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Toegestaan Order Verwijderen:'),USE(?GLO:ToegestaanOrderVerwijderen:Prompt)
+! ENTRY(@n1),USE(GLO:ToegestaanOrderVerwijderen)
+[REPORTCONTROLS]
+! STRING(@n1),USE(GLO:ToegestaanOrderVerwijderen)
+GLO:ToegestaanOrderVerwijderen BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(37aa2bff-f280-4687-8a3f-9ee82f0b3884),PROMPT('GLO : Toegestaan Order Verwijderen:'),HEADER('GLO : Toegestaan Order Verwijderen'),PICTURE(@n1),TYPEMODE(OVR)
+!endregion
+!region GLO:ToegestaanVoorraadWijzigen BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Toegestaan Voorraad Wijzigen:'),USE(?GLO:ToegestaanVoorraadWijzigen:Prompt)
+! ENTRY(@n1),USE(GLO:ToegestaanVoorraadWijzigen)
+[REPORTCONTROLS]
+! STRING(@n1),USE(GLO:ToegestaanVoorraadWijzigen)
+GLO:ToegestaanVoorraadWijzigen BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(e6f023a4-46b5-4cf2-a342-393f237bfb97),PROMPT('GLO : Toegestaan Voorraad Wijzigen:'),HEADER('GLO : Toegestaan Voorraad Wijzigen'),PICTURE(@n1),TYPEMODE(OVR)
+!endregion
+!region GLO:AfdelingMagazijnKlaarzetten DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?GLO:AfdelingMagazijnKlaarzetten:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:AfdelingMagazijnKlaarzetten),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:AfdelingMagazijnKlaarzetten),TRN,RIGHT
+GLO:AfdelingMagazijnKlaarzetten DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(5d1edae9-fda8-4fe0-8c02-1e6d75a4e390),VALID(NONZERO),PROMPT('Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:KeuzeMagazijnpicker STRING(5),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Medewerkerscode:'),USE(?GLO:KeuzeMagazijnpicker:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(GLO:KeuzeMagazijnpicker),MSG('Medewerkerscode (bijv. initialen)'),TIP('Medewerkerscode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(GLO:KeuzeMagazijnpicker),TRN
+GLO:KeuzeMagazijnpicker STRING(5),EXTERNAL,Dll(dll_mode)
+!!> GUID(1c9bfd99-ce7e-489a-a2da-b349cbc78009),VALID(NONZERO),PROMPT('&Medewerkerscode:'),HEADER('Medewerkerscode'),MESSAGE('Medewerkerscode (bijv. initialen)'),TOOLTIP('Medewerkerscode'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+!endregion
+!region GLO:KeuzeProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Productgroep:'),USE(?GLO:KeuzeProductgroep:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(GLO:KeuzeProductgroep),RIGHT,MSG('Productgroep'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(GLO:KeuzeProductgroep),TRN,RIGHT
+GLO:KeuzeProductgroep DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(63b5a244-5053-4227-a1cf-abe096c8eff7),VALID(NONZERO),PROMPT('Productgroep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),PICTURE(@n_8.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:FilterDebiteurnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?GLO:FilterDebiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(GLO:FilterDebiteurnummer),MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GLO:FilterDebiteurnummer),TRN
+GLO:FilterDebiteurnummer DECIMAL(8,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(994bd69f-f202-4517-936d-d4fccb31d9b5),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8)
+!endregion
+!region GLO:InvervoINI STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Invervo INI:'),USE(?GLO:InvervoINI:Prompt)
+! ENTRY(@s255),USE(GLO:InvervoINI)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:InvervoINI)
+GLO:InvervoINI        STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(b79933be-6b18-4c21-bf21-52dbbea9450b),PROMPT('GLO : Invervo INI:'),HEADER('GLO : Invervo INI'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GloMagazijnAfdelingscode DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?GloMagazijnAfdelingscode:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GloMagazijnAfdelingscode),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GloMagazijnAfdelingscode),TRN,RIGHT
+GloMagazijnAfdelingscode DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(2488b5e7-1d11-46b2-ad79-4a154d2fbfe6),VALID(NONZERO),PROMPT('Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+!endregion
+!region GloORPBestand STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo ORPB estand:'),USE(?GloORPBestand:Prompt)
+! ENTRY(@s255),USE(GloORPBestand)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GloORPBestand)
+GloORPBestand         STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(48bb3485-5801-42a9-9111-d6f01c1dba47),PROMPT('Glo ORPB estand:'),HEADER('Glo ORPB estand'),PICTURE(@s255)
+!endregion
+!region GLO:InkoopTypeControle STRING(10),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Inkoop Type Controle:'),USE(?GLO:InkoopTypeControle:Prompt)
+! ENTRY(@s10),USE(GLO:InkoopTypeControle)
+[REPORTCONTROLS]
+! STRING(@s10),USE(GLO:InkoopTypeControle)
+GLO:InkoopTypeControle STRING(10),EXTERNAL,Dll(dll_mode)
+!!> GUID(a609dd60-fdfd-40c2-befa-c8570faf9b4d),PROMPT('GLO : Inkoop Type Controle:'),HEADER('GLO : Inkoop Type Controle'),PICTURE(@s10),TYPEMODE(OVR)
+!endregion
+!region GLO:MagTeller LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mag Teller:'),USE(?GLO:MagTeller:Prompt)
+! ENTRY(@n_8),USE(GLO:MagTeller),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n_8),USE(GLO:MagTeller),RIGHT(1)
+GLO:MagTeller         LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(5c3d7452-32bb-4186-8bc0-ab5f0842f7ce),PROMPT('GLO : Mag Teller:'),HEADER('GLO : Mag Teller'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+!endregion
+!region GLO:NoDuplexSkip BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : No Duplex Skip:'),USE(?GLO:NoDuplexSkip:Prompt)
+! ENTRY(@n3),USE(GLO:NoDuplexSkip)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:NoDuplexSkip)
+GLO:NoDuplexSkip      BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(045bfc9b-3332-4225-94dd-e80ba8fc0622),PROMPT('GLO : No Duplex Skip:'),HEADER('GLO : No Duplex Skip'),PICTURE(@n3)
+!endregion
+!region GLO:AutoSluitenApp BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Auto Sluiten App:'),USE(?GLO:AutoSluitenApp:Prompt)
+! ENTRY(@n3),USE(GLO:AutoSluitenApp)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:AutoSluitenApp)
+GLO:AutoSluitenApp    BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(9a3bd46c-15d6-48ef-893d-f13fdfa23eb7),PROMPT('GLO : Auto Sluiten App:'),HEADER('GLO : Auto Sluiten App'),PICTURE(@n3),TYPEMODE(OVR)
+!endregion
+!region GLO:ActieAfdeling DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?GLO:ActieAfdeling:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:ActieAfdeling),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:ActieAfdeling),TRN,RIGHT
+GLO:ActieAfdeling     DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(1504461b-2c53-49ca-bd66-05820e899064),VALID(NONZERO),PROMPT('Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:Bedrijfsafdelingscode DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?GLO:Bedrijfsafdelingscode:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:Bedrijfsafdelingscode),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:Bedrijfsafdelingscode),TRN,RIGHT
+GLO:Bedrijfsafdelingscode DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(18c039c6-bd72-4c37-87b1-24cbfb8ddcbc),VALID(NONZERO),PROMPT('Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:dbOwnerS2 CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : db Owner S 2:'),USE(?GLO:dbOwnerS2:Prompt)
+! ENTRY(@s255),USE(GLO:dbOwnerS2)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:dbOwnerS2)
+GLO:dbOwnerS2         CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(3a6bbeb8-f8ea-4223-8410-41c6a98003c1),PROMPT('GLO : db Owner S 2:'),HEADER('GLO : db Owner S 2'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:dbOwnerS3 CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : db Owner S 3:'),USE(?GLO:dbOwnerS3:Prompt)
+! ENTRY(@s255),USE(GLO:dbOwnerS3)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:dbOwnerS3)
+GLO:dbOwnerS3         CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(c85f9e24-6d67-4513-b872-c2563c2fd36d),PROMPT('GLO : db Owner S 3:'),HEADER('GLO : db Owner S 3'),PICTURE(@s255)
+!endregion
+!region GLO:dbOwnerWMS CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : db Owner S 3:'),USE(?GLO:dbOwnerWMS:Prompt)
+! ENTRY(@s255),USE(GLO:dbOwnerWMS)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:dbOwnerWMS)
+GLO:dbOwnerWMS        CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(90cc6935-c499-4ad1-ada1-88d6fd0c3293),PROMPT('GLO : db Owner S 3:'),HEADER('GLO : db Owner S 3'),PICTURE(@s255)
+!endregion
+!region GLO:dbOwner CSTRING(256),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : db Owner:'),USE(?GLO:dbOwner:Prompt)
+! TEXT,USE(GLO:dbOwner)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:dbOwner)
+GLO:dbOwner           CSTRING(256),EXTERNAL,Dll(dll_mode)
+!!> GUID(8cc2d30c-ad03-4020-ab56-8a9c9eec4c24),PROMPT('GLO : db Owner:'),HEADER('GLO : db Owner'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:Versie STRING(20),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Versie:'),USE(?GLO:Versie:Prompt)
+! ENTRY(@s20),USE(GLO:Versie)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:Versie)
+GLO:Versie            STRING(20),EXTERNAL,Dll(dll_mode)
+!!> GUID(0c8dfd19-22f5-4bb6-b7c7-067052480a54),PROMPT('GLO : Versie:'),HEADER('GLO : Versie'),PICTURE(@s20)
+!endregion
+!region GLO:AfdelingMagazijnConsument DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Afdelingscode:'),USE(?GLO:AfdelingMagazijnConsument:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:AfdelingMagazijnConsument),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:AfdelingMagazijnConsument),TRN,RIGHT
+GLO:AfdelingMagazijnConsument DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(9af82c9d-7ae1-42b9-9d5f-5faf587d0fb6),VALID(NONZERO),PROMPT('&Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:AfdelingMagazijn DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('&Afdelingscode:'),USE(?GLO:AfdelingMagazijn:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(GLO:AfdelingMagazijn),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(GLO:AfdelingMagazijn),TRN,RIGHT
+GLO:AfdelingMagazijn  DECIMAL(4,2),EXTERNAL,Dll(dll_mode)
+!!> GUID(a066f6fe-1401-450e-a331-fa2e582ce0f5),VALID(NONZERO),PROMPT('&Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+!endregion
+!region GLO:IPServer STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : IPS erver:'),USE(?GLO:IPServer:Prompt)
+! ENTRY(@s255),USE(GLO:IPServer)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:IPServer)
+GLO:IPServer          STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(3e99c821-8558-4432-aa29-398d00c6152c),PROMPT('GLO : IPS erver:'),HEADER('GLO : IPS erver'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:HyperactiveMap STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Hyperactive Map:'),USE(?GLO:HyperactiveMap:Prompt)
+! ENTRY(@s255),USE(GLO:HyperactiveMap)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:HyperactiveMap)
+GLO:HyperactiveMap    STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(ca4eef5a-a3bf-428f-9cf1-a9ff9c9e54b5),PROMPT('GLO : Hyperactive Map:'),HEADER('GLO : Hyperactive Map'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+!region GLO:PrijslijnId LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Prijslijn Id:'),USE(?GLO:PrijslijnId:Prompt)
+! ENTRY(@n-14),USE(GLO:PrijslijnId),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(GLO:PrijslijnId),RIGHT(1)
+GLO:PrijslijnId       LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(8293a3b3-8aa3-48a8-adf4-95a0ff64c52a),PROMPT('GLO : Prijslijn Id:'),HEADER('GLO : Prijslijn Id'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+!endregion
+!region GLO:DatumVan DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Datum Van:'),USE(?GLO:DatumVan:Prompt)
+! ENTRY(@d6),USE(GLO:DatumVan)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GLO:DatumVan)
+GLO:DatumVan          DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(6a8f65d0-b726-4d2e-abdf-ba77ecf15776),PROMPT('GLO : Datum Van:'),HEADER('GLO : Datum Van'),PICTURE(@d6)
+!endregion
+!region GLO:DatumTot DATE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Datum Tot:'),USE(?GLO:DatumTot:Prompt)
+! ENTRY(@d6),USE(GLO:DatumTot)
+[REPORTCONTROLS]
+! STRING(@d6),USE(GLO:DatumTot)
+GLO:DatumTot          DATE,EXTERNAL,Dll(dll_mode)
+!!> GUID(1fcd4396-1f6a-469c-b997-c9b43b12ff3b),PROMPT('GLO : Datum Tot:'),HEADER('GLO : Datum Tot'),PICTURE(@d6)
+!endregion
+!region GLO:Reset BYTE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Reset:'),USE(?GLO:Reset:Prompt)
+! ENTRY(@n3),USE(GLO:Reset)
+[REPORTCONTROLS]
+! STRING(@n3),USE(GLO:Reset)
+GLO:Reset             BYTE,EXTERNAL,Dll(dll_mode)
+!!> GUID(3388a11e-eab5-4e12-b746-9542618d81d9),PROMPT('GLO : Reset:'),HEADER('GLO : Reset'),PICTURE(@n3)
+!endregion
+!region GLO:VoorraadGelijk CSTRING(4),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! OPTION('GLO : Voorraad Gelijk:'),USE(GLO:VoorraadGelijk),BOXED
+! RADIO('Alles'),USE(GLO:VoorraadGelijk),VALUE('All')
+! RADIO('Ja'),USE(GLO:VoorraadGelijk),VALUE('Ja')
+! RADIO('Nee'),USE(GLO:VoorraadGelijk),VALUE('Nee')
+! END
+[REPORTCONTROLS]
+! STRING(@s3),USE(GLO:VoorraadGelijk)
+GLO:VoorraadGelijk    CSTRING(4),EXTERNAL,Dll(dll_mode)
+!!> GUID(276f560d-f0d7-4ecd-942d-09295f7aaead),VALID(INLIST('Alles|Ja|Nee')),PROMPT('GLO : Voorraad Gelijk:'),HEADER('GLO : Voorraad Gelijk'),PICTURE(@s3),VALUES('All|Ja|Nee')
+!endregion
+!region GLO:WMSHerkomst CSTRING(11),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : WMSH erkomst:'),USE(?GLO:WMSHerkomst:Prompt)
+! ENTRY(@s10),USE(GLO:WMSHerkomst)
+[REPORTCONTROLS]
+! STRING(@s10),USE(GLO:WMSHerkomst)
+GLO:WMSHerkomst       CSTRING(11),EXTERNAL,Dll(dll_mode)
+!!> GUID(72c3d654-1e1a-4a7c-b865-709df4055b7a),PROMPT('GLO : WMSH erkomst:'),HEADER('GLO : WMSH erkomst'),PICTURE(@s10)
+!endregion
+!region GLO:c2dwe STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 dwe:'),USE(?GLO:c2dwe:Prompt)
+! ENTRY(@s255),USE(GLO:c2dwe)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2dwe)
+GLO:c2dwe             STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(77b490f9-2871-4586-a9ae-fd1017c8407a),PROMPT('GLO : c 2 dwe:'),HEADER('GLO : c 2 dwe'),PICTURE(@s255)
+!endregion
+!region GLO:c2ExportSlimDagafzet STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Dagafzet:'),USE(?GLO:c2ExportSlimDagafzet:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimDagafzet)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimDagafzet)
+GLO:c2ExportSlimDagafzet STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(1d2bc1e5-25fd-4726-abe8-0fbe0132727b),PROMPT('GLO : c 2 Export Slim Dagafzet:'),HEADER('GLO : c 2 Export Slim Dagafzet'),PICTURE(@s255)
+!endregion
+!region GLO:c2ExportSlimPromotie STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Promotie:'),USE(?GLO:c2ExportSlimPromotie:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimPromotie)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimPromotie)
+GLO:c2ExportSlimPromotie STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(eb8c966f-67df-4834-a93c-90b88788779d),PROMPT('GLO : c 2 Export Slim Promotie:'),HEADER('GLO : c 2 Export Slim Promotie'),PICTURE(@s255)
+!endregion
+!region GLO:c2ExportSlimPurchase STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Purchase:'),USE(?GLO:c2ExportSlimPurchase:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimPurchase)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimPurchase)
+GLO:c2ExportSlimPurchase STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(e9bebe8b-272c-4d5e-bf55-a717735a6283),PROMPT('GLO : c 2 Export Slim Purchase:'),HEADER('GLO : c 2 Export Slim Purchase'),PICTURE(@s255)
+!endregion
+!region GLO:c2ExportSlimStock STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Stock:'),USE(?GLO:c2ExportSlimStock:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimStock)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimStock)
+GLO:c2ExportSlimStock STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(4ca79616-ff5f-4b41-8b56-340e5b698640),PROMPT('GLO : c 2 Export Slim Stock:'),HEADER('GLO : c 2 Export Slim Stock'),PICTURE(@s255)
+!endregion
+!region GLO:c2Bnl500 STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Bnl 500:'),USE(?GLO:c2Bnl500:Prompt)
+! ENTRY(@s255),USE(GLO:c2Bnl500)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2Bnl500)
+GLO:c2Bnl500          STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(9dea060e-34e0-4fdc-84f8-b37e3ead83ba),PROMPT('GLO : c 2 Bnl 500:'),HEADER('GLO : c 2 Bnl 500'),PICTURE(@s255)
+!endregion
+!region GLO:c2intertr STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 intertr:'),USE(?GLO:c2intertr:Prompt)
+! ENTRY(@s255),USE(GLO:c2intertr)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2intertr)
+GLO:c2intertr         STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(2c720ab6-3e38-4850-9355-9f32ab0b394e),PROMPT('GLO : c 2 intertr:'),HEADER('GLO : c 2 intertr'),PICTURE(@s255)
+!endregion
+!region GLO:c2ORDERS STRING(255),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 ORDERS:'),USE(?GLO:c2ORDERS:Prompt)
+! ENTRY(@s255),USE(GLO:c2ORDERS)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ORDERS)
+GLO:c2ORDERS          STRING(255),EXTERNAL,Dll(dll_mode)
+!!> GUID(25b42d61-4234-44a4-95fd-14a849a97218),PROMPT('GLO : c 2 ORDERS:'),HEADER('GLO : c 2 ORDERS'),PICTURE(@s255)
+!endregion
+!region GLO:QueueFacturen QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Facturen:'),USE(?GLO:QueueFacturen:Prompt)
+! ENTRY(@s20),USE(GLO:QueueFacturen)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueFacturen)
+GLO:QueueFacturen     QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(55bfd282-293f-4f84-9e23-27b9d0b437b3),PROMPT('GLO : Queue Facturen:'),HEADER('GLO : Queue Facturen'),PICTURE(@s20)
+!endregion
+  !region qfp_Factuurnummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('qfp Factuurnummer:'),USE(?qfp_Factuurnummer:Prompt)
+! ENTRY(@n_7),USE(qfp_Factuurnummer),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n_7),USE(qfp_Factuurnummer),DECIMAL(12)
+qfp_Factuurnummer DECIMAL(7,2)
+!!> GUID(93216a7f-278b-464c-b6d1-dd657b17644c),PROMPT('qfp Factuurnummer:'),HEADER('qfp Factuurnummer'),PICTURE(@n_7),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qfp_Ordernummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('qfp Ordernummer:'),USE(?qfp_Ordernummer:Prompt)
+! ENTRY(@n_7),USE(qfp_Ordernummer),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n_7),USE(qfp_Ordernummer),DECIMAL(12)
+qfp_Ordernummer DECIMAL(7,2)
+!!> GUID(3bec2d5e-a215-4f74-a25e-d57c847dd8e8),PROMPT('qfp Ordernummer:'),HEADER('qfp Ordernummer'),PICTURE(@n_7),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qfp_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('qfp Debiteurnummer:'),USE(?qfp_Debiteurnummer:Prompt)
+! ENTRY(@n_8),USE(qfp_Debiteurnummer),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qfp_Debiteurnummer),DECIMAL(12)
+qfp_Debiteurnummer DECIMAL(8,2)
+!!> GUID(4283d352-7ab5-4d86-86ab-ea4da2111c48),PROMPT('qfp Debiteurnummer:'),HEADER('qfp Debiteurnummer'),PICTURE(@n_8),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qfp_DatumOrder DATE
+[SCREENCONTROLS]
+! PROMPT('qfp Datum Order:'),USE(?qfp_DatumOrder:Prompt)
+! ENTRY(@d6),USE(qfp_DatumOrder)
+[REPORTCONTROLS]
+! STRING(@d6),USE(qfp_DatumOrder)
+qfp_DatumOrder DATE
+!!> GUID(85d053aa-df00-4f66-af37-29459dfacb2c),PROMPT('qfp Datum Order:'),HEADER('qfp Datum Order'),PICTURE(@d6)
+  !endregion
+  !region qfp_Uitleverdatum DATE
+[SCREENCONTROLS]
+! PROMPT('qfp Uitleverdatum:'),USE(?qfp_Uitleverdatum:Prompt)
+! ENTRY(@d6),USE(qfp_Uitleverdatum)
+[REPORTCONTROLS]
+! STRING(@d6),USE(qfp_Uitleverdatum)
+qfp_Uitleverdatum DATE
+!!> GUID(68ce59af-adf6-438a-a2b0-c28cb766e5fd),PROMPT('qfp Uitleverdatum:'),HEADER('qfp Uitleverdatum'),PICTURE(@d6)
+  !endregion
+  !region qfp_Referentie CSTRING(51)
+[SCREENCONTROLS]
+! PROMPT('qfp Referentie:'),USE(?qfp_Referentie:Prompt)
+! ENTRY(@s50),USE(qfp_Referentie)
+[REPORTCONTROLS]
+! STRING(@s50),USE(qfp_Referentie)
+qfp_Referentie CSTRING(51)
+!!> GUID(520652cb-648a-4469-8fe3-2dc982845981),PROMPT('qfp Referentie:'),HEADER('qfp Referentie'),PICTURE(@s50)
+  !endregion
+  !region qfp_ReedsBetaald DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('qfp Reeds Betaald:'),USE(?qfp_ReedsBetaald:Prompt)
+! ENTRY(@n-10.2),USE(qfp_ReedsBetaald),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n-10.2),USE(qfp_ReedsBetaald),DECIMAL(12)
+qfp_ReedsBetaald DECIMAL(7,2)
+!!> GUID(024b4ff1-07a4-4f8c-aa24-803630625958),PROMPT('qfp Reeds Betaald:'),HEADER('qfp Reeds Betaald'),PICTURE(@n-10.2),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qfp_BetaalMethode STRING(15)
+[SCREENCONTROLS]
+! PROMPT('qfp Betaal Methode:'),USE(?qfp_BetaalMethode:Prompt)
+! ENTRY(@s15),USE(qfp_BetaalMethode)
+[REPORTCONTROLS]
+! STRING(@s15),USE(qfp_BetaalMethode)
+qfp_BetaalMethode STRING(15)
+!!> GUID(dac8e3ef-505b-487e-a8b1-d27662ab4361),PROMPT('qfp Betaal Methode:'),HEADER('qfp Betaal Methode'),PICTURE(@s15)
+  !endregion
+  !region qfp_Bijzonderheden CSTRING(1001)
+[SCREENCONTROLS]
+! PROMPT('qfp Bijzonderheden:'),USE(?qfp_Bijzonderheden:Prompt)
+! ENTRY(@s255),USE(qfp_Bijzonderheden)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qfp_Bijzonderheden)
+qfp_Bijzonderheden CSTRING(1001)
+!!> GUID(616e3a04-5784-4162-9575-2c7878f14f6d),PROMPT('qfp Bijzonderheden:'),HEADER('qfp Bijzonderheden'),PICTURE(@s255)
+  !endregion
+END
+!region GLO:QueueFacturenPdfEnMailen QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Facturen Pdf En Mailen:'),USE(?GLO:QueueFacturenPdfEnMailen:Prompt)
+! ENTRY(@s255),USE(GLO:QueueFacturenPdfEnMailen)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:QueueFacturenPdfEnMailen)
+GLO:QueueFacturenPdfEnMailen QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(dd29c465-64fb-427a-bb6d-dfed70a3f215),PROMPT('GLO : Queue Facturen Pdf En Mailen:'),HEADER('GLO : Queue Facturen Pdf En Mailen'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+  !region QFP:Factuurnummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Factuurnummer:'),USE(?QFP:Factuurnummer:Prompt)
+! ENTRY(@n_7),AT(,,,10),USE(QFP:Factuurnummer),RIGHT,MSG('Factuurnummer geprinte factuurr'),TIP('Factuurnummer geprinte factuurr')
+[REPORTCONTROLS]
+! STRING(@n_7),USE(QFP:Factuurnummer),TRN,RIGHT
+QFP:Factuurnummer DECIMAL(7,2)
+!!> GUID(ffcb3f48-5651-4712-9d2a-470305289cee),PROMPT('&Factuurnummer:'),HEADER('Factuurnummer'),MESSAGE('Factuurnummer geprinte factuurr'),TOOLTIP('Factuurnummer geprinte factuurr'),PICTURE(@n_7),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+  !region QFP:PdfBestand STRING(500)
+[SCREENCONTROLS]
+! PROMPT('QFP : Pdf Bestand:'),USE(?QFP:PdfBestand:Prompt)
+! ENTRY(@s255),USE(QFP:PdfBestand)
+[REPORTCONTROLS]
+! TEXT,USE(QFP:PdfBestand),BOXED
+QFP:PdfBestand STRING(500)
+!!> GUID(417d4364-281d-4bb2-aa3a-b41c8cd1271c),PROMPT('QFP : Pdf Bestand:'),HEADER('QFP : Pdf Bestand'),PICTURE(@s255),TYPEMODE(OVR)
+  !endregion
+  !region QFP:EmailAdres STRING(500)
+[SCREENCONTROLS]
+! PROMPT('QFP : Email Adres:'),USE(?QFP:EmailAdres:Prompt)
+! ENTRY(@s255),USE(QFP:EmailAdres)
+[REPORTCONTROLS]
+! TEXT,USE(QFP:EmailAdres),BOXED
+QFP:EmailAdres STRING(500)
+!!> GUID(48c3d7fc-05a7-4717-8553-f41fb1d653bc),PROMPT('QFP : Email Adres:'),HEADER('QFP : Email Adres'),PICTURE(@s255),TYPEMODE(OVR)
+  !endregion
+  !region QFP:Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?QFP:Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(QFP:Debiteurnummer),DECIMAL(12),MSG('Debiteurnummer'),TIP('Debiteurnummer'),INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(QFP:Debiteurnummer),TRN,DECIMAL(12)
+QFP:Debiteurnummer DECIMAL(8,2)
+!!> GUID(c8f362a8-9b3a-487f-9e24-b57621ec0b71),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region QFP:FTP BYTE
+[SCREENCONTROLS]
+! PROMPT('QFP : FTP:'),USE(?QFP:FTP:Prompt)
+! ENTRY(@n3),USE(QFP:FTP)
+[REPORTCONTROLS]
+! STRING(@n3),USE(QFP:FTP)
+QFP:FTP BYTE
+!!> GUID(f11094c0-a24c-4c90-9018-a8eb67a25954),PROMPT('QFP : FTP:'),HEADER('QFP : FTP'),PICTURE(@n3)
+  !endregion
+  !region QFP:FTPBestand STRING(255)
+[SCREENCONTROLS]
+! PROMPT('QF:'),USE(?QFP:FTPBestand:Prompt)
+! ENTRY(@s255),USE(QFP:FTPBestand)
+[REPORTCONTROLS]
+! STRING(@s255),USE(QFP:FTPBestand)
+QFP:FTPBestand STRING(255)
+!!> GUID(e7a18d8a-46aa-44b7-8af1-8913afd57acf),PROMPT('QF:'),HEADER('QF'),PICTURE(@s255)
+  !endregion
+  !region QFP:FTPPad STRING(255)
+[SCREENCONTROLS]
+! PROMPT('QF:'),USE(?QFP:FTPPad:Prompt)
+! ENTRY(@s255),USE(QFP:FTPPad)
+[REPORTCONTROLS]
+! STRING(@s255),USE(QFP:FTPPad)
+QFP:FTPPad STRING(255)
+!!> GUID(62b5e983-0b8f-46ec-a11a-414a75a8639a),PROMPT('QF:'),HEADER('QF'),PICTURE(@s255)
+  !endregion
+END
+!region QueueAfdelingActieTonen QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Queue Afdeling Actie Tonen:'),USE(?QueueAfdelingActieTonen:Prompt)
+! ENTRY(@s1),USE(QueueAfdelingActieTonen)
+[REPORTCONTROLS]
+! STRING(@s1),USE(QueueAfdelingActieTonen)
+QueueAfdelingActieTonen QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(b6a0bc2b-adc7-43f4-a802-17cf55b17d88),PROMPT('Queue Afdeling Actie Tonen:'),HEADER('Queue Afdeling Actie Tonen'),PICTURE(@s2),TYPEMODE(OVR)
+!endregion
+  !region qa_Afdeling DECIMAL(4,2)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?qa_Afdeling:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(qa_Afdeling),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(qa_Afdeling),TRN,RIGHT
+qa_Afdeling DECIMAL(4,2)
+!!> GUID(a8bc72be-5a5d-4c83-9990-2ffe8f7d3bc5),VALID(NONZERO),PROMPT('Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+  !endregion
+END
+!region QueueOrderApartePicker QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Queue Order Aparte Picker:'),USE(?QueueOrderApartePicker:Prompt)
+! ENTRY(@s6),USE(QueueOrderApartePicker)
+[REPORTCONTROLS]
+! STRING(@s6),USE(QueueOrderApartePicker)
+QueueOrderApartePicker QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(07fed44d-fdd2-4212-84da-20c6e78cf7ac),PROMPT('Queue Order Aparte Picker:'),HEADER('Queue Order Aparte Picker'),PICTURE(@s6),TYPEMODE(OVR)
+!endregion
+  !region qop_Ordernummer DECIMAL(6,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qop_Ordernummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(qop_Ordernummer),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qop_Ordernummer),TRN,RIGHT
+qop_Ordernummer DECIMAL(6,2)
+!!> GUID(a1d9a3ab-dd14-4b96-8562-92118c7033bd),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+  !region qop_ApartePicker STRING(5)
+[SCREENCONTROLS]
+! PROMPT('&Gepakt door:'),USE(?qop_ApartePicker:Prompt)
+! ENTRY(@s5),AT(,,,10),USE(qop_ApartePicker),MSG('Gepakt door'),TIP('Gepakt door'),UPR
+[REPORTCONTROLS]
+! STRING(@s5),USE(qop_ApartePicker),TRN
+qop_ApartePicker STRING(5)
+!!> GUID(f8b5d6da-3c1c-4995-bf52-49aaf2ce83fc),PROMPT('&Gepakt door:'),HEADER('Magazijn Picker'),MESSAGE('Gepakt door'),TOOLTIP('Gepakt door'),PICTURE(@s5),CASE(UPPER),TYPEMODE(OVR)
+  !endregion
+  !region qop_AfwijkId LONG
+[SCREENCONTROLS]
+! PROMPT('Sortering ID:'),USE(?qop_AfwijkId:Prompt)
+! ENTRY(@n_6),USE(qop_AfwijkId),RIGHT(1),MSG('Sortering id'),TIP('Sortering id')
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qop_AfwijkId),RIGHT(1)
+qop_AfwijkId LONG
+!!> GUID(bf16ba3a-b173-41a8-a0d5-0515d59b9913),PROMPT('Sortering ID:'),HEADER('Sortering ID'),MESSAGE('Sortering id'),TOOLTIP('Sortering id'),PICTURE(@n_6),JUSTIFY(RIGHT,1)
+  !endregion
+END
+!region Glo:iQErrorMessageText STRING(128),EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Glo : i QE rror Message Text:'),USE(?Glo:iQErrorMessageText:Prompt)
+! ENTRY(@s128),USE(Glo:iQErrorMessageText)
+[REPORTCONTROLS]
+! STRING(@s128),USE(Glo:iQErrorMessageText)
+Glo:iQErrorMessageText STRING(128),EXTERNAL,Dll(dll_mode)
+!!> GUID(9e6dbcd5-631b-4144-8cd6-cd9917a2df4e),PROMPT('Glo : i QE rror Message Text:'),HEADER('Glo : i QE rror Message Text'),PICTURE(@s128),TYPEMODE(OVR)
+!endregion
+!region QueueMeldingen QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Queue Meldingen:'),USE(?QueueMeldingen:Prompt)
+! ENTRY(@s1),USE(QueueMeldingen)
+[REPORTCONTROLS]
+! STRING(@s1),USE(QueueMeldingen)
+QueueMeldingen        QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(c732ab8d-4b22-49f7-a1c8-c922a94d6d2c),PROMPT('Queue Meldingen:'),HEADER('Queue Meldingen'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+  !region qmld_Type STRING(40)
+[SCREENCONTROLS]
+! PROMPT('qmld Type:'),USE(?qmld_Type:Prompt)
+! ENTRY(@s40),USE(qmld_Type)
+[REPORTCONTROLS]
+! STRING(@s40),USE(qmld_Type)
+qmld_Type STRING(40)
+!!> GUID(5725537a-9d2b-474e-8ff6-2a5b397d2a64),PROMPT('qmld Type:'),HEADER('qmld Type'),PICTURE(@s40),TYPEMODE(OVR)
+  !endregion
+  !region qmld_Productgroep DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('Product&groep:'),USE(?qmld_Productgroep:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(qmld_Productgroep),RIGHT,MSG('Productgroep'),TIP('Productgroep'),INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(qmld_Productgroep),TRN,RIGHT
+qmld_Productgroep DECIMAL(8,2)
+!!> GUID(067e73cb-fbe5-4acb-a4c9-e84ac8ade2d5),PROMPT('Product&groep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),JUSTIFY(RIGHT)
+  !endregion
+  !region qmld_Productnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Productnummer:'),USE(?qmld_Productnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qmld_Productnummer),RIGHT,MSG('Productnummer'),TIP('Productnummer'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qmld_Productnummer),TRN,RIGHT
+qmld_Productnummer DECIMAL(8,2)
+!!> GUID(cfad3646-d8b5-4bb4-a725-2366c8ab2576),VALID(NONZERO),PROMPT('&Productnummer:'),HEADER('Productnummer'),MESSAGE('Productnummer'),TOOLTIP('Productnummer'),PICTURE(@n_8),CASE(UPPER),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+  !region qmld_Omschrijving STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmld Omschrijving:'),USE(?qmld_Omschrijving:Prompt)
+! ENTRY(@s255),USE(qmld_Omschrijving)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmld_Omschrijving)
+qmld_Omschrijving STRING(255)
+!!> GUID(ac0d069e-2603-4c68-947a-1478eac84c31),PROMPT('qmld Omschrijving:'),HEADER('qmld Omschrijving'),PICTURE(@s255),TYPEMODE(OVR)
+  !endregion
+END
+!region QueueMeldingModembestelling QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Queue Melding Modembestelling:'),USE(?QueueMeldingModembestelling:Prompt)
+! ENTRY(@s1),USE(QueueMeldingModembestelling)
+[REPORTCONTROLS]
+! STRING(@s1),USE(QueueMeldingModembestelling)
+QueueMeldingModembestelling QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(7785c4b3-4490-48dc-bc5e-8b9e1b358ec2),PROMPT('Queue Melding Modembestelling:'),HEADER('Queue Melding Modembestelling'),PICTURE(@s20),TYPEMODE(OVR)
+!endregion
+  !region qmod_Debiteurnummer STRING(20)
+[SCREENCONTROLS]
+! PROMPT('qmod Debiteurnummer:'),USE(?qmod_Debiteurnummer:Prompt)
+! ENTRY(@s20),USE(qmod_Debiteurnummer)
+[REPORTCONTROLS]
+! STRING(@s20),USE(qmod_Debiteurnummer)
+qmod_Debiteurnummer STRING(20)
+!!> GUID(8949ba65-5e87-402c-80f2-3e8e3dd71e09),PROMPT('qmod Debiteurnummer:'),HEADER('qmod Debiteurnummer'),PICTURE(@s20),TYPEMODE(OVR)
+  !endregion
+END
+!region QueueNietKlaargezet QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Queue Niet Klaargezet:'),USE(?QueueNietKlaargezet:Prompt)
+! ENTRY(@s1),USE(QueueNietKlaargezet)
+[REPORTCONTROLS]
+! STRING(@s1),USE(QueueNietKlaargezet)
+QueueNietKlaargezet   QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(93334b0e-9c4a-4c2c-8790-3662b1ce441c),PROMPT('Queue Niet Klaargezet:'),HEADER('Queue Niet Klaargezet'),PICTURE(@s108),TYPEMODE(OVR)
+!endregion
+  !region qnk_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?qnk_Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qnk_Debiteurnummer),RIGHT,MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qnk_Debiteurnummer),TRN,RIGHT
+qnk_Debiteurnummer DECIMAL(8,2)
+!!> GUID(4df16908-a326-4834-9ae1-8df3a2ece469),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),JUSTIFY(RIGHT)
+  !endregion
+  !region qnk_Naam STRING(50)
+[SCREENCONTROLS]
+! PROMPT('qnk Naam:'),USE(?qnk_Naam:Prompt)
+! ENTRY(@s50),USE(qnk_Naam)
+[REPORTCONTROLS]
+! STRING(@s50),USE(qnk_Naam)
+qnk_Naam STRING(50)
+!!> GUID(76be6c8b-0a69-491b-933b-a6a0d0cb6f8c),PROMPT('qnk Naam:'),HEADER('qnk Naam'),PICTURE(@s50),TYPEMODE(OVR)
+  !endregion
+  !region qnk_Ordernummer DECIMAL(6,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qnk_Ordernummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(qnk_Ordernummer),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qnk_Ordernummer),TRN,RIGHT
+qnk_Ordernummer DECIMAL(6,2)
+!!> GUID(8d4f34a9-e4ff-4349-be43-df7c21df7ec2),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+  !region qnk_Afdeling DECIMAL(4,2)
+[SCREENCONTROLS]
+! PROMPT('Afdelingscode:'),USE(?qnk_Afdeling:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(qnk_Afdeling),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(qnk_Afdeling),TRN,RIGHT
+qnk_Afdeling DECIMAL(4,2)
+!!> GUID(2ad4f246-d9c5-41e9-bac9-becf3210f7e0),VALID(NONZERO),PROMPT('Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),JUSTIFY(RIGHT)
+  !endregion
+  !region qnk_Omschrijving STRING(50)
+[SCREENCONTROLS]
+! PROMPT('qnk Omschrijving:'),USE(?qnk_Omschrijving:Prompt)
+! ENTRY(@s50),USE(qnk_Omschrijving)
+[REPORTCONTROLS]
+! STRING(@s50),USE(qnk_Omschrijving)
+qnk_Omschrijving STRING(50)
+!!> GUID(22549c4e-06b5-411d-81c2-090e586dd702),PROMPT('qnk Omschrijving:'),HEADER('qnk Omschrijving'),PICTURE(@s50),TYPEMODE(OVR)
+  !endregion
+END
+!region QueueMailOrder QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('Queue Mail Order:'),USE(?QueueMailOrder:Prompt)
+! ENTRY(@s4),USE(QueueMailOrder)
+[REPORTCONTROLS]
+! STRING(@s4),USE(QueueMailOrder)
+QueueMailOrder        QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(15a889b7-60ee-4b81-8225-e00c6d5ba97e),PROMPT('Queue Mail Order:'),HEADER('Queue Mail Order'),PICTURE(@s255),TYPEMODE(OVR)
+!endregion
+  !region qmo_Ordernummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qmo_Ordernummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qmo_Ordernummer),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qmo_Ordernummer),TRN,RIGHT
+qmo_Ordernummer DECIMAL(8,2)
+!!> GUID(22bb71f2-d228-4908-84ca-99ed5c54e9e1),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_8),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+  !region qmo_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?qmo_Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qmo_Debiteurnummer),MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qmo_Debiteurnummer),TRN
+qmo_Debiteurnummer DECIMAL(8,2)
+!!> GUID(d4cf30e8-2019-4698-9cf0-2b9919f7d162),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8)
+  !endregion
+  !region qmo_DatumLeveren DATE
+[SCREENCONTROLS]
+! PROMPT('qmo Datum Leveren:'),USE(?qmo_DatumLeveren:Prompt)
+! ENTRY(@d6),USE(qmo_DatumLeveren)
+[REPORTCONTROLS]
+! STRING(@d6),USE(qmo_DatumLeveren)
+qmo_DatumLeveren DATE
+!!> GUID(e4a36b51-904e-4e90-a243-8084d1f79b1f),PROMPT('qmo Datum Leveren:'),HEADER('qmo Datum Leveren'),PICTURE(@d6),TYPEMODE(OVR)
+  !endregion
+  !region qmo_Email STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmo Email:'),USE(?qmo_Email:Prompt)
+! ENTRY(@s255),USE(qmo_Email)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmo_Email)
+qmo_Email STRING(255)
+!!> GUID(4657921e-cd37-4bec-9383-e24a53b0477b),PROMPT('qmo Email:'),HEADER('qmo Email'),PICTURE(@s255),TYPEMODE(OVR)
+  !endregion
+  !region qmo_EmailVerkoper STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmo Email Verkoper:'),USE(?qmo_EmailVerkoper:Prompt)
+! ENTRY(@s255),USE(qmo_EmailVerkoper)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmo_EmailVerkoper)
+qmo_EmailVerkoper STRING(255)
+!!> GUID(37464b4b-c63b-4a92-a177-75b1f7a92536),PROMPT('qmo Email Verkoper:'),HEADER('qmo Email Verkoper'),PICTURE(@s255),TYPEMODE(OVR)
+  !endregion
+  !region qmo_Afzender STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmo Afzender:'),USE(?qmo_Afzender:Prompt)
+! ENTRY(@s255),USE(qmo_Afzender)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmo_Afzender)
+qmo_Afzender STRING(255)
+!!> GUID(e1b3798e-8726-4bb5-ad95-952aa144f6a0),PROMPT('qmo Afzender:'),HEADER('qmo Afzender'),PICTURE(@s255),TYPEMODE(OVR)
+  !endregion
+END
+!region GLO:QueueLocatieVolume QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Locatie Volume:'),USE(?GLO:QueueLocatieVolume:Prompt)
+! ENTRY(@s60),USE(GLO:QueueLocatieVolume)
+[REPORTCONTROLS]
+! STRING(@s60),USE(GLO:QueueLocatieVolume)
+GLO:QueueLocatieVolume QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(0b031a4a-de32-4e22-954f-f17794da7f1a),PROMPT('GLO : Queue Locatie Volume:'),HEADER('GLO : Queue Locatie Volume'),PICTURE(@s67),TYPEMODE(OVR)
+!endregion
+  !region qlvg_Locatie LONG
+[SCREENCONTROLS]
+! PROMPT('Code:'),USE(?qlvg_Locatie:Prompt)
+! ENTRY(@n4),USE(qlvg_Locatie),RIGHT,MSG('Locatie code'),TIP('Locatie code'),REQ
+[REPORTCONTROLS]
+! STRING(@n4),USE(qlvg_Locatie),RIGHT
+qlvg_Locatie LONG
+!!> GUID(ae43325f-fd00-45c7-abf5-82fe32db8311),VALID(NONZERO),PROMPT('Code:'),HEADER('Code'),MESSAGE('Locatie code'),TOOLTIP('Locatie code'),PICTURE(@n4),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+  !region qlvg_Omschrijving STRING(50)
+[SCREENCONTROLS]
+! PROMPT('qlvg Omschrijving:'),USE(?qlvg_Omschrijving:Prompt)
+! ENTRY(@s50),USE(qlvg_Omschrijving)
+[REPORTCONTROLS]
+! STRING(@s50),USE(qlvg_Omschrijving)
+qlvg_Omschrijving STRING(50)
+!!> GUID(32433aa1-3030-4d1f-ace7-03889419724f),PROMPT('qlvg Omschrijving:'),HEADER('qlvg Omschrijving'),PICTURE(@s50),TYPEMODE(OVR)
+  !endregion
+  !region qlvg_Volume DECIMAL(12,2)
+[SCREENCONTROLS]
+! PROMPT('qlvg Volume:'),USE(?qlvg_Volume:Prompt)
+! ENTRY(@n_9.2),USE(qlvg_Volume),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n_9.2),USE(qlvg_Volume),DECIMAL(12)
+qlvg_Volume DECIMAL(12,2)
+!!> GUID(cfd12958-3f29-4ac7-b211-d2ad40f2378d),PROMPT('qlvg Volume:'),HEADER('qlvg Volume'),PICTURE(@n_9.2),TYPEMODE(OVR),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qlvg_Wachten BYTE
+[SCREENCONTROLS]
+! PROMPT('qlvg Wachten:'),USE(?qlvg_Wachten:Prompt)
+! ENTRY(@n3),USE(qlvg_Wachten)
+[REPORTCONTROLS]
+! STRING(@n3),USE(qlvg_Wachten)
+qlvg_Wachten BYTE
+!!> GUID(94124e19-b217-4741-8c42-02c01302dbb0),PROMPT('qlvg Wachten:'),HEADER('qlvg Wachten'),PICTURE(@n3),TYPEMODE(OVR)
+  !endregion
+  !region qlvg_Bundelnummer ULONG
+[SCREENCONTROLS]
+! PROMPT('Bundel Nr:'),USE(?qlvg_Bundelnummer:Prompt)
+! ENTRY(@n13),USE(qlvg_Bundelnummer)
+[REPORTCONTROLS]
+! STRING(@n13),USE(qlvg_Bundelnummer)
+qlvg_Bundelnummer ULONG
+!!> GUID(dfc6b8b7-b383-4996-a421-ebb26963aca2),PROMPT('Bundel Nr:'),HEADER('Bundel Nr'),PICTURE(@n13),TYPEMODE(OVR)
+  !endregion
+  !region qlvg_AantalKratten SHORT
+[SCREENCONTROLS]
+! PROMPT('qlvg Aantal Kratten:'),USE(?qlvg_AantalKratten:Prompt)
+! ENTRY(@n_4),USE(qlvg_AantalKratten),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n_4),USE(qlvg_AantalKratten),RIGHT(1)
+qlvg_AantalKratten SHORT
+!!> GUID(1b88ae73-d754-4c71-acc2-f09866e0e2a1),PROMPT('qlvg Aantal Kratten:'),HEADER('qlvg Aantal Kratten'),PICTURE(@n_4),TYPEMODE(OVR),JUSTIFY(RIGHT,1)
+  !endregion
+END
+!region GLO:QueueDigLeveringsbon QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Dig Leveringsbon:'),USE(?GLO:QueueDigLeveringsbon:Prompt)
+! ENTRY(@s1),USE(GLO:QueueDigLeveringsbon)
+[REPORTCONTROLS]
+! STRING(@s1),USE(GLO:QueueDigLeveringsbon)
+GLO:QueueDigLeveringsbon QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(24090d1a-c9b0-4666-8344-49994d0da7f1),PROMPT('GLO : Queue Dig Leveringsbon:'),HEADER('GLO : Queue Dig Leveringsbon'),PICTURE(@s3),TYPEMODE(OVR)
+!endregion
+  !region qdlb_Verkooporder DECIMAL(6,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qdlb_Verkooporder:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(qdlb_Verkooporder),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qdlb_Verkooporder),TRN,RIGHT
+qdlb_Verkooporder DECIMAL(6,2)
+!!> GUID(ab2244ee-bf57-42ba-b7f2-2782c82d9f72),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),TYPEMODE(OVR),JUSTIFY(RIGHT)
+  !endregion
+END
+!region GLO:QueueMailConsument QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Mail Consument:'),USE(?GLO:QueueMailConsument:Prompt)
+! ENTRY(@s20),USE(GLO:QueueMailConsument)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueMailConsument)
+GLO:QueueMailConsument QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(109297fd-6262-45b7-8324-8c5cd8fb5a64),PROMPT('GLO : Queue Mail Consument:'),HEADER('GLO : Queue Mail Consument'),PICTURE(@s20)
+!endregion
+  !region qmc_Type BYTE
+[SCREENCONTROLS]
+! PROMPT('qmc Type:'),USE(?qmc_Type:Prompt)
+! ENTRY(@n3),USE(qmc_Type)
+[REPORTCONTROLS]
+! STRING(@n3),USE(qmc_Type)
+qmc_Type BYTE
+!!> GUID(dacc9dca-b910-45d5-8554-dd7a77c6956e),PROMPT('qmc Type:'),HEADER('qmc Type'),PICTURE(@n3)
+  !endregion
+  !region qmc_Winkel DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?qmc_Winkel:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qmc_Winkel),MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qmc_Winkel),TRN
+qmc_Winkel DECIMAL(8,2)
+!!> GUID(5839b5b1-b567-4bb0-b37d-f55459cae320),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),TYPEMODE(INS)
+  !endregion
+  !region qmc_Consument LONG
+[SCREENCONTROLS]
+! PROMPT('Nummer:'),USE(?qmc_Consument:Prompt)
+! ENTRY(@n_8),USE(qmc_Consument),RIGHT,MSG('Consument nummer'),TIP('Consument nummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qmc_Consument),RIGHT
+qmc_Consument LONG
+!!> GUID(26505a50-9948-48e8-9077-e4364620d0d6),VALID(NONZERO),PROMPT('Nummer:'),HEADER('Nummer'),MESSAGE('Consument nummer'),TOOLTIP('Consument nummer'),PICTURE(@n_8),JUSTIFY(RIGHT),DERIVEDFROM('CON:ConsumentNummer')
+  !endregion
+  !region qmc_Ordernummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qmc_Ordernummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(qmc_Ordernummer),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qmc_Ordernummer),TRN,RIGHT
+qmc_Ordernummer DECIMAL(7,2)
+!!> GUID(3f9d6234-0e2a-4034-9ff5-c7108dcc781f),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+  !region qmc_Email STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmc Email:'),USE(?qmc_Email:Prompt)
+! ENTRY(@s255),USE(qmc_Email)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmc_Email)
+qmc_Email STRING(255)
+!!> GUID(b21b8125-51e9-4229-9fbc-7b592c4d0f97),PROMPT('qmc Email:'),HEADER('qmc Email'),PICTURE(@s255)
+  !endregion
+  !region qmc_Afzender STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmc Afzender:'),USE(?qmc_Afzender:Prompt)
+! ENTRY(@s255),USE(qmc_Afzender)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmc_Afzender)
+qmc_Afzender STRING(255)
+!!> GUID(4ef2fa68-4ac0-4516-ad3d-6ec25fbe1f16),PROMPT('qmc Afzender:'),HEADER('qmc Afzender'),PICTURE(@s255)
+  !endregion
+  !region qmc_PdfNaam STRING(255)
+[SCREENCONTROLS]
+! PROMPT('qmc Pdf Naam:'),USE(?qmc_PdfNaam:Prompt)
+! ENTRY(@s255),USE(qmc_PdfNaam)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmc_PdfNaam)
+qmc_PdfNaam STRING(255)
+!!> GUID(37fffaff-db8d-4c47-9575-49cdcb9e3c8e),PROMPT('qmc Pdf Naam:'),HEADER('qmc Pdf Naam'),PICTURE(@s255)
+  !endregion
+  !region qmc_Printen BYTE
+[SCREENCONTROLS]
+! PROMPT('qmc Printen:'),USE(?qmc_Printen:Prompt)
+! ENTRY(@n3),USE(qmc_Printen)
+[REPORTCONTROLS]
+! STRING(@n3),USE(qmc_Printen)
+qmc_Printen BYTE
+!!> GUID(7287962c-4fb6-4167-b177-0e079a17dcf1),PROMPT('qmc Printen:'),HEADER('qmc Printen'),PICTURE(@n3)
+  !endregion
+  !region qmc_Mailen BYTE
+[SCREENCONTROLS]
+! PROMPT('qmc Mailen:'),USE(?qmc_Mailen:Prompt)
+! ENTRY(@n3),USE(qmc_Mailen)
+[REPORTCONTROLS]
+! STRING(@n3),USE(qmc_Mailen)
+qmc_Mailen BYTE
+!!> GUID(fcfd257d-469f-4a4b-832e-568f107b6bd4),PROMPT('qmc Mailen:'),HEADER('qmc Mailen'),PICTURE(@n3)
+  !endregion
+  !region qmc_Tekst STRING(2500)
+[SCREENCONTROLS]
+! PROMPT('qmc Tekst:'),USE(?qmc_Tekst:Prompt)
+! ENTRY(@s255),USE(qmc_Tekst)
+[REPORTCONTROLS]
+! STRING(@s255),USE(qmc_Tekst)
+qmc_Tekst STRING(2500)
+!!> GUID(0a64d042-6caf-4b0b-96c1-8c13ca408dfd),PROMPT('qmc Tekst:'),HEADER('qmc Tekst'),PICTURE(@s255)
+  !endregion
+END
+!region GLO:QueueMeldingVolume QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Melding Volume:'),USE(?GLO:QueueMeldingVolume:Prompt)
+! ENTRY(@s20),USE(GLO:QueueMeldingVolume)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueMeldingVolume)
+GLO:QueueMeldingVolume QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(1af93992-7e9e-4135-9fa2-3c62ddaadb73),PROMPT('GLO : Queue Melding Volume:'),HEADER('GLO : Queue Melding Volume'),PICTURE(@s20)
+!endregion
+  !region qmv_Ordernummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qmv_Ordernummer:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(qmv_Ordernummer),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qmv_Ordernummer),TRN,RIGHT
+qmv_Ordernummer DECIMAL(7,2)
+!!> GUID(4b595ec9-27c0-4bb1-878c-f301d8d888bc),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+  !region qmv_Productgroep DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('Product&groep:'),USE(?qmv_Productgroep:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(qmv_Productgroep),DECIMAL(12),MSG('Productgroep'),TIP('Productgroep'),INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(qmv_Productgroep),TRN,DECIMAL(12)
+qmv_Productgroep DECIMAL(7,2)
+!!> GUID(3f7f69ad-ba82-40bf-b401-c36673474362),PROMPT('Product&groep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),TYPEMODE(INS),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qmv_Omschrijving STRING(100)
+[SCREENCONTROLS]
+! PROMPT('qmv Omschrijving:'),USE(?qmv_Omschrijving:Prompt)
+! ENTRY(@s100),USE(qmv_Omschrijving)
+[REPORTCONTROLS]
+! STRING(@s100),USE(qmv_Omschrijving)
+qmv_Omschrijving STRING(100)
+!!> GUID(e6448a2a-88f0-4f5b-ada4-7cd1c96cb5d3),PROMPT('qmv Omschrijving:'),HEADER('qmv Omschrijving'),PICTURE(@s100)
+  !endregion
+  !region qmv_Volume DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Volumegetal:'),USE(?qmv_Volume:Prompt)
+! ENTRY(@n_6.2),AT(,,,10),USE(qmv_Volume),DECIMAL(12),MSG('Volumegetal'),TIP('Volumegetal')
+[REPORTCONTROLS]
+! STRING(@n_6.2),USE(qmv_Volume),TRN,DECIMAL(12)
+qmv_Volume DECIMAL(7,2)
+!!> GUID(7682bb21-d290-4cc7-904f-0ffaf0a09129),PROMPT('&Volumegetal:'),HEADER('Volumegetal'),MESSAGE('Volumegetal'),TOOLTIP('Volumegetal'),PICTURE(@n_6.2),JUSTIFY(DECIMAL,12)
+  !endregion
+END
+!region GLO:QueueConsumentPakbon QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Consument Pakbon:'),USE(?GLO:QueueConsumentPakbon:Prompt)
+! ENTRY(@s20),USE(GLO:QueueConsumentPakbon)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueConsumentPakbon)
+GLO:QueueConsumentPakbon QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(195b548b-ace6-4e53-9362-29631d3130a6),PROMPT('GLO : Queue Consument Pakbon:'),HEADER('GLO : Queue Consument Pakbon'),PICTURE(@s20)
+!endregion
+  !region qcp_Type STRING(2)
+[SCREENCONTROLS]
+! PROMPT('qcp Type:'),USE(?qcp_Type:Prompt)
+! ENTRY(@s2),USE(qcp_Type)
+[REPORTCONTROLS]
+! STRING(@s2),USE(qcp_Type)
+qcp_Type STRING(2)
+!!> GUID(b1f62e99-5cd9-45b1-905f-450d933a7208),PROMPT('qcp Type:'),HEADER('qcp Type'),PICTURE(@s2)
+  !endregion
+  !region qcp_Id LONG
+[SCREENCONTROLS]
+! PROMPT('Factuur Id:'),USE(?qcp_Id:Prompt)
+! ENTRY(@n-14),USE(qcp_Id),RIGHT(1),MSG('Factuur Id'),TIP('Factuur Id')
+[REPORTCONTROLS]
+! STRING(@n-14),USE(qcp_Id),RIGHT(1)
+qcp_Id LONG
+!!> GUID(bf7a9491-f1a7-41ba-aafe-66d5febf80fd),PROMPT('Factuur Id:'),HEADER('Factuur Id'),MESSAGE('Factuur Id'),TOOLTIP('Factuur Id'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+  !endregion
+  !region qcp_Soort CSTRING(31)
+[SCREENCONTROLS]
+! OPTION('&Soort'),AT(,,50,72),USE(qcp_Soort),BOXED,MSG('Soort verkoop'),TIP('Soort verkoop')
+! RADIO('1. Producten geleverd '),USE(?qcp_Soort:Radio1)
+! RADIO('2. Producten retour '),USE(?qcp_Soort:Radio2)
+! RADIO('3. Fusten geleverd '),USE(?qcp_Soort:Radio3)
+! RADIO('4. Fusten retour '),USE(?qcp_Soort:Radio4)
+! RADIO('5. Kosten'),USE(?qcp_Soort:Radio5)
+! END
+[REPORTCONTROLS]
+! STRING(@s30),USE(qcp_Soort),TRN
+qcp_Soort CSTRING(31)
+!!> GUID(4e7b2a84-d736-4efb-b39b-b243b7ba2e40),VALID(INLIST('1. Producten geleverd |2. Producten retour |3. Fusten geleverd |4. Fusten retour |5. Kosten')),PROMPT('&Soort'),HEADER('Soort'),MESSAGE('Soort verkoop'),TOOLTIP('Soort verkoop'),PICTURE(@s30)
+  !endregion
+  !region qcp_Productgroep DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('Product&groep:'),USE(?qcp_Productgroep:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(qcp_Productgroep),DECIMAL(12),MSG('Productgroep'),TIP('Productgroep'),INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(qcp_Productgroep),TRN,DECIMAL(12)
+qcp_Productgroep DECIMAL(8,2)
+!!> GUID(dca71368-0c36-42f7-9e5a-731086b53018),PROMPT('Product&groep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),TYPEMODE(INS),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qcp_Productnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Productnummer:'),USE(?qcp_Productnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qcp_Productnummer),DECIMAL(12),MSG('Productnummer'),TIP('Productnummer'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qcp_Productnummer),TRN,DECIMAL(12)
+qcp_Productnummer DECIMAL(8,2)
+!!> GUID(1e502eda-b5b0-4017-8d8f-7da3a1200a61),VALID(NONZERO),PROMPT('&Productnummer:'),HEADER('Productnummer'),MESSAGE('Productnummer'),TOOLTIP('Productnummer'),PICTURE(@n_8),CASE(UPPER),JUSTIFY(DECIMAL,12)
+  !endregion
+END
+!region GLO:QueueExportExcel QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Export Excel:'),USE(?GLO:QueueExportExcel:Prompt)
+! ENTRY(@s20),USE(GLO:QueueExportExcel)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueExportExcel)
+GLO:QueueExportExcel  QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(54fc1e09-9c10-408d-a3f4-38c56795b58d),PROMPT('GLO : Queue Export Excel:'),HEADER('GLO : Queue Export Excel'),PICTURE(@s20)
+!endregion
+  !region qexc_Afdeling DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Afdelingscode:'),USE(?qexc_Afdeling:Prompt)
+! ENTRY(@n_4.0),AT(,,,10),USE(qexc_Afdeling),RIGHT,MSG('Afdelingscode'),TIP('Afdelingscode'),INS
+[REPORTCONTROLS]
+! STRING(@n_4.0),USE(qexc_Afdeling),TRN,RIGHT
+qexc_Afdeling DECIMAL(7,2)
+!!> GUID(00013b49-14bc-4b47-835b-2c2ddc26ff25),PROMPT('&Afdelingscode:'),HEADER('Afdelingscode'),MESSAGE('Afdelingscode'),TOOLTIP('Afdelingscode'),PICTURE(@n_4.0),TYPEMODE(INS),JUSTIFY(RIGHT)
+  !endregion
+  !region qexc_Bestelnummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('Productgroep:'),USE(?qexc_Bestelnummer:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(qexc_Bestelnummer),RIGHT,MSG('Productgroep'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(qexc_Bestelnummer),TRN,RIGHT
+qexc_Bestelnummer DECIMAL(7,2)
+!!> GUID(30ae5ad9-7e39-4e9c-bced-d30150fe3fcd),VALID(NONZERO),PROMPT('Productgroep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),TYPEMODE(INS),JUSTIFY(RIGHT)
+  !endregion
+  !region qexc_Productnummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Productnummer:'),USE(?qexc_Productnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qexc_Productnummer),RIGHT,MSG('Productnummer'),TIP('Productnummer'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qexc_Productnummer),TRN,RIGHT
+qexc_Productnummer DECIMAL(7,2)
+!!> GUID(4f884471-75ab-4ee7-a286-bffd7d71467f),VALID(NONZERO),PROMPT('&Productnummer:'),HEADER('Productnummer'),MESSAGE('Productnummer'),TOOLTIP('Productnummer'),PICTURE(@n_8),CASE(UPPER),JUSTIFY(RIGHT)
+  !endregion
+END
+!region GLO:QueueExtraDebFactuurnummering QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO:'),USE(?QueueExtraDebFactuurnummering:Prompt)
+! ENTRY(@s20),USE(QueueExtraDebFactuurnummering)
+[REPORTCONTROLS]
+! STRING(@s20),USE(QueueExtraDebFactuurnummering)
+GLO:QueueExtraDebFactuurnummering QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(82d0d659-4e5c-45ec-8fb6-669e725be58d),PROMPT('GLO:'),HEADER('GLO'),PICTURE(@s20)
+!endregion
+  !region qedf_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?qedf_Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qedf_Debiteurnummer),MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qedf_Debiteurnummer),TRN
+qedf_Debiteurnummer DECIMAL(8,2)
+!!> GUID(12ebad86-0c7d-4381-a8e6-6e44c6f4a8fa),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),TYPEMODE(INS)
+  !endregion
+  !region qedf_Factuurnummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Factuurnummer:'),USE(?qedf_Factuurnummer:Prompt)
+! ENTRY(@n_7),AT(,,,10),USE(qedf_Factuurnummer),RIGHT,MSG('Factuurnummer geprinte factuurr'),TIP('Factuurnummer geprinte factuurr')
+[REPORTCONTROLS]
+! STRING(@n_7),USE(qedf_Factuurnummer),TRN,RIGHT
+qedf_Factuurnummer DECIMAL(7,2)
+!!> GUID(4e594be5-261e-448f-9589-d4e1c9016a4f),PROMPT('&Factuurnummer:'),HEADER('Factuurnummer'),MESSAGE('Factuurnummer geprinte factuurr'),TOOLTIP('Factuurnummer geprinte factuurr'),PICTURE(@n_7),JUSTIFY(RIGHT)
+  !endregion
+END
+!region GLO:QueueVrrdProductgroep QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Vrrd Productgroep:'),USE(?QueueVrrdProductgroep:Prompt)
+! ENTRY(@s20),USE(QueueVrrdProductgroep)
+[REPORTCONTROLS]
+! STRING(@s20),USE(QueueVrrdProductgroep)
+GLO:QueueVrrdProductgroep QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(ba267a38-3192-4c49-988c-e090ac86585c),PROMPT('GLO : Queue Vrrd Productgroep:'),HEADER('GLO : Queue Vrrd Productgroep'),PICTURE(@s20)
+!endregion
+  !region qvp_Productgroep DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('Productgroep:'),USE(?qvp_Productgroep:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(qvp_Productgroep),RIGHT,MSG('Productgroep'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(qvp_Productgroep),TRN,RIGHT
+qvp_Productgroep DECIMAL(8,2)
+!!> GUID(4066a910-fcbc-4f0e-8244-71f89ac0e200),VALID(NONZERO),PROMPT('Productgroep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),TYPEMODE(INS),JUSTIFY(RIGHT)
+  !endregion
+  !region qvp_BesteldNaarVrrd DECIMAL(10,2)
+[SCREENCONTROLS]
+! PROMPT('qp Aantal Onderweg:'),USE(?qvp_BesteldNaarVrrd:Prompt)
+! ENTRY(@n-14.2),USE(qvp_BesteldNaarVrrd),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n-14.2),USE(qvp_BesteldNaarVrrd),DECIMAL(12)
+qvp_BesteldNaarVrrd DECIMAL(10,2)
+!!> GUID(731fac96-d871-45dd-8759-469aa2c37f35),PROMPT('qp Aantal Onderweg:'),HEADER('qp Aantal Onderweg'),PICTURE(@n-14.2),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qvp_OnderwegNaarVrrd DECIMAL(10,2)
+[SCREENCONTROLS]
+! PROMPT('qvp Onderweg Naar Vrrd:'),USE(?qvp_OnderwegNaarVrrd:Prompt)
+! ENTRY(@n-14.2),USE(qvp_OnderwegNaarVrrd),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n-14.2),USE(qvp_OnderwegNaarVrrd),DECIMAL(12)
+qvp_OnderwegNaarVrrd DECIMAL(10,2)
+!!> GUID(62bd7a02-f626-4d6d-a24a-7c02adc7345c),PROMPT('qvp Onderweg Naar Vrrd:'),HEADER('qvp Onderweg Naar Vrrd'),PICTURE(@n-14.2),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qvp_AantalBesteld DECIMAL(10,2)
+[SCREENCONTROLS]
+! PROMPT('qp Aantal Onderweg:'),USE(?qvp_AantalBesteld:Prompt)
+! ENTRY(@n-14.2),USE(qvp_AantalBesteld),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n-14.2),USE(qvp_AantalBesteld),DECIMAL(12)
+qvp_AantalBesteld DECIMAL(10,2)
+!!> GUID(452f8e20-63e5-4aba-946d-9a43edd721fb),PROMPT('qp Aantal Onderweg:'),HEADER('qp Aantal Onderweg'),PICTURE(@n-14.2),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region qvp_AantalOnderweg DECIMAL(10,2)
+[SCREENCONTROLS]
+! PROMPT('qvp Aantal Onderweg:'),USE(?qvp_AantalOnderweg:Prompt)
+! ENTRY(@n-14.2),USE(qvp_AantalOnderweg),DECIMAL(12)
+[REPORTCONTROLS]
+! STRING(@n-14.2),USE(qvp_AantalOnderweg),DECIMAL(12)
+qvp_AantalOnderweg DECIMAL(10,2)
+!!> GUID(097bb147-c9d8-488f-bcb6-daa9000d6d8e),PROMPT('qvp Aantal Onderweg:'),HEADER('qvp Aantal Onderweg'),PICTURE(@n-14.2),JUSTIFY(DECIMAL,12)
+  !endregion
+END
+!region GLO:QueueAparteOrder QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Aparte Order:'),USE(?GLO:QueueAparteOrder:Prompt)
+! ENTRY(@s20),USE(GLO:QueueAparteOrder)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueAparteOrder)
+GLO:QueueAparteOrder  QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(72b8a72f-88e0-4e6e-bbbd-f47a0d5e2f70),PROMPT('GLO : Queue Aparte Order:'),HEADER('GLO : Queue Aparte Order'),PICTURE(@s20)
+!endregion
+  !region qao_Id LONG
+[SCREENCONTROLS]
+! PROMPT('qao Id:'),USE(?qao_Id:Prompt)
+! ENTRY(@n-14),USE(qao_Id),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(qao_Id),RIGHT(1)
+qao_Id LONG
+!!> GUID(e786a98d-d797-4af5-b977-d0d62ab0fc09),PROMPT('qao Id:'),HEADER('qao Id'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+  !endregion
+  !region qao_Omschrijving STRING(100)
+[SCREENCONTROLS]
+! PROMPT('qao Omschrijving:'),USE(?qao_Omschrijving:Prompt)
+! ENTRY(@s100),USE(qao_Omschrijving)
+[REPORTCONTROLS]
+! STRING(@s100),USE(qao_Omschrijving)
+qao_Omschrijving STRING(100)
+!!> GUID(6e0b9388-eab5-4f07-b38a-1b9fee6d61b0),PROMPT('qao Omschrijving:'),HEADER('qao Omschrijving'),PICTURE(@s100)
+  !endregion
+  !region qao_Picker STRING(5)
+[SCREENCONTROLS]
+! PROMPT('qao Picker:'),USE(?qao_Picker:Prompt)
+! ENTRY(@s5),USE(qao_Picker)
+[REPORTCONTROLS]
+! STRING(@s5),USE(qao_Picker)
+qao_Picker STRING(5)
+!!> GUID(dd8b1cc7-c1d2-481c-863b-8d1ccdae0f55),PROMPT('qao Picker:'),HEADER('qao Picker'),PICTURE(@s5)
+  !endregion
+END
+!region GLO:QueueDigFactuur QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Dig Factuur:'),USE(?GLO:QueueDigFactuur:Prompt)
+! ENTRY(@s20),USE(GLO:QueueDigFactuur)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueDigFactuur)
+GLO:QueueDigFactuur   QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(ff6d8c69-6f58-41ca-9d71-da2cf2ba639e),PROMPT('GLO : Queue Dig Factuur:'),HEADER('GLO : Queue Dig Factuur'),PICTURE(@s20)
+!endregion
+  !region qdf_Factuurnummer DECIMAL(7,2)
+[SCREENCONTROLS]
+! PROMPT('&Factuurnummer:'),USE(?qdf_Factuurnummer:Prompt)
+! ENTRY(@n_7),AT(,,,10),USE(qdf_Factuurnummer),RIGHT,MSG('Factuurnummer geprinte factuurr'),TIP('Factuurnummer geprinte factuurr')
+[REPORTCONTROLS]
+! STRING(@n_7),USE(qdf_Factuurnummer),TRN,RIGHT
+qdf_Factuurnummer DECIMAL(7,2)
+!!> GUID(1fcfec60-e7bc-4959-9e2b-ef2018c4c667),PROMPT('&Factuurnummer:'),HEADER('Factuurnummer'),MESSAGE('Factuurnummer geprinte factuurr'),TOOLTIP('Factuurnummer geprinte factuurr'),PICTURE(@n_7),JUSTIFY(RIGHT)
+  !endregion
+  !region qdf_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?qdf_Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(qdf_Debiteurnummer),DECIMAL(12),MSG('Debiteurnummer'),TIP('Debiteurnummer'),INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(qdf_Debiteurnummer),TRN,DECIMAL(12)
+qdf_Debiteurnummer DECIMAL(8,2)
+!!> GUID(4a59b6b8-2cb6-4afc-a8b3-d2bed5454ac3),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),TYPEMODE(INS),JUSTIFY(DECIMAL,12)
+  !endregion
+END
+!region GLO:MemVerpakkingen QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Verpakkingen:'),USE(?MemVerpakkingen:Prompt)
+! ENTRY(@s20),USE(MemVerpakkingen)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemVerpakkingen)
+GLO:MemVerpakkingen   QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(450f3917-9807-4e91-8bdc-2683864cbee8),PROMPT('GLO : Mem Verpakkingen:'),HEADER('GLO : Mem Verpakkingen'),PICTURE(@s20)
+!endregion
+  !region mvp_Verpakkingsnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('Verpakkingsnummer:'),USE(?mvp_Verpakkingsnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(mvp_Verpakkingsnummer),DECIMAL(4),MSG('Verpakkingsnummer'),TIP('Verpakkingsnummer'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@n_8),USE(mvp_Verpakkingsnummer),TRN,DECIMAL(4)
+mvp_Verpakkingsnummer DECIMAL(8,2)
+!!> GUID(8fc06b8f-27dc-45bf-a25c-4c00c4873558),VALID(NONZERO),PROMPT('Verpakkingsnummer:'),HEADER('Verpakkingsnummer'),MESSAGE('Verpakkingsnummer'),TOOLTIP('Verpakkingsnummer'),PICTURE(@n_8),CASE(UPPER),JUSTIFY(DECIMAL,4)
+  !endregion
+  !region mvp_Statiegeld STRING(3)
+[SCREENCONTROLS]
+! CHECK('Statiegeld'),USE(mvp_Statiegeld),MSG('Statiegeld')
+[REPORTCONTROLS]
+! CHECK('Statiegeld'),USE(mvp_Statiegeld),TRN
+mvp_Statiegeld STRING(3)
+!!> GUID(ee53074d-d8e7-4c76-bd94-700a15dacf30),VALID(BOOLEAN),PROMPT('Statiegeld'),HEADER('Statiegeld'),MESSAGE('Statiegeld'),TOOLTIP('Statiegeld'),PICTURE(@s3)
+  !endregion
+END
+!region GLO:MemDebiteuren QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Debiteuren:'),USE(?MemDebiteuren:Prompt)
+! ENTRY(@s20),USE(MemDebiteuren)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemDebiteuren)
+GLO:MemDebiteuren     QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(a5583c7a-8ac1-4930-a719-7174fec8a1a8),PROMPT('GLO : Mem Debiteuren:'),HEADER('GLO : Mem Debiteuren'),PICTURE(@s20)
+!endregion
+  !region mdb_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?mdb_Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(mdb_Debiteurnummer),MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(mdb_Debiteurnummer),TRN
+mdb_Debiteurnummer DECIMAL(8,2)
+!!> GUID(807e8753-20f8-4c39-899c-233744ada7a8),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),TYPEMODE(INS)
+  !endregion
+  !region mdb_Naam STRING(50)
+[SCREENCONTROLS]
+! PROMPT('&Naam:'),USE(?mdb_Naam:Prompt)
+! ENTRY(@s50),AT(,,,10),USE(mdb_Naam),MSG('Bedrijfsnaam'),TIP('Naam')
+[REPORTCONTROLS]
+! STRING(@s50),USE(mdb_Naam),TRN
+mdb_Naam STRING(50)
+!!> GUID(1c312503-7836-4035-95fc-891301ac861f),PROMPT('&Naam:'),HEADER('Naam'),MESSAGE('Bedrijfsnaam'),TOOLTIP('Naam'),PICTURE(@s50)
+  !endregion
+  !region mdb_Postadres STRING(80)
+[SCREENCONTROLS]
+! PROMPT('&Postadres:'),USE(?mdb_Postadres:Prompt)
+! ENTRY(@s80),AT(,,,10),USE(mdb_Postadres),MSG('Postadres'),TIP('Postadres')
+[REPORTCONTROLS]
+! STRING(@s80),USE(mdb_Postadres),TRN
+mdb_Postadres STRING(80)
+!!> GUID(6d175015-4da4-47c2-82a8-c3bc74ebcd1e),PROMPT('&Postadres:'),HEADER('Postadres'),MESSAGE('Postadres'),TOOLTIP('Postadres'),PICTURE(@s80)
+  !endregion
+  !region mdb_Postcode2 STRING(10)
+[SCREENCONTROLS]
+! PROMPT('&Postcode:'),USE(?mdb_Postcode2:Prompt)
+! ENTRY(@s10),AT(,,,10),USE(mdb_Postcode2),MSG('Postcode postadres'),TIP('Postcode'),UPR
+[REPORTCONTROLS]
+! STRING(@s10),USE(mdb_Postcode2),TRN
+mdb_Postcode2 STRING(10)
+!!> GUID(caa945df-211d-4251-b488-3636d4fd7d06),PROMPT('&Postcode:'),HEADER('Postcode'),MESSAGE('Postcode postadres'),TOOLTIP('Postcode'),PICTURE(@s10),CASE(UPPER)
+  !endregion
+  !region mdb_Plaats2 STRING(40)
+[SCREENCONTROLS]
+! PROMPT('&Plaats:'),USE(?mdb_Plaats2:Prompt)
+! ENTRY(@s40),AT(,,,10),USE(mdb_Plaats2),MSG('Plaats postadres'),TIP('Plaats'),REQ
+[REPORTCONTROLS]
+! STRING(@s40),USE(mdb_Plaats2),TRN
+mdb_Plaats2 STRING(40)
+!!> GUID(a3f776a1-b4bb-42a8-9ac5-eb056cb12b4a),VALID(NONZERO),PROMPT('&Plaats:'),HEADER('Plaats'),MESSAGE('Plaats postadres'),TOOLTIP('Plaats'),PICTURE(@s40)
+  !endregion
+  !region mdb_BtwNummer STRING(50)
+[SCREENCONTROLS]
+! PROMPT('BTW Nummer:'),USE(?mdb_BtwNummer:Prompt)
+! ENTRY(@s50),USE(mdb_BtwNummer),MSG('BTW nummer'),TIP('BTW nummer')
+[REPORTCONTROLS]
+! STRING(@s50),USE(mdb_BtwNummer)
+mdb_BtwNummer STRING(50)
+!!> GUID(9963ff87-91ff-4ab3-a2a1-2fda4a2d86d2),PROMPT('BTW Nummer:'),HEADER('Btw Nummer'),MESSAGE('BTW nummer'),TOOLTIP('BTW nummer'),PICTURE(@s50)
+  !endregion
+  !region mdb_Betalingsvoorwaarde STRING(100)
+[SCREENCONTROLS]
+! PROMPT('&Betalingsvoorwaarde:'),USE(?mdb_Betalingsvoorwaarde:Prompt)
+! ENTRY(@s100),AT(,,,10),USE(mdb_Betalingsvoorwaarde),MSG('Betalingsvoorwaarde'),TIP('Betalingsvoorwaarde')
+[REPORTCONTROLS]
+! STRING(@s100),USE(mdb_Betalingsvoorwaarde),TRN
+mdb_Betalingsvoorwaarde STRING(100)
+!!> GUID(8838ba07-690f-467f-a903-d3f8b4b071d7),PROMPT('&Betalingsvoorwaarde:'),HEADER('Betalingsvoorwaarde'),MESSAGE('Betalingsvoorwaarde'),TOOLTIP('Betalingsvoorwaarde'),PICTURE(@s100)
+  !endregion
+  !region mdb_Consumentenprijzen STRING(3)
+[SCREENCONTROLS]
+! CHECK('Consumentenprijzen'),USE(mdb_Consumentenprijzen),MSG('Consumentenprijzen?'),VALUE('Ja','Nee'),TIP('Consumentenprijzen?')
+[REPORTCONTROLS]
+! CHECK('Consumentenprijzen'),USE(mdb_Consumentenprijzen),VALUE('Ja','Nee')
+mdb_Consumentenprijzen STRING(3)
+!!> GUID(ba93e47f-ac38-4586-a076-ff98cd6d5ded),VALID(BOOLEAN),PROMPT('Consumentenprijzen:'),HEADER('Consumentenprijzen'),MESSAGE('Consumentenprijzen?'),TOOLTIP('Consumentenprijzen?'),PICTURE(@s3),TRUEVALUE('Ja'),FALSEVALUE('Nee')
+  !endregion
+  !region mdb_EmailFactuur STRING(254)
+[SCREENCONTROLS]
+! PROMPT('E-mail facturen:'),USE(?mdb_EmailFactuur:Prompt)
+! ENTRY(@s254),USE(mdb_EmailFactuur),MSG('Email adres factuur'),TIP('Email adres factuur')
+[REPORTCONTROLS]
+! STRING(@s254),USE(mdb_EmailFactuur)
+mdb_EmailFactuur STRING(254)
+!!> GUID(dd31994e-fe77-4477-92de-09704582e38a),PROMPT('E-mail facturen:'),HEADER('E-mail facturen'),MESSAGE('Email adres factuur'),TOOLTIP('Email adres factuur'),PICTURE(@s254)
+  !endregion
+  !region mdb_FactuurPdfFtp BYTE
+[SCREENCONTROLS]
+! CHECK('PDF'),USE(mdb_FactuurPdfFtp),MSG('Indien actief zal de factuur als PDF bestand geplaatst worden op de FTP locatie zoals opgegeven bij de digitale leveringsbon'),VALUE('1','0'),TIP('Indien actief zal de factuur als PDF bestand geplaatst worden op de FTP locatie zoals opgegeven bij de digitale leveringsbon')
+[REPORTCONTROLS]
+! CHECK('PDF'),USE(mdb_FactuurPdfFtp),VALUE('1','0')
+mdb_FactuurPdfFtp BYTE
+!!> GUID(07c76cd4-7e8c-4603-949d-0f8a786787f2),VALID(BOOLEAN),PROMPT('PDF'),HEADER('PDF'),MESSAGE('Indien actief zal de factuur als PDF bestand geplaatst worden op de FTP locatie zoals opgegeven bij de digitale leveringsbon'),TOOLTIP('Indien actief zal de factuur als PDF bestand geplaatst worden op de FTP locatie zoals opgegeven bij de digitale leveringsbon'),PICTURE(@n3),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+  !region mdb_BetalingskortingCode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('Betalingskorting code:'),USE(?mdb_BetalingskortingCode:Prompt)
+! ENTRY(@s3),AT(,,,10),USE(mdb_BetalingskortingCode),MSG('Betalingskorting code'),TIP('Betalingskorting code')
+[REPORTCONTROLS]
+! STRING(@s3),USE(mdb_BetalingskortingCode),TRN
+mdb_BetalingskortingCode STRING(3)
+!!> GUID(290cdb2f-cb47-4193-a1a2-2118b7f265fb),PROMPT('Betalingskorting code:'),HEADER('Betalingskorting Code'),MESSAGE('Betalingskorting code'),TOOLTIP('Betalingskorting code'),PICTURE(@s3)
+  !endregion
+  !region mdb_Landcode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('&Landcode:'),USE(?mdb_Landcode:Prompt)
+! ENTRY(@s3),AT(,,,10),USE(mdb_Landcode),MSG('Landcode'),TIP('Landcode'),UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(mdb_Landcode),TRN
+mdb_Landcode STRING(3)
+!!> GUID(468b7af6-fb92-459e-8139-45116cdfd3df),PROMPT('&Landcode:'),HEADER('Landcode'),MESSAGE('Landcode'),TOOLTIP('Landcode'),PICTURE(@s3),CASE(UPPER)
+  !endregion
+  !region mdb_PrintenFactuur BYTE(1)
+[SCREENCONTROLS]
+! OPTION('Facturen'),AT(,,50,48),USE(mdb_PrintenFactuur),BOXED,MSG('1 = printen / 2 = pdf+mailen / 3 = printen+pdf+mailen'),TIP('1 = printen / 2 = pdf+mailen / 3 = printen+pdf+mailen')
+! RADIO('printen'),USE(?mdb_PrintenFactuur:Radio1),VALUE('1')
+! RADIO('pdf+mailen'),USE(?mdb_PrintenFactuur:Radio2),VALUE('2')
+! RADIO('printen+pdf+mailen'),USE(?mdb_PrintenFactuur:Radio3),VALUE('3')
+! END
+[REPORTCONTROLS]
+! STRING(@n1),USE(mdb_PrintenFactuur)
+mdb_PrintenFactuur BYTE(1)
+!!> GUID(0bc60136-93b9-4222-ba87-e00726b7e6ad),VALID(INLIST('printen|pdf+mailen|printen+pdf+mailen')),INITIAL('1'),PROMPT('Facturen:'),HEADER('Facturen'),MESSAGE('1 = printen / 2 = pdf+mailen / 3 = printen+pdf+mailen'),TOOLTIP('1 = printen / 2 = pdf+mailen / 3 = printen+pdf+mailen'),PICTURE(@n1),VALUES('1|2|3')
+  !endregion
+  !region mdb_DigitaleFactuur BYTE
+[SCREENCONTROLS]
+! CHECK(' Aanmaken digitale factuur'),USE(mdb_DigitaleFactuur),MSG('Aanmaken digitale factuur'),VALUE('1','0'),TIP('Aanmaken digitale factuur')
+[REPORTCONTROLS]
+! CHECK(' Aanmaken digitale factuur'),USE(mdb_DigitaleFactuur),VALUE('1','0')
+mdb_DigitaleFactuur BYTE
+!!> GUID(637fa35b-8d95-4d4d-958d-efb29bc6917d),VALID(BOOLEAN),PROMPT(' Aanmaken digitale factuur'),HEADER('Digitale Factuur'),MESSAGE('Aanmaken digitale factuur'),TOOLTIP('Aanmaken digitale factuur'),PICTURE(@n1),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+  !region mdb_DagFacturen CSTRING(4)
+[SCREENCONTROLS]
+! CHECK('Dag Facturen'),USE(mdb_DagFacturen)
+[REPORTCONTROLS]
+! CHECK('Dag Facturen'),USE(mdb_DagFacturen)
+mdb_DagFacturen CSTRING(4)
+!!> GUID(d4e0cceb-d2d9-498c-be26-b981fe97760e),VALID(NOCHECKS('Ja|Nee')),PROMPT('Dag Facturen:'),HEADER('Dag Facturen'),PICTURE(@s3),VALUES('Ja|Nee')
+  !endregion
+  !region mdb_Taalcode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('&Taalcode:'),USE(?mdb_Taalcode:Prompt)
+! ENTRY(@s3),USE(mdb_Taalcode),MSG('Taalcode'),TIP('Taalcode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(mdb_Taalcode)
+mdb_Taalcode STRING(3)
+!!> GUID(0e11f185-c084-4968-b526-63f69b68465b),VALID(NONZERO),PROMPT('&Taalcode:'),HEADER('Taalcode'),MESSAGE('Taalcode'),TOOLTIP('Taalcode'),PICTURE(@s3),CASE(UPPER)
+  !endregion
+  !region mdb_OpslagOpFactuur BYTE
+[SCREENCONTROLS]
+! CHECK('Opslag Op Factuur'),USE(mdb_OpslagOpFactuur),MSG('Opslag berekenen op factuur'),VALUE('1','0'),TIP('Opslag berekenen op factuur')
+[REPORTCONTROLS]
+! CHECK('Opslag Op Factuur'),USE(mdb_OpslagOpFactuur),VALUE('1','0')
+mdb_OpslagOpFactuur BYTE
+!!> GUID(8df85b37-e3ac-4d6c-83f6-9d7dcdc32797),VALID(BOOLEAN),PROMPT('Opslag Op Factuur:'),HEADER('Opslag Op Factuur'),MESSAGE('Opslag berekenen op factuur'),TOOLTIP('Opslag berekenen op factuur'),PICTURE(@n1),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+  !region mdb_OpslagOmschrijving STRING(30)
+[SCREENCONTROLS]
+! PROMPT('Omschrijving:'),USE(?mdb_OpslagOmschrijving:Prompt)
+! ENTRY(@s30),AT(,,,10),USE(mdb_OpslagOmschrijving),MSG('Omschrijving opslag')
+[REPORTCONTROLS]
+! STRING(@s30),USE(mdb_OpslagOmschrijving),TRN
+mdb_OpslagOmschrijving STRING(30)
+!!> GUID(a1f774d8-6956-4648-93b3-b7dbef177f17),PROMPT('Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving opslag'),TOOLTIP('Omschrijving'),PICTURE(@s30)
+  !endregion
+  !region mdb_OpslagPercentage DECIMAL(6,2)
+[SCREENCONTROLS]
+! PROMPT('Opslagpercentage:'),USE(?mdb_OpslagPercentage:Prompt)
+! SPIN(@n-8.2~%~),USE(mdb_OpslagPercentage),RIGHT,MSG('Opslagpercentage'),TIP('Opslagpercentage')
+[REPORTCONTROLS]
+! STRING(@n-8.2~%~),USE(mdb_OpslagPercentage),RIGHT
+mdb_OpslagPercentage DECIMAL(6,2)
+!!> GUID(6524e60f-c490-41d9-ba89-f027564016cf),PROMPT('Opslagpercentage:'),HEADER('Opslag Percentage'),MESSAGE('Opslagpercentage'),TOOLTIP('Opslagpercentage'),PICTURE(@n-8.2~%~),JUSTIFY(RIGHT)
+  !endregion
+  !region mdb_FactuurGecomprimeerd STRING(3)
+[SCREENCONTROLS]
+! CHECK('&Factuur gecomprimeerd printen'),USE(mdb_FactuurGecomprimeerd),MSG('Factuur gecomprimeerd printen?'),VALUE('Ja','Nee'),TIP('Factuur gecomprimeerd printen?')
+[REPORTCONTROLS]
+! CHECK('&Factuur gecomprimeerd printen'),USE(mdb_FactuurGecomprimeerd),VALUE('Ja','Nee')
+mdb_FactuurGecomprimeerd STRING(3)
+!!> GUID(ebe888ac-6d21-4392-b480-7f38bb0beb71),VALID(BOOLEAN),PROMPT('&Factuur gecomprimeerd printen'),HEADER('Factuur Gecomprimeerd'),MESSAGE('Factuur gecomprimeerd printen?'),TOOLTIP('Factuur gecomprimeerd printen?'),PICTURE(@s3),TRUEVALUE('Ja'),FALSEVALUE('Nee')
+  !endregion
+  !region mdb_TwigEnForestLayout BYTE
+[SCREENCONTROLS]
+! CHECK('Twig en Forest lay-out'),USE(mdb_TwigEnForestLayout),MSG('Twig en Forest lay-out'),VALUE('1','0'),TIP('Twig en Forest lay-out')
+[REPORTCONTROLS]
+! CHECK('Twig en Forest lay-out'),USE(mdb_TwigEnForestLayout),VALUE('1','0')
+mdb_TwigEnForestLayout BYTE
+!!> GUID(2cb58da2-c1f0-4f45-96ac-d5fa3343882f),VALID(BOOLEAN),PROMPT('Twig en Forest lay-out'),HEADER('Twig en Forest lay-out'),MESSAGE('Twig en Forest lay-out'),TOOLTIP('Twig en Forest lay-out'),PICTURE(@n3),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+END
+!region GLO:MemBetalingkortingen QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Betalingkortingen:'),USE(?MemBetalingkortingen:Prompt)
+! ENTRY(@s20),USE(MemBetalingkortingen)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemBetalingkortingen)
+GLO:MemBetalingkortingen QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(3d3c198c-3de7-463d-a541-ddee867612d9),PROMPT('GLO : Mem Betalingkortingen:'),HEADER('GLO : Mem Betalingkortingen'),PICTURE(@s20)
+!endregion
+  !region mbc_BetalingskortingCode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('Betalingskorting code:'),USE(?mbc_BetalingskortingCode:Prompt)
+! ENTRY(@s3),AT(,,,10),USE(mbc_BetalingskortingCode),MSG('Betalingskorting code'),TIP('Betalingskorting code'),REQ
+[REPORTCONTROLS]
+! STRING(@s3),USE(mbc_BetalingskortingCode),TRN
+mbc_BetalingskortingCode STRING(3)
+!!> GUID(da7ae364-ec28-4e4f-b2a1-107d5d7ad7f4),VALID(NONZERO),PROMPT('Betalingskorting code:'),HEADER('Betalingskorting Code'),MESSAGE('Betalingskorting code'),TOOLTIP('Betalingskorting code'),PICTURE(@s3)
+  !endregion
+  !region mbc_Korting DECIMAL(5,2)
+[SCREENCONTROLS]
+! PROMPT('Korting:'),USE(?mbc_Korting:Prompt)
+! ENTRY(@n-7.2~%~),USE(mbc_Korting),DECIMAL(12),MSG('Korting'),TIP('Korting')
+[REPORTCONTROLS]
+! STRING(@n-7.2~%~),USE(mbc_Korting),DECIMAL(12)
+mbc_Korting DECIMAL(5,2)
+!!> GUID(76136edd-cfd7-42e1-8c73-34b5ce8732c5),PROMPT('Korting:'),HEADER('Korting'),MESSAGE('Korting'),TOOLTIP('Korting'),PICTURE(@n-7.2~%~),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region mbc_Omschrijving STRING(100)
+[SCREENCONTROLS]
+! PROMPT('&Omschrijving:'),USE(?mbc_Omschrijving:Prompt)
+! ENTRY(@s100),AT(,,,10),USE(mbc_Omschrijving),MSG('Omschrijving'),TIP('Omschrijving'),REQ
+[REPORTCONTROLS]
+! STRING(@s100),USE(mbc_Omschrijving),TRN
+mbc_Omschrijving STRING(100)
+!!> GUID(81ba1e14-59d8-48b0-b8fb-dab390ac8681),VALID(NONZERO),PROMPT('&Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving'),TOOLTIP('Omschrijving'),PICTURE(@s100)
+  !endregion
+END
+!region GLO:MemLanden QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Landen:'),USE(?MemLanden:Prompt)
+! ENTRY(@s20),USE(MemLanden)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemLanden)
+GLO:MemLanden         QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(0488fc06-704d-4066-8083-46e1d4eef1c2),PROMPT('GLO : Mem Landen:'),HEADER('GLO : Mem Landen'),PICTURE(@s20)
+!endregion
+  !region mlc_Landcode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('&Landcode:'),USE(?mlc_Landcode:Prompt)
+! ENTRY(@s3),USE(mlc_Landcode),MSG('Landcode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(mlc_Landcode)
+mlc_Landcode STRING(3)
+!!> GUID(7c6cce3f-1776-4a66-bf10-1254fde4561a),VALID(NONZERO),PROMPT('&Landcode:'),HEADER('Landcode'),MESSAGE('Landcode'),TOOLTIP('Landcode'),PICTURE(@s3),CASE(UPPER)
+  !endregion
+  !region mlc_Omschrijving STRING(25)
+[SCREENCONTROLS]
+! PROMPT('&Omschrijving:'),USE(?mlc_Omschrijving:Prompt)
+! ENTRY(@s25),USE(mlc_Omschrijving),MSG('Omschrijving')
+[REPORTCONTROLS]
+! STRING(@s25),USE(mlc_Omschrijving)
+mlc_Omschrijving STRING(25)
+!!> GUID(feb35a95-464c-448e-9ddf-77dbd66a5637),PROMPT('&Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving'),TOOLTIP('Omschrijving'),PICTURE(@s25)
+  !endregion
+END
+!region GLO:MemProducten QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Producten:'),USE(?MemProducten:Prompt)
+! ENTRY(@s20),USE(MemProducten)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemProducten)
+GLO:MemProducten      QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(0b8ce4c5-b498-49f3-ba6c-b5d786887a31),PROMPT('GLO : Mem Producten:'),HEADER('GLO : Mem Producten'),PICTURE(@s20)
+!endregion
+  !region mpr_ProductGroep DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('Product&groep:'),USE(?mpr_ProductGroep:Prompt)
+! ENTRY(@n_8.0),AT(,,,10),USE(mpr_ProductGroep),RIGHT,MSG('Productgroep'),TIP('Productgroep'),INS
+[REPORTCONTROLS]
+! STRING(@n_8.0),USE(mpr_ProductGroep),TRN,RIGHT
+mpr_ProductGroep DECIMAL(8,2)
+!!> GUID(905478fb-2b06-4890-88bf-aa1b48aa43de),PROMPT('Product&groep:'),HEADER('Productgroep'),MESSAGE('Productgroep'),TOOLTIP('Productgroep'),PICTURE(@n_8.0),TYPEMODE(INS),JUSTIFY(RIGHT)
+  !endregion
+  !region mpr_Productnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Productnummer:'),USE(?mpr_Productnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(mpr_Productnummer),RIGHT,MSG('Productnummer'),TIP('Productnummer'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@n_8),USE(mpr_Productnummer),TRN,RIGHT
+mpr_Productnummer DECIMAL(8,2)
+!!> GUID(b4617b91-1a59-49ed-beb9-c08cc4ca5045),VALID(NONZERO),PROMPT('&Productnummer:'),HEADER('Productnummer'),MESSAGE('Productnummer'),TOOLTIP('Productnummer'),PICTURE(@n_8),CASE(UPPER),JUSTIFY(RIGHT)
+  !endregion
+  !region mpr_Klassering STRING(25)
+[SCREENCONTROLS]
+! PROMPT('Klassering:'),USE(?mpr_Klassering:Prompt)
+! ENTRY(@s25),USE(mpr_Klassering),MSG('Keurmerk bio'),TIP('Keurmerk bio')
+[REPORTCONTROLS]
+! STRING(@s25),USE(mpr_Klassering)
+mpr_Klassering STRING(25)
+!!> GUID(fad6c689-bd93-4be6-8fc8-5396e677dd65),PROMPT('Klassering:'),HEADER('Klassering'),MESSAGE('Keurmerk bio'),TOOLTIP('Keurmerk bio'),PICTURE(@s25)
+  !endregion
+  !region mpr_KeurmerkBio STRING(25)
+[SCREENCONTROLS]
+! PROMPT('Keurmerk bio:'),USE(?mpr_KeurmerkBio:Prompt)
+! ENTRY(@s25),USE(mpr_KeurmerkBio),MSG('Keurmerk bio'),TIP('Keurmerk bio')
+[REPORTCONTROLS]
+! STRING(@s25),USE(mpr_KeurmerkBio)
+mpr_KeurmerkBio STRING(25)
+!!> GUID(275ae06c-a973-4136-bb6d-1fe192b30ae8),PROMPT('Keurmerk bio:'),HEADER('Keurmerk bio'),MESSAGE('Keurmerk bio'),TOOLTIP('Keurmerk bio'),PICTURE(@s25)
+  !endregion
+  !region mpr_KeurmerkOverig STRING(25)
+[SCREENCONTROLS]
+! PROMPT('Keurmerk overig:'),USE(?mpr_KeurmerkOverig:Prompt)
+! ENTRY(@s25),USE(mpr_KeurmerkOverig),MSG('Keurmerk overig'),TIP('Keurmerk overig')
+[REPORTCONTROLS]
+! STRING(@s25),USE(mpr_KeurmerkOverig)
+mpr_KeurmerkOverig STRING(25)
+!!> GUID(a206a569-ea2c-488f-a548-036fc3844230),PROMPT('Keurmerk overig:'),HEADER('Keurmerk overig'),MESSAGE('Keurmerk overig'),TOOLTIP('Keurmerk overig'),PICTURE(@s25)
+  !endregion
+  !region mpr_Kwaliteit STRING(20)
+[SCREENCONTROLS]
+! PROMPT('&Kwaliteit:'),USE(?mpr_Kwaliteit:Prompt)
+! ENTRY(@s20),AT(,,,10),USE(mpr_Kwaliteit),MSG('Kwaliteit'),TIP('Kwaliteit'),OVR
+[REPORTCONTROLS]
+! STRING(@s20),USE(mpr_Kwaliteit),TRN
+mpr_Kwaliteit STRING(20)
+!!> GUID(5d31152d-b655-4941-9715-d1897862bd4c),PROMPT('&Kwaliteit:'),HEADER('Kwaliteit'),MESSAGE('Kwaliteit'),TOOLTIP('Kwaliteit'),PICTURE(@s20),TYPEMODE(OVR)
+  !endregion
+END
+!region GLO:MemBtwTaal QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Btw Taal:'),USE(?MemBtwTaal:Prompt)
+! ENTRY(@s20),USE(MemBtwTaal)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemBtwTaal)
+GLO:MemBtwTaal        QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(fe6ee76e-f954-422a-88be-e0a0955049fb),PROMPT('GLO : Mem Btw Taal:'),HEADER('GLO : Mem Btw Taal'),PICTURE(@s20)
+!endregion
+  !region mbt_BtwCode STRING(20)
+[SCREENCONTROLS]
+! PROMPT('BTW code:'),USE(?mbt_BtwCode:Prompt)
+! ENTRY(@s1),AT(,,,10),USE(mbt_BtwCode),MSG('Btw code'),REQ
+[REPORTCONTROLS]
+! STRING(@s1),USE(mbt_BtwCode),TRN
+mbt_BtwCode STRING(20)
+!!> GUID(36aa4a82-3cb6-423a-ae6b-9daed2881543),VALID(NONZERO),PROMPT('BTW code:'),HEADER('BTW code'),MESSAGE('Btw code'),TOOLTIP('Btw code'),PICTURE(@s1)
+  !endregion
+  !region mbt_Taalcode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('&Taalcode:'),USE(?mbt_Taalcode:Prompt)
+! ENTRY(@s3),USE(mbt_Taalcode),MSG('Taalcode'),TIP('Taalcode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(mbt_Taalcode)
+mbt_Taalcode STRING(3)
+!!> GUID(35d7506a-e3c9-4d65-be0d-604a79046e0d),VALID(NONZERO),PROMPT('&Taalcode:'),HEADER('Taalcode'),MESSAGE('Taalcode'),TOOLTIP('Taalcode'),PICTURE(@s3),CASE(UPPER)
+  !endregion
+  !region mbt_Omschrijving STRING(30)
+[SCREENCONTROLS]
+! PROMPT('Omschrijving:'),USE(?mbt_Omschrijving:Prompt)
+! ENTRY(@s30),AT(,,,10),USE(mbt_Omschrijving),MSG('Omschrijving')
+[REPORTCONTROLS]
+! STRING(@s30),USE(mbt_Omschrijving),TRN
+mbt_Omschrijving STRING(30)
+!!> GUID(79efe7f0-0fe8-4525-bf3a-c92c2c52d864),PROMPT('Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving'),TOOLTIP('Omschrijving'),PICTURE(@s30)
+  !endregion
+END
+!region GLO:MemBioKwaliteiten QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Bio Kwaliteiten:'),USE(?MemBioKwaliteiten:Prompt)
+! ENTRY(@s20),USE(MemBioKwaliteiten)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemBioKwaliteiten)
+GLO:MemBioKwaliteiten QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(dfdf5bd1-d503-487b-bdd1-b62896170ac8),PROMPT('GLO : Mem Bio Kwaliteiten:'),HEADER('GLO : Mem Bio Kwaliteiten'),PICTURE(@s20)
+!endregion
+  !region mbk_Kwaliteit STRING(20)
+[SCREENCONTROLS]
+! PROMPT('Kwaliteit:'),USE(?Kwaliteit:Prompt)
+! ENTRY(@s20),AT(,,,10),USE(Kwaliteit),MSG('Kwaliteit'),OVR
+[REPORTCONTROLS]
+! STRING(@s20),USE(Kwaliteit),TRN
+mbk_Kwaliteit STRING(20)
+!!> GUID(2845ef5c-4455-45ca-900b-8cf68354ff28),PROMPT('Kwaliteit:'),HEADER('Kwaliteit'),MESSAGE('Kwaliteit'),TOOLTIP('Kwaliteit'),PICTURE(@s20),TYPEMODE(OVR)
+  !endregion
+END
+!region GLO:MemEenhedenTaal QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Eenheden Taal:'),USE(?MemEenhedenTaal:Prompt)
+! ENTRY(@s20),USE(MemEenhedenTaal)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemEenhedenTaal)
+GLO:MemEenhedenTaal   QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(cbb21305-91c8-4cad-bab3-6462225257af),PROMPT('GLO : Mem Eenheden Taal:'),HEADER('GLO : Mem Eenheden Taal'),PICTURE(@s20)
+!endregion
+  !region met_Eenheid STRING(10)
+[SCREENCONTROLS]
+! PROMPT('Eenheid:'),USE(?met_Eenheid:Prompt)
+! ENTRY(@s10),AT(,,,10),USE(met_Eenheid),MSG('Eenheid'),OVR
+[REPORTCONTROLS]
+! STRING(@s10),USE(met_Eenheid),TRN
+met_Eenheid STRING(10)
+!!> GUID(d94f5114-d8d1-4c4f-b05f-4683dfa75e0c),PROMPT('Eenheid:'),HEADER('Eenheid'),MESSAGE('Eenheid'),TOOLTIP('Eenheid'),PICTURE(@s10),TYPEMODE(OVR)
+  !endregion
+  !region met_Taalcode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('&Taalcode:'),USE(?met_Taalcode:Prompt)
+! ENTRY(@s3),USE(met_Taalcode),MSG('Taalcode'),TIP('Taalcode'),REQ,UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(met_Taalcode)
+met_Taalcode STRING(3)
+!!> GUID(9c7d705d-2035-44d6-96d8-2652ca768392),VALID(NONZERO),PROMPT('&Taalcode:'),HEADER('Taalcode'),MESSAGE('Taalcode'),TOOLTIP('Taalcode'),PICTURE(@s3),CASE(UPPER)
+  !endregion
+  !region met_Omschrijving STRING(20)
+[SCREENCONTROLS]
+! PROMPT('Omschrijving:'),USE(?met_Omschrijving:Prompt)
+! ENTRY(@s20),USE(met_Omschrijving),MSG('Omschrijving'),TIP('Omschrijving')
+[REPORTCONTROLS]
+! STRING(@s20),USE(met_Omschrijving)
+met_Omschrijving STRING(20)
+!!> GUID(e3d2066d-78c3-4a8c-814e-5c5dcf8f322c),PROMPT('Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving'),TOOLTIP('Omschrijving'),PICTURE(@s20)
+  !endregion
+END
+!region GLO:MemGrootboekrekeningen1 QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Grootboekrekeningen 1:'),USE(?MemGrootboekrekeningen1:Prompt)
+! ENTRY(@s20),USE(MemGrootboekrekeningen1)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemGrootboekrekeningen1)
+GLO:MemGrootboekrekeningen1 QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(af51322f-d6cc-4ad4-bfbb-82ba095f9853),PROMPT('GLO : Mem Grootboekrekeningen 1:'),HEADER('GLO : Mem Grootboekrekeningen 1'),PICTURE(@s20)
+!endregion
+  !region mg1_GrootboekRekening STRING(6)
+[SCREENCONTROLS]
+! PROMPT('&Grootboekrekening:'),USE(?mg1_GrootboekRekening:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(mg1_GrootboekRekening),RIGHT,MSG('Grootboekrekening'),TIP('Grootboekrekening'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(mg1_GrootboekRekening),TRN,RIGHT
+mg1_GrootboekRekening STRING(6)
+!!> GUID(338ffd17-44af-4f53-9aed-0a5fa7be75d2),VALID(NONZERO),PROMPT('&Grootboekrekening:'),HEADER('Grootboek Rekening'),MESSAGE('Grootboekrekening'),TOOLTIP('Grootboekrekening'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+  !region mg1_LeveringRekening STRING(6)
+[SCREENCONTROLS]
+! PROMPT('Levering Rekening:'),USE(?mg1_LeveringRekening:Prompt)
+! ENTRY(@n_6),USE(mg1_LeveringRekening),RIGHT,MSG('Levering rekening'),TIP('Levering rekening')
+[REPORTCONTROLS]
+! STRING(@n_6),USE(mg1_LeveringRekening),RIGHT
+mg1_LeveringRekening STRING(6)
+!!> GUID(5669c767-e090-4dbc-8d33-7d32d66f7e1c),PROMPT('Levering Rekening:'),HEADER('Levering Rekening'),MESSAGE('Levering rekening'),TOOLTIP('Levering rekening'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+  !region mg1_Omschrijving STRING(25)
+[SCREENCONTROLS]
+! PROMPT('Omschrijving:'),USE(?mg1_Omschrijving:Prompt)
+! ENTRY(@s25),AT(,,,10),USE(mg1_Omschrijving),MSG('Omschrijving'),TIP('Omschrijving')
+[REPORTCONTROLS]
+! STRING(@s25),USE(mg1_Omschrijving),TRN
+mg1_Omschrijving STRING(25)
+!!> GUID(f8305290-1d40-46b7-a425-5c03b87513df),PROMPT('Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving'),TOOLTIP('Omschrijving'),PICTURE(@s25)
+  !endregion
+  !region mg1_BioOpFactuur BYTE
+[SCREENCONTROLS]
+! CHECK(' Biologisch % berekenen op factuur'),USE(mg1_BioOpFactuur),MSG('Biologisch % op factuur'),VALUE('1','0'),TIP('Biologisch % op factuur')
+[REPORTCONTROLS]
+! CHECK(' Biologisch % berekenen op factuur'),USE(mg1_BioOpFactuur),VALUE('1','0')
+mg1_BioOpFactuur BYTE
+!!> GUID(a4a9f823-09a0-4cee-a0fc-49d27edc2e97),VALID(BOOLEAN),PROMPT(' Biologisch % berekenen op factuur'),HEADER('Bio Op Factuur'),MESSAGE('Biologisch % op factuur'),TOOLTIP('Biologisch % op factuur'),PICTURE(@n1),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+  !region mg1_SpecificatieOpFactuur BYTE
+[SCREENCONTROLS]
+! CHECK('Specificatie op factuur'),USE(mg1_SpecificatieOpFactuur),MSG('Specificatie op factuur'),VALUE('1','0'),TIP('Specificatie op factuur')
+[REPORTCONTROLS]
+! CHECK('Specificatie op factuur'),USE(mg1_SpecificatieOpFactuur),VALUE('1','0')
+mg1_SpecificatieOpFactuur BYTE
+!!> GUID(1ab2c757-8c70-409a-adca-fac699d391cc),VALID(BOOLEAN),PROMPT('Specificatie op factuur:'),HEADER('Specificatie op factuur'),MESSAGE('Specificatie op factuur'),TOOLTIP('Specificatie op factuur'),PICTURE(@n1),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+END
+!region GLO:MemGrootboekrekeningen2 QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Grootboekrekeningen 2:'),USE(?MemGrootboekrekeningen2:Prompt)
+! ENTRY(@s20),USE(MemGrootboekrekeningen2)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemGrootboekrekeningen2)
+GLO:MemGrootboekrekeningen2 QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(eeb0ec43-0902-4552-9b04-3ab8d1ca9ad6),PROMPT('GLO : Mem Grootboekrekeningen 2:'),HEADER('GLO : Mem Grootboekrekeningen 2'),PICTURE(@s20)
+!endregion
+  !region mg2_Grootboekrekening STRING(6)
+[SCREENCONTROLS]
+! PROMPT('&Grootboekrekening:'),USE(?mg2_Grootboekrekening:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(mg2_Grootboekrekening),RIGHT,MSG('Grootboekrekening'),TIP('Grootboekrekening'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(mg2_Grootboekrekening),TRN,RIGHT
+mg2_Grootboekrekening STRING(6)
+!!> GUID(45a449ab-776b-495b-9fc9-08a10686485a),VALID(NONZERO),PROMPT('&Grootboekrekening:'),HEADER('Grootboek Rekening'),MESSAGE('Grootboekrekening'),TOOLTIP('Grootboekrekening'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+  !region mg2_Omschrijving STRING(25)
+[SCREENCONTROLS]
+! PROMPT('Omschrijving:'),USE(?mg2_Omschrijving:Prompt)
+! ENTRY(@s25),AT(,,,10),USE(mg2_Omschrijving),MSG('Omschrijving'),TIP('Omschrijving')
+[REPORTCONTROLS]
+! STRING(@s25),USE(mg2_Omschrijving),TRN
+mg2_Omschrijving STRING(25)
+!!> GUID(a21a5341-d426-4865-9d40-0518e4f1579a),PROMPT('Omschrijving:'),HEADER('Omschrijving'),MESSAGE('Omschrijving'),TOOLTIP('Omschrijving'),PICTURE(@s25)
+  !endregion
+  !region mg2_BioOpFactuur BYTE
+[SCREENCONTROLS]
+! CHECK(' Biologisch % berekenen op factuur'),USE(mg2_BioOpFactuur),MSG('Biologisch % op factuur'),VALUE('1','0'),TIP('Biologisch % op factuur')
+[REPORTCONTROLS]
+! CHECK(' Biologisch % berekenen op factuur'),USE(mg2_BioOpFactuur),VALUE('1','0')
+mg2_BioOpFactuur BYTE
+!!> GUID(ee78199f-7074-47f7-9ec5-3b1cfe811848),VALID(BOOLEAN),PROMPT(' Biologisch % berekenen op factuur'),HEADER('Bio Op Factuur'),MESSAGE('Biologisch % op factuur'),TOOLTIP('Biologisch % op factuur'),PICTURE(@n1),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+  !region mg2_SpecificatieOpFactuur BYTE
+[SCREENCONTROLS]
+! CHECK('Specificatie op factuur'),USE(mg2_SpecificatieOpFactuur),MSG('Specificatie op factuur'),VALUE('1','0'),TIP('Specificatie op factuur')
+[REPORTCONTROLS]
+! CHECK('Specificatie op factuur'),USE(mg2_SpecificatieOpFactuur),VALUE('1','0')
+mg2_SpecificatieOpFactuur BYTE
+!!> GUID(ccf729d0-8db5-4990-a565-8cd1142ae584),VALID(BOOLEAN),PROMPT('Specificatie op factuur:'),HEADER('Specificatie op factuur'),MESSAGE('Specificatie op factuur'),TOOLTIP('Specificatie op factuur'),PICTURE(@n1),TRUEVALUE('1'),FALSEVALUE('0')
+  !endregion
+END
+!region GLO:MemConsumenten QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Consumenten:'),USE(?MemConsumenten:Prompt)
+! ENTRY(@s20),USE(MemConsumenten)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemConsumenten)
+GLO:MemConsumenten    QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(76f9aab7-7581-4f42-8f33-f81cde52242b),PROMPT('GLO : Mem Consumenten:'),HEADER('GLO : Mem Consumenten'),PICTURE(@s20)
+!endregion
+  !region mco_ConsumentNummer LONG
+[SCREENCONTROLS]
+! PROMPT('Nummer:'),USE(?mco_ConsumentNummer:Prompt)
+! ENTRY(@n_8),USE(mco_ConsumentNummer),RIGHT,MSG('Consument nummer'),TIP('Consument nummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_8),USE(mco_ConsumentNummer),RIGHT
+mco_ConsumentNummer LONG
+!!> GUID(d3d6fe0a-2d9f-40e6-b0a1-66258fd8c499),VALID(NONZERO),PROMPT('Nummer:'),HEADER('Nummer'),MESSAGE('Consument nummer'),TOOLTIP('Consument nummer'),PICTURE(@n_8),JUSTIFY(RIGHT)
+  !endregion
+  !region mco_Voornaam STRING(255)
+[SCREENCONTROLS]
+! PROMPT('Voornaam:'),USE(?mco_Voornaam:Prompt)
+! ENTRY(@s255),USE(mco_Voornaam),MSG('Voornaam'),TIP('Voornaam')
+[REPORTCONTROLS]
+! STRING(@s255),USE(mco_Voornaam)
+mco_Voornaam STRING(255)
+!!> GUID(532badbe-40ac-450d-a2e4-ef38550fc263),PROMPT('Voornaam:'),HEADER('Voornaam'),MESSAGE('Voornaam'),TOOLTIP('Voornaam'),PICTURE(@s255)
+  !endregion
+  !region mco_Achternaam STRING(255)
+[SCREENCONTROLS]
+! PROMPT('Achternaam:'),USE(?mco_Achternaam:Prompt)
+! ENTRY(@s255),USE(mco_Achternaam),MSG('Achternaam'),TIP('Achternaam')
+[REPORTCONTROLS]
+! STRING(@s255),USE(mco_Achternaam)
+mco_Achternaam STRING(255)
+!!> GUID(137b6ab5-0623-4295-a806-4725e956aaa4),PROMPT('Achternaam:'),HEADER('Achternaam'),MESSAGE('Achternaam'),TOOLTIP('Achternaam'),PICTURE(@s255)
+  !endregion
+END
+!region GLO:MemHerkomst QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Herkomst:'),USE(?MemHerkomst:Prompt)
+! ENTRY(@s20),USE(MemHerkomst)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemHerkomst)
+GLO:MemHerkomst       QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(b44f99ba-887b-4f12-b19a-e36591582ebd),PROMPT('GLO : Mem Herkomst:'),HEADER('GLO : Mem Herkomst'),PICTURE(@s20)
+!endregion
+  !region mhe_Herkomst STRING(20)
+[SCREENCONTROLS]
+! PROMPT('Herkomst:'),USE(?mhe_Herkomst:Prompt)
+! ENTRY(@s20),AT(,,,10),USE(mhe_Herkomst),MSG('Herkomst'),TIP('Herkomst'),OVR
+[REPORTCONTROLS]
+! STRING(@s20),USE(mhe_Herkomst),TRN
+mhe_Herkomst STRING(20)
+!!> GUID(09a419d2-1898-47ea-81a2-ce549365441c),PROMPT('Herkomst:'),HEADER('Herkomst'),MESSAGE('Herkomst'),TOOLTIP('Herkomst'),PICTURE(@s20),TYPEMODE(OVR)
+  !endregion
+  !region mhe_ISOLandcode STRING(3)
+[SCREENCONTROLS]
+! PROMPT('ISO Landcode:'),USE(?mhe_ISOLandcode:Prompt)
+! ENTRY(@s3),USE(mhe_ISOLandcode),MSG('Landcode volgens ISO nomering'),TIP('Landcode volgens ISO nomering<0DH,0AH>(www.nsrc.org/codes/country-codes.html)'),UPR
+[REPORTCONTROLS]
+! STRING(@s3),USE(mhe_ISOLandcode)
+mhe_ISOLandcode STRING(3)
+!!> GUID(fb869354-8e83-4311-9a35-87e8796d162b),PROMPT('ISO Landcode:'),HEADER('ISO Landcode'),MESSAGE('Landcode volgens ISO nomering'),TOOLTIP('Landcode volgens ISO nomering (www.nsrc.org/codes/country-codes.html)'),PICTURE(@s3),CASE(UPPER)
+  !endregion
+END
+!region GLO:MemDebOmzettenGrootboek QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Mem Deb Omzetten Grootboek:'),USE(?MemDebOmzettenGrootboek:Prompt)
+! ENTRY(@s20),USE(MemDebOmzettenGrootboek)
+[REPORTCONTROLS]
+! STRING(@s20),USE(MemDebOmzettenGrootboek)
+GLO:MemDebOmzettenGrootboek QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(7996a55b-b9f2-4416-ad31-c385499b6877),PROMPT('GLO : Mem Deb Omzetten Grootboek:'),HEADER('GLO : Mem Deb Omzetten Grootboek'),PICTURE(@s20)
+!endregion
+  !region mdo_Debiteurnummer DECIMAL(8,2)
+[SCREENCONTROLS]
+! PROMPT('&Debiteurnummer:'),USE(?mdo_Debiteurnummer:Prompt)
+! ENTRY(@n_8),AT(,,,10),USE(mdo_Debiteurnummer),MSG('Debiteurnummer'),TIP('Debiteurnummer'),REQ,INS
+[REPORTCONTROLS]
+! STRING(@n_8),USE(mdo_Debiteurnummer),TRN
+mdo_Debiteurnummer DECIMAL(8,2)
+!!> GUID(80377d8c-5221-4fe3-9f4c-225e4d3c7923),VALID(NONZERO),PROMPT('&Debiteurnummer:'),HEADER('Debiteurnummer'),MESSAGE('Debiteurnummer'),TOOLTIP('Debiteurnummer'),PICTURE(@n_8),TYPEMODE(INS)
+  !endregion
+  !region mdo_Grootboekrekening STRING(6)
+[SCREENCONTROLS]
+! PROMPT('&Grootboekrekening:'),USE(?mdo_Grootboekrekening:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(mdo_Grootboekrekening),RIGHT,MSG('Grootboekrekening'),TIP('Grootboekrekening'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(mdo_Grootboekrekening),TRN,RIGHT
+mdo_Grootboekrekening STRING(6)
+!!> GUID(665da070-d311-40e0-9a6e-33f42ceaa81c),VALID(NONZERO),PROMPT('&Grootboekrekening:'),HEADER('Grootboek Rekening'),MESSAGE('Grootboekrekening'),TOOLTIP('Grootboekrekening'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+  !region mdo_Jaar LONG
+[SCREENCONTROLS]
+! PROMPT('Jaar:'),USE(?mdo_Jaar:Prompt)
+! SPIN(@n_4),USE(mdo_Jaar),MSG('Jaar'),TIP('Jaar'),STEP(1)
+[REPORTCONTROLS]
+! STRING(@n_4),USE(mdo_Jaar),TRN
+mdo_Jaar LONG
+!!> GUID(799fd484-e165-40d0-a0a1-16a948bd3da5),PROMPT('Jaar:'),HEADER('Jaar'),MESSAGE('Jaar'),TOOLTIP('Jaar'),PICTURE(@n_4)
+  !endregion
+  !region mdo_Verkoop DECIMAL(10,2),DIM(53)
+[SCREENCONTROLS]
+! PROMPT('Verkoop:'),USE(?mdo_Verkoop:Prompt)
+! ENTRY(@n-14.2),USE(mdo_Verkoop),DECIMAL(12),MSG('Verkoop bedrag'),TIP('Verkoop bedrag')
+[REPORTCONTROLS]
+! STRING(@n-14.2),USE(mdo_Verkoop),DECIMAL(12)
+mdo_Verkoop DECIMAL(10,2),DIM(53)
+!!> GUID(5311074f-5f1e-4671-9608-c0dbdadd4774),PROMPT('Verkoop:'),HEADER('Verkoop'),MESSAGE('Verkoop bedrag'),TOOLTIP('Verkoop bedrag'),PICTURE(@n-14.2),JUSTIFY(DECIMAL,12)
+  !endregion
+  !region mdo_VerkoopBioKwaliteit DECIMAL(10,2),DIM(53)
+[SCREENCONTROLS]
+! PROMPT('Verkoop Bio Kwaliteit:'),USE(?mdo_VerkoopBioKwaliteit:Prompt)
+! ENTRY(@n-14.2),USE(mdo_VerkoopBioKwaliteit),DECIMAL(12),MSG('Verkoop bedrag'),TIP('Verkoop bedrag')
+[REPORTCONTROLS]
+! STRING(@n-14.2),USE(mdo_VerkoopBioKwaliteit),DECIMAL(12)
+mdo_VerkoopBioKwaliteit DECIMAL(10,2),DIM(53)
+!!> GUID(bcc9ce26-6305-4782-b3c6-f32eb5b9c9be),PROMPT('Verkoop Bio Kwaliteit:'),HEADER('Verkoop Bio Kwaliteit'),MESSAGE('Verkoop bedrag'),TOOLTIP('Verkoop bedrag'),PICTURE(@n-14.2),JUSTIFY(DECIMAL,12)
+  !endregion
+END
+!region GLO:QueueTripPlanningResult QUEUE,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('GLO : Queue Trip Planning Result:'),USE(?GLO:QueueTripPlanningResult:Prompt)
+! ENTRY(@s20),USE(GLO:QueueTripPlanningResult)
+[REPORTCONTROLS]
+! STRING(@s20),USE(GLO:QueueTripPlanningResult)
+GLO:QueueTripPlanningResult QUEUE,EXTERNAL,Dll(dll_mode)
+!!> GUID(932d1f11-f097-4228-ad32-f45e6b04be94),PROMPT('GLO : Queue Trip Planning Result:'),HEADER('GLO : Queue Trip Planning Result'),PICTURE(@s20)
+!endregion
+  !region qtp_Verkooporder DECIMAL(6,2)
+[SCREENCONTROLS]
+! PROMPT('&Ordernummer:'),USE(?qtp_Verkooporder:Prompt)
+! ENTRY(@n_6),AT(,,,10),USE(qtp_Verkooporder),RIGHT,MSG('Ordernummer'),TIP('Ordernummer'),REQ
+[REPORTCONTROLS]
+! STRING(@n_6),USE(qtp_Verkooporder),TRN,RIGHT
+qtp_Verkooporder DECIMAL(6,2)
+!!> GUID(a9d48871-2ac9-471c-a5da-b5fd7a26c903),VALID(NONZERO),PROMPT('&Ordernummer:'),HEADER('Ordernummer'),MESSAGE('Ordernummer'),TOOLTIP('Ordernummer'),PICTURE(@n_6),JUSTIFY(RIGHT)
+  !endregion
+END
+!region PC:NewPage LONG,EXTERNAL,Dll(dll_mode)
+[SCREENCONTROLS]
+! PROMPT('PC : New Page:'),USE(?PC:NewPage:Prompt)
+! ENTRY(@n-14),USE(PC:NewPage),OVR
+[REPORTCONTROLS]
+! STRING(@n-14),USE(PC:NewPage)
+PC:NewPage            LONG,EXTERNAL,Dll(dll_mode)
+!!> GUID(4b0b229a-8247-4b6d-89b2-8e32afad10e4),PROMPT('PC : New Page:'),HEADER('PC : New Page'),PICTURE(@n-14),TYPEMODE(OVR)
+!endregion
+
