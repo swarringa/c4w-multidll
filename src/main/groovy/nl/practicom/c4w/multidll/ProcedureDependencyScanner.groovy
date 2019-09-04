@@ -1,11 +1,6 @@
 package nl.practicom.c4w.multidll
 
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContentHandler
-import nl.practicom.c4w.txa.transform.TxaContext
-import nl.practicom.c4w.txa.transform.TxaLogicalContentHandler
-import nl.practicom.c4w.txa.transform.TxaRawContentHandler
-import nl.practicom.c4w.txa.transform.TxaSectionHandler
+import nl.practicom.c4w.txa.transform.*
 
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 
@@ -118,13 +113,13 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
     List<String> getTransitiveDependencies(List<String> procedures, int level = -1) {
         Set<String> result = procedures.inject([] as Set) {
             collected, procedure ->
-                collected.addAll(dependencies[procedure])
+                collected.addAll(dependencies[procedure] ?: [])
                 collected
         }
         Set<String> candidates = []
         candidates.addAll(result)
         candidates.each { p ->
-            result.addAll(addTransitiveDependencies(result, p, level))
+            result.addAll(addTransitiveDependencies(result, p, level) ?: [])
         }
         return result.toList()
     }
@@ -134,14 +129,14 @@ class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler
         if ( level == 0) return []
 
         Set<String> result  = []
-        result.addAll(collected)
-        Set<String> candidates = dependencies[procedure] as Set ?: [] as Set
+        result.addAll(collected ?: [])
+        Set<String> candidates = ( dependencies[procedure] ?: [] ) as Set
 
         candidates.removeAll(collected)
         if ( !candidates.isEmpty() ){
             collected.addAll(candidates)
             candidates.each { p ->
-                result.addAll(addTransitiveDependencies(collected, p, level-1))
+                result.addAll(addTransitiveDependencies(collected, p, level-1) ?: [] )
             }
         }
 
