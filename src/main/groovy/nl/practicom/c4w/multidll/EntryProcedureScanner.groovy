@@ -14,16 +14,39 @@ import static nl.practicom.c4w.txa.transform.SectionMark.*
 
 class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 
+    final private static MAIN_PROCEDURE_DECLARATION = ~/^\s*PROCEDURE\s+(\w+)\s*$/
+
+    //Eg: %ButtonProcedure DEPEND %Control PROCEDURE TIMES 3
+    final private static buttonProcedurePattern =
+      ~/^%ButtonProcedure\s+DEPEND\s+%Control\s+PROCEDURE\s+TIMES\s+([0-9]+)\s*$/
+
+    //Eg: WHEN  ('?ITEM1') (SelPrtHistorieProductgroepPeriodeTotDebiteur)
+    final private static controlActionPattern =
+      ~/^\s*WHEN\s+\('(\?[\w]+)'\)\s+\(([\w]+)\)\s*$/
+
+    //Eg: MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
+    final menubarPattern = /^\s*MENUBAR.*USE\((\?\w+)\).*#ORDINAL\(([0-9]+)\)\s*$/
+
+    //Eg: MENU('Menu 1'),USE(?MENU1),#ORDINAL(1)
+    final menuPattern = ~/^\s*MENU\('(.*)'\).*USE\((\?[\w]+)\).*#ORDINAL\(([0-9])+\)\s*$/
+
+    //Eg: ITEM('item_1_1'),USE(?ITEM1),#ORDINAL(1)
+    final menuItemPattern = ~/^\s*ITEM\('(.*)'\).*USE\((\?[\w]+)\).*#ORDINAL\(([0-9]+)\)\s*$/
+
+    //Eg: END
+    final menuEndPattern = ~/^\s*END\s*$/
+
+
     private menuActions = [:]
 
     /**
      * Map containing structure (parent/child relations) of the menu
      * Keys can be only MENU control identifiers (the control USE)
-     * Values are both MENU and ITEM id's. A special key 'window' is
+     * Values are both MENU and ITEM id's. A special key 'MENUBAR' is
      * used for top-level menu items (MENU and ITEM controls).
      * Eg:
      *  [
-     *    window: [MENU1, ITEM1, ITEM2],
+     *    'MENUBAR': [MENU1, ITEM1, ITEM2],
      *    MENU1: [ITEM3, ITEM4, MENU2, ITEM5],
      *    MENU2: [ITEM6]
      *  ]
@@ -31,13 +54,18 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
     public menuTree = [:]
 
     /* The procedure containing the MENUBAR */
-    def procedureName
+    def procedureName = null
 
     /* Flags to enable/disable processing */
     boolean withinButtonProcedures = false
 
     /* Maintains the current level in the menu structure */
     def menuParents = ['MENUBAR']
+
+    /**
+     * Collect the entry procedures for the main application procedure
+     */
+    EntryProcedureScanner() {}
 
     /**
      * Collect the entry procedures attached the menu of a procedure
@@ -96,22 +124,21 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
 
     @Override
     void onSectionContent(TxaContext ctx, SectionMark sectionMark, Long lineNumber, String content) {
-        if (ctx.currentProcedureName == this.procedureName){
+        // If no procedure was set use the main procedure
+        if ( this.procedureName == null && sectionMark == APPLICATION && content ==~ MAIN_PROCEDURE_DECLARATION ){
+            (content =~ MAIN_PROCEDURE_DECLARATION).each { _, name ->
+                this.procedureName = name
+            }
+        }
+
+        // While inside the procedure scan it's contents
+        if (this.procedureName && ctx.currentProcedureName == this.procedureName){
             processPrompts(ctx, content)
             processMenu(ctx, content)
         }
     }
 
     void processPrompts(TxaContext ctx, content){
-
-        //Eg: %ButtonProcedure DEPEND %Control PROCEDURE TIMES 3
-        final buttonProcedurePattern =
-                ~/^%ButtonProcedure\s+DEPEND\s+%Control\s+PROCEDURE\s+TIMES\s+([0-9]+)\s*$/
-
-        //Eg: WHEN  ('?ITEM1') (SelPrtHistorieProductgroepPeriodeTotDebiteur)
-        final controlActionPattern =
-                ~/^\s*WHEN\s+\('(\?[\w]+)'\)\s+\(([\w]+)\)\s*$/
-
         if (ctx.within(PROMPTS)){
             if (withinButtonProcedures){
                 if ( content ==~ controlActionPattern){
@@ -128,19 +155,6 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
     }
 
     void processMenu(TxaContext ctx, String content){
-
-        //Eg: MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
-        final menubarPattern = /^\s*MENUBAR.*USE\((\?\w+)\).*#ORDINAL\(([0-9]+)\)\s*$/
-
-        //Eg: MENU('Menu 1'),USE(?MENU1),#ORDINAL(1)
-        final menuPattern = ~/^\s*MENU\('(.*)'\).*USE\((\?[\w]+)\).*#ORDINAL\(([0-9])+\)\s*$/
-
-        //Eg: ITEM('item_1_1'),USE(?ITEM1),#ORDINAL(1)
-        final menuItemPattern = ~/^\s*ITEM\('(.*)'\).*USE\((\?[\w]+)\).*#ORDINAL\(([0-9]+)\)\s*$/
-
-        //Eg: END
-        final menuEndPattern = ~/^\s*END\s*$/
-
         // Restrict processing to the [WINDOW] section where the menu should live
         if (ctx.within(WINDOW)){
 

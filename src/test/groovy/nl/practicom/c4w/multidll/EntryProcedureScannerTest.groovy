@@ -3,8 +3,6 @@ package nl.practicom.c4w.multidll
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
-import org.junit.Ignore
-import org.junit.Test
 
 class EntryProcedureScannerTest extends GroovyTestCase {
     void setUp() {
@@ -169,7 +167,7 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                 .withHandler(scanner)
                 .parse('' << content)
 
-        // Indivual ietms always return 0 or 1 entries
+        // Indivual items always return 0 or 1 entries
         assert scanner.entryProceduresFor('?ITEM1') == ['SelPrtHistorieProductgroepPeriodeTotDebiteur']
         assert scanner.entryProceduresFor('?ITEM2') == ['SelPrtHistorieMargeDebiteur']
         assert scanner.entryProceduresFor('?ITEM3') == []
@@ -204,6 +202,46 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                 'SelPrintistorieOverzichtHistorie',
                 'SelPrintHistorieOverzichtMagazijnscanning'
         ])
+    }
+
+    void testMainProcedureIsScannedByIfNoSpecificProcedureProvided(){
+        def content = """\
+            [APPLICATION]
+            PROCEDURE P1
+            [PROCEDURE]
+            NAME P1
+            [COMMON]
+            DESCRIPTION 'Procedure 1'
+            FROM ABC Frame
+                [PROMPTS]
+                %ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+                WHEN  ('?ITEM1') (SelPrtHistorieProductgroepPeriodeTotDebiteur)
+            [WINDOW]
+            window1  WINDOW('Window 1')
+                      MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
+                        ITEM('item1'),USE(?ITEM1),#ORDINAL(1)
+                      END
+            [PROCEDURE]
+            NAME P2
+            [COMMON]
+            DESCRIPTION 'Procedure 2'
+            FROM ABC Frame
+                [PROMPTS]
+                %ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+            [WINDOW]
+            AppFrame  WINDOW('Window 2')
+                      MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
+                        ITEM('item1'),USE(?ITEM1),#ORDINAL(1)
+                      END
+        """.trimLines()
+
+        def scanner = new EntryProcedureScanner()
+
+        new StreamingTxaReader()
+          .withHandler(scanner)
+          .parse('' << content)
+
+        assert scanner.entryProceduresFor('?ITEM1') == ['SelPrtHistorieProductgroepPeriodeTotDebiteur']
     }
 
     /**
