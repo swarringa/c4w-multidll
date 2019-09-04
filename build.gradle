@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'groovy'
     id 'ivy-publish'
     id 'idea'
@@ -10,11 +9,18 @@ version '0.1'
 
 repositories {
     mavenCentral()
+    ivy {
+        url project.property('publishing.repo.url')
+        patternLayout {
+            artifact "[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"
+            ivy "[organisation]/[module]/ivy-[revision].[ext]"
+        }
+    }
 }
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
-    compile 'nl.practicom:c4w-txa:1.0'
+    compile 'nl.practicom:c4w-txa:0.1'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
@@ -22,7 +28,6 @@ publishing {
     repositories {
         ivy {
             url project.property('publishing.repo.url')
-            // grape repository layout:
             patternLayout {
                 artifact "[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"
                 ivy "[organisation]/[module]/ivy-[revision].[ext]"
@@ -32,8 +37,8 @@ publishing {
     publications {
         ivy(IvyPublication) {
             organisation = 'nl.practicom'
-            module = 'multidll'
-            revision = '0.1'
+            module = rootProject.name
+            revision = version
             from components.java
         }
     }
