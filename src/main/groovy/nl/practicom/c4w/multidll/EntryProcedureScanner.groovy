@@ -36,7 +36,6 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
     //Eg: END
     final menuEndPattern = ~/^\s*END\s*$/
 
-
     private menuActions = [:]
 
     /**
@@ -52,6 +51,8 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
      *  ]
      */
     public menuTree = [:]
+
+    public menuRoot = null
 
     /* The procedure containing the MENUBAR */
     def procedureName = null
@@ -163,6 +164,7 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
             if (content ==~ menubarPattern) {
                 (content =~ menubarPattern).each {
                     _, id, ordinal ->
+                    menuRoot = id
                     menuTree[id as String] = []
                     menuParents = [id]
                 }

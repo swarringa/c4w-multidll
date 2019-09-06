@@ -1,5 +1,6 @@
+@GrabResolver(name='practicom_dev', root='http://localhost:8080/grapes/practicom/')
 @Grab("nl.practicom:c4w-txa:0.1")
-@Grab("nl.practicom:multidll:0.1")
+@Grab("nl.practicom:c4w-multidll:0.1")
 
 import nl.practicom.c4w.multidll.ProcedureDependencyScanner
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
@@ -139,7 +140,7 @@ def runTransform(txaFile,outputFile, TxaGraphTransform t) {
     }
 }
 
-def txaFile = new File("/Volumes/Projects/Clients/Udea/tmp/historie10.txa")
-def graphmlFile =  new File("/Volumes/Projects/Clients/Udea/tmp/historie10.graphml")
+def txaFile = new File("/Volumes/SSD2/Workspaces/clients/Practicom/data/invervo10.txa")
+def graphmlFile =  new File("/Volumes/SSD2/Workspaces/clients/Practicom/data/invervo10.graphml")
 (nodes, edges) = runTransform(txaFile, graphmlFile, new GraphMLTransform())
 println("Wrote ${nodes} nodes and ${edges} edges to ${graphmlFile.toString()}")
