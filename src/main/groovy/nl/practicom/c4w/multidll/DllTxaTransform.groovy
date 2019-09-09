@@ -1,11 +1,11 @@
 package nl.practicom.c4w.multidll
 
+
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.StreamingTxaTransform
 import nl.practicom.c4w.txa.transform.TxaContext
 
 import static nl.practicom.c4w.txa.transform.SectionMark.*
-
 /**
  * Generates a TXA file for a DLL by copying procedures from the source TXA.
  * The generated TXA will contain publicly visible (exported) procedures as
@@ -14,7 +14,6 @@ import static nl.practicom.c4w.txa.transform.SectionMark.*
 class DllTxaTransform extends StreamingTxaTransform {
     private publicProcedures = []
     private privateProcedures = []
-    private File targetTxaFile
     int numProceduresPerModule = 20
 
     protected Writer out = null
@@ -31,8 +30,28 @@ class DllTxaTransform extends StreamingTxaTransform {
             List<String> privateProcedures = [],
             int numProceduresPerModule = 20) {
 
+
         /* ToDo: path resolution, existence and access checks */
-        this.targetTxaFile = new File(targetTxaFile)
+        this.out = new File(targetTxaFile).newWriter()
+        this.publicProcedures = publicProcedures
+        this.privateProcedures = privateProcedures
+        this.numProceduresPerModule = numProceduresPerModule
+    }
+
+    /**
+     *
+     * @param txaout - outputstream to target txa
+     * @param publicProcedures - list of procedures names to be exported from the DLL
+     * @param privateProcedures - list of procedure names to be included in the DLL but not exported
+     * @param numProceduresPerModule - number of procedures per module
+     */
+    DllTxaTransform(
+      OutputStream txaout,
+      List<String> publicProcedures,
+      List<String> privateProcedures = [],
+      int numProceduresPerModule = 20) {
+
+        this.out = txaout.newWriter()
         this.publicProcedures = publicProcedures
         this.privateProcedures = privateProcedures
         this.numProceduresPerModule = numProceduresPerModule
@@ -40,8 +59,6 @@ class DllTxaTransform extends StreamingTxaTransform {
 
     @Override
     protected String transformInitialize(TxaContext context) {
-        this.out = targetTxaFile.newWriter()
-
         return super.transformInitialize(context)
     }
 
@@ -64,11 +81,18 @@ class DllTxaTransform extends StreamingTxaTransform {
 
     @Override
     protected String transformSectionEnd(TxaContext context, SectionMark section) {
-        if ( isProcedureDeclaration(section) && isDllProcedure(context.currentProcedureName)){
-            out << super.content
+        if ( isProcedureDeclaration(context, section)){
+            if ( isDllProcedure(context.currentProcedureName) ){
+                println "Exporting procedure ${context.currentProcedureName}"
+                out << super.content
+            } else {
+                println "Skipping procedure ${context.currentProcedureName}"
+            }
             super.clear()
+            return null
+        } else {
+            return super.transformSectionEnd(context, section)
         }
-        return super.transformSectionEnd(context, section)
     }
 
     @Override
