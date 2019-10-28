@@ -6,28 +6,6 @@ import static nl.practicom.c4w.txa.transform.SectionMark.APPLICATION
 
 class ProcedureInfoScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 
-  static class ProcedureInfo {
-    // Name of procedure extracted from NAME
-    String name = null
-
-    // Template used to generate procedure extracted from FROM
-    String template = null
-
-    // Flag indicating if this is the main application procedure
-    boolean isMainProcedure = false
-
-    // Flag indicating if procedure is exported
-    boolean isExported = true
-
-    // Line number where procedure definition starts in txa
-    long lineNumber = 0
-
-    @Override
-    String toString() {
-      return "${this.name} (${this.template})@${this.lineNumber}"
-    }
-  }
-
   /* Regular expression patterns used to inspect content */
   final private static MAIN_PROCEDURE_DECLARATION = ~/^\s*PROCEDURE\s+(\w+)\s*$/
   final private static TEMPLATE_DECLARATION = ~/^FROM\s+(\w[\w\s]+)\s*$/
@@ -103,7 +81,7 @@ class ProcedureInfoScanner implements TxaContentHandler, TxaSectionHandler, TxaL
     }
   }
 
-  def isProcedureDeclaration(TxaContext context,SectionMark section) {
+  def static isProcedureDeclaration(TxaContext context,SectionMark section) {
     section == SectionMark.PROCEDURE && !context.within(SectionMark.DEFINITION)
   }
 

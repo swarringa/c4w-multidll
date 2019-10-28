@@ -1,11 +1,10 @@
 package nl.practicom.c4w.multidll
 
-import nl.practicom.c4w.txa.test.TxaTestSupport
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
+import nl.practicom.c4w.txa.test.TxaTestSupport
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
-import static nl.practicom.c4w.txa.test.TxaTestSupport.*
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 
 class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
@@ -17,18 +16,18 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
     }
 
     /* Helper methods */
-    def assertStructuresAtLine(ProcedureExtractor.Procedure p, int lineno, List<String>... structures){
+    def assertStructuresAtLine(Procedure p, int lineno, List<String>... structures){
         assertStructuresAtLine(p.body.toString(), lineno, structures)
     }
 
-    def assertStructureAtLine(ProcedureExtractor.Procedure p, int lineno, structure){
+    def assertStructureAtLine(Procedure p, int lineno, structure){
         assertStructureAtLine(p.body.toString(), lineno, structure)
     }
 
-    def assertStructureAtLine(ProcedureExtractor.Procedure p, int lineno, String[] structure){
+    def assertStructureAtLine(Procedure p, int lineno, String[] structure){
     }
 
-    def assertSectionsClosedCorrectly(ProcedureExtractor.Procedure p){
+    def assertSectionsClosedCorrectly(Procedure p){
         assertSectionsClosedCorrectly(p.body.toString())
     }
 
@@ -55,7 +54,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         def reader = new StreamingTxaReader()
         def xt = new ProcedureExtractor()
         reader.registerHandler(xt)
-        def countHandler = new TxaContentHandlerStub()
+        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
         reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
@@ -124,7 +123,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         def reader = new StreamingTxaReader()
         def xt = new ProcedureExtractor()
         reader.registerHandler(xt)
-        def countHandler = new TxaContentHandlerStub()
+        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
         reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
@@ -154,7 +153,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         def reader = new StreamingTxaReader()
         def xt = new ProcedureExtractor()
         reader.registerHandler(xt)
-        def countHandler = new TxaContentHandlerStub()
+        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
         reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
@@ -202,7 +201,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         def reader = new StreamingTxaReader()
         def xt = new ProcedureExtractor()
         reader.registerHandler(xt)
-        def countHandler = new TxaContentHandlerStub()
+        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
         reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
@@ -293,7 +292,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         def reader = new StreamingTxaReader()
         def xt = new ProcedureExtractor()
         reader.registerHandler(xt)
-        def countHandler = new TxaContentHandlerStub()
+        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
         reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
