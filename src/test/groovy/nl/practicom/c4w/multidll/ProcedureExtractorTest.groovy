@@ -5,8 +5,6 @@ import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.test.TxaTestSupport
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
-import static nl.practicom.c4w.txa.transform.SectionMark.*
-
 class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
 
     void setUp() {
@@ -52,39 +50,39 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         assertSectionsClosedCorrectly(contents)
 
         def reader = new StreamingTxaReader()
-        def xt = new ProcedureExtractor()
+        def wr = new ProcedureTestWriter()
+        def xt = new ProcedureExtractor(new ProcedureIdentityTransformFactory(), wr)
         reader.registerHandler(xt)
-        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
-        reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
-        def procedures = xt.procedures
-        assert procedures.size() == 3
-        assertSectionsClosedCorrectly(procedures[0])
-        assertSectionsClosedCorrectly(procedures[1])
-        assertSectionsClosedCorrectly(procedures[2])
+        wr.with {
+            assert procedures.size() == 3
+            assertSectionsClosedCorrectly(procedures[0])
+            assertSectionsClosedCorrectly(procedures[1])
+            assertSectionsClosedCorrectly(procedures[2])
 
-        assert procedures[0].name == 'P1'
-        assert procedures[0].template == 'ABC Browse'
-        assertStructureAtLine(procedures[0],0,[
-                "[PROCEDURE]",
-                "NAME P1",
-                "FROM ABC Browse"
-        ])
-        assert procedures[1].name == 'P2'
-        assertStructureAtLine(procedures[1],0,[
-                "[PROCEDURE]",
-                "NAME P2",
-                "FROM ABC Window"
-        ])
-        assert procedures[1].template == 'ABC Window'
-        assert procedures[2].name == 'P3'
-        assert procedures[2].template == 'ABC Report'
-        assertStructureAtLine(procedures[2],0,[
-                "[PROCEDURE]",
-                "NAME P3",
-                "FROM ABC Report"
-        ])
+            assert procedures[0].name == 'P1'
+            assert procedures[0].template == 'ABC Browse'
+            assertStructureAtLine(procedures[0], 0, [
+              "[PROCEDURE]",
+              "NAME P1",
+              "FROM ABC Browse"
+            ])
+            assert procedures[1].name == 'P2'
+            assertStructureAtLine(procedures[1], 0, [
+              "[PROCEDURE]",
+              "NAME P2",
+              "FROM ABC Window"
+            ])
+            assert procedures[1].template == 'ABC Window'
+            assert procedures[2].name == 'P3'
+            assert procedures[2].template == 'ABC Report'
+            assertStructureAtLine(procedures[2], 0, [
+              "[PROCEDURE]",
+              "NAME P3",
+              "FROM ABC Report"
+            ])
+        }
     }
 
     void testEmbeddedProcedureIsIgnored(){
@@ -121,18 +119,16 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         assertSectionsClosedCorrectly(contents)
 
         def reader = new StreamingTxaReader()
-        def xt = new ProcedureExtractor()
+        def wr = new ProcedureTestWriter()
+        def xt = new ProcedureExtractor(new ProcedureIdentityTransformFactory(), wr)
         reader.registerHandler(xt)
-        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
-        reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
-        assert countHandler.sectionsStarted == [MODULE,PROCEDURE,COMMON,EMBED,DEFINITION,PROCEDURE,PROCEDURE,COMMON,EMBED,INSTANCES,DEFINITION,PROCEDURE]
-        def procedures = xt.procedures
-        assert procedures.size() == 2
-        assertSectionsClosedCorrectly(procedures[0])
-        assertSectionsClosedCorrectly(procedures[1])
-
+        wr.with {
+            assert procedures.size() == 2
+            assertSectionsClosedCorrectly(procedures[0])
+            assertSectionsClosedCorrectly(procedures[1])
+        }
     }
 
     void testFlatProcedureListIsExtractedCorrectly(){
@@ -151,36 +147,35 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         assertSectionsClosedCorrectly(contents)
 
         def reader = new StreamingTxaReader()
-        def xt = new ProcedureExtractor()
+        def wr = new ProcedureTestWriter()
+        def xt = new ProcedureExtractor(new ProcedureIdentityTransformFactory(), wr)
         reader.registerHandler(xt)
-        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
-        reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
-        def procedures = xt.procedures
-
-        assert procedures.size() == 3
-        assert procedures[0].name == 'P1'
-        assert procedures[0].template == 'ABC Browse'
-        assertStructureAtLine(procedures[0],0,[
-                "[PROCEDURE]",
-                "NAME P1",
-                "FROM ABC Browse"
-        ])
-        assert procedures[1].name == 'P2'
-        assertStructureAtLine(procedures[1],0,[
-                "[PROCEDURE]",
-                "NAME P2",
-                "FROM ABC Window"
-        ])
-        assert procedures[1].template == 'ABC Window'
-        assert procedures[2].name == 'P3'
-        assert procedures[2].template == 'ABC Report'
-        assertStructureAtLine(procedures[2],0,[
-                "[PROCEDURE]",
-                "NAME P3",
-                "FROM ABC Report"
-        ])
+        wr.with {
+            assert procedures.size() == 3
+            assert procedures[0].name == 'P1'
+            assert procedures[0].template == 'ABC Browse'
+            assertStructureAtLine(procedures[0], 0, [
+              "[PROCEDURE]",
+              "NAME P1",
+              "FROM ABC Browse"
+            ])
+            assert procedures[1].name == 'P2'
+            assertStructureAtLine(procedures[1], 0, [
+              "[PROCEDURE]",
+              "NAME P2",
+              "FROM ABC Window"
+            ])
+            assert procedures[1].template == 'ABC Window'
+            assert procedures[2].name == 'P3'
+            assert procedures[2].template == 'ABC Report'
+            assertStructureAtLine(procedures[2], 0, [
+              "[PROCEDURE]",
+              "NAME P3",
+              "FROM ABC Report"
+            ])
+        }
     }
 
     void testCorrectRollupInnerSection(){
@@ -199,15 +194,15 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         assertSectionsClosedCorrectly(contents)
 
         def reader = new StreamingTxaReader()
-        def xt = new ProcedureExtractor()
+        def wr = new ProcedureTestWriter()
+        def xt = new ProcedureExtractor(new ProcedureIdentityTransformFactory(), wr)
         reader.registerHandler(xt)
-        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
-        reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
-        def procedures = xt.procedures
-        assert procedures.size() == 1
-        assert procedures[0].body.contains('MyWindow')
+        wr.with {
+            assert procedures.size() == 1
+            assert procedures[0].body.contains('MyWindow')
+        }
     }
 
     void testFullProcedureExtractedCorrectly(){
@@ -290,19 +285,19 @@ class ProcedureExtractorTest extends GroovyTestCase implements TxaTestSupport {
         assertSectionsClosedCorrectly(contents)
 
         def reader = new StreamingTxaReader()
-        def xt = new ProcedureExtractor()
+        def wr = new ProcedureTestWriter()
+        def xt = new ProcedureExtractor(new ProcedureIdentityTransformFactory(), wr)
         reader.registerHandler(xt)
-        def countHandler = new TxaTestSupport.TxaContentHandlerStub()
-        reader.registerHandler(countHandler)
         reader.parse('' << contents)
 
-        def procedures = xt.procedures
-        assert procedures.size() == 1
+        wr.with {
+            assert procedures.size() == 1
 
-        def body = procedures[0].body.toString()
-        assert body.lineCount() == contents.lineCount()
-        assertSectionsClosedCorrectly(body)
-        assertStructureAtLine(procedures[0],0, contents.toLineArray())
+            def body = procedures[0].body.toString()
+            assert body.lineCount() == contents.lineCount()
+            assertSectionsClosedCorrectly(body)
+            assertStructureAtLine(procedures[0], 0, contents.toLineArray())
+        }
     }
 }
 

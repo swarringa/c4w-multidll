@@ -3,26 +3,45 @@ package nl.practicom.c4w.multidll
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.StreamingTxaTransform
 import nl.practicom.c4w.txa.transform.TxaContext
-
+/**
+ * The ProcedureExtractor extracts specific procedures from a
+ * source txa and writes them either collectively to a new txa
+ * file or individually to a separate txa file per procedure.
+ *
+ */
 class ProcedureExtractor extends StreamingTxaTransform {
 
-    List<Procedure> procedures = []
-
-    Procedure getProcedureByName(String name){
-        procedures.find{ p -> p.name.equalsIgnoreCase(name)}
-    }
+    private ProcedureTransformFactory transformFactory
+    private ProcedureWriter destination
 
     private Procedure currentProcedure = null
+    private ProcedureTransform currentTransform = null
+
+    /**
+     * Apply transformation to procedures and write the transformed procedures
+     * @param transformFactory - provides the transformation to apply
+     * @param destination - ProcedureWriter instance handling the actual writing
+     */
+    ProcedureExtractor(ProcedureTransformFactory transformFactory, ProcedureWriter destination){
+        super(new StringBuffer(4000)) // Collect content in buffer
+        this.transformFactory = transformFactory
+        this.destination = destination
+    }
 
     @Override
     protected String transformSectionStart(TxaContext ctx, SectionMark section) {
         if (isProcedureDeclaration(ctx, section)) {
             currentProcedure = new Procedure()
             currentProcedure.lineNumber = ctx.currentLineNumber
+            currentTransform = null
+            return section.toString()
+        } else {
+            if (currentProcedure != null && currentTransform != null) {
+                currentTransform.transformSectionStart(ctx, section)
+            } else {
+                null
+            }
         }
-
-        // Suppress content outside procedures
-        return currentProcedure ? super.transformSectionStart(ctx, section) : null
     }
 
     @Override
@@ -30,7 +49,16 @@ class ProcedureExtractor extends StreamingTxaTransform {
         final TEMPLATE_DECL = ~/^FROM\s+(\w[\w\s]+)\s*$/
 
         if ( currentProcedure ) {
-            currentProcedure.name = currentProcedure.name ?: ctx.currentProcedureName
+            if ( currentProcedure.name == null && ctx.currentProcedureName != null ){
+                currentProcedure.name = ctx.currentProcedureName
+                def t = transformFactory.getTransform(currentProcedure.name)
+                if ( t != null){
+                    currentTransform = t
+                } else {
+                    currentProcedure = null
+                    super.clear() // clear [PROCEDURE] section marker
+                }
+            }
 
             if (!currentProcedure.template) {
                 (content =~ TEMPLATE_DECL).each {
@@ -39,36 +67,49 @@ class ProcedureExtractor extends StreamingTxaTransform {
             }
         }
 
-        // Suppress content outside procedures
-        return currentProcedure ? super.transformSectionContent(ctx,section,content) : null
+        if (currentProcedure != null && currentTransform != null) {
+            currentTransform.transformSectionContent(ctx, section, content)
+        } else {
+            null
+        }
     }
 
     @Override
     protected String transformSectionEnd(TxaContext ctx, SectionMark section) {
         // End of the current procedure: store it and set it to null until
         // we receive the next [PROCEDURE] start mark
-        if ( currentProcedure && isProcedureDeclaration(ctx, section)){
-            appendProcedure()
-            currentProcedure = null
+        if ( isProcedureDeclaration(ctx, section)){
+            if ( currentProcedure && currentTransform) {
+                writeProcedure()
+                currentProcedure = null
+                currentTransform = null
+                null
+            }
+        } else {
+            if ( currentProcedure && currentTransform){
+                currentTransform.transformSectionEnd(ctx, section)
+            }
         }
-
-        return currentProcedure ? super.transformSectionEnd(ctx, section) : null
     }
 
     @Override
     protected String transformFinalize(TxaContext context) {
-        appendProcedure()
+        if ( currentProcedure) {
+            writeProcedure()
+        }
         currentProcedure = null
     }
 
     // Copy collected content to procedure body and clear the contents
-    def appendProcedure() {
+    def writeProcedure() {
         if (currentProcedure) {
             currentProcedure.body.append(super.getContent())
-            this.procedures << currentProcedure
+            destination.write(currentProcedure)
             super.clear()
         }
     }
+
+    /* Support methods */
 
     def static isProcedureDeclaration(TxaContext context,SectionMark section) {
         section == SectionMark.PROCEDURE && !context.within(SectionMark.DEFINITION)

@@ -31,8 +31,6 @@ import java.util.regex.Matcher
  *   - add #compile command for main module
  *   - add #compile command for BC module
  *   - add link command for application
- *
- * - Erase the persist section
  */
 
 import static nl.practicom.c4w.multidll.TxaTransformOptions.ApplicationType.*
@@ -311,38 +309,4 @@ class TxaApplicationTransform extends StreamingTxaTransform {
         return output
     }
 
-    def addENoxportFlag = { TxaContext context, SectionMark section ->
-
-        if (context.currentSection == PROCEDURE && section == COMMON) {
-            if (isPrivateProcedure(context.currentProcedureName)) {
-                out << 'NOEXPORT' + EOL + section
-            } else {
-                return super.transformSectionStart(context, section)
-            }
-        }
-    }
-
-    /* Support methods */
-    def static isProcedureDeclaration(TxaContext context,SectionMark section) {
-        section == PROCEDURE && !context.within(DEFINITION)
-    }
-
-    boolean isTargetProcedure(String procedureName) {
-        options.publicProcedures.contains(procedureName) || options.privateProcedures.contains(procedureName)
-    }
-
-    def isPublicProcedure(String procedureName){
-        options.publicProcedures.contains(procedureName) ||
-          // EXE does not support private procedures
-          (options.targetType == MainApplication && options.privateProcedures.contains(procedureName))
-    }
-
-    def isPrivateProcedure(String procedureName){
-        // public overrides private!
-        options.targetType == ProcedureDLL && !options.publicProcedures.contains(procedureName) && options.privateProcedures.contains(procedureName)
-    }
-
-    def isExternalProcedure(String procedureName){
-        options.externalProcedures.contains((procedureName))
-    }
 }
