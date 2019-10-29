@@ -3,6 +3,9 @@ package nl.practicom.c4w.multidll
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.StreamingTxaTransform
 import nl.practicom.c4w.txa.transform.TxaContext
+
+import static nl.practicom.c4w.txa.transform.SectionMark.*
+
 /**
  * The ProcedureExtractor extracts specific procedures from a
  * source txa and writes them either collectively to a new txa
@@ -30,16 +33,21 @@ class ProcedureExtractor extends StreamingTxaTransform {
 
     @Override
     protected String transformSectionStart(TxaContext ctx, SectionMark section) {
-        if (isProcedureDeclaration(ctx, section)) {
+        if (ctx.isProcedureDeclaration(section)) {
+            if (currentProcedure){
+                writeProcedure()
+            }
             currentProcedure = new Procedure()
             currentProcedure.lineNumber = ctx.currentLineNumber
             currentTransform = null
             return section.toString()
         } else {
-            if (currentProcedure != null && currentTransform != null) {
-                currentTransform.transformSectionStart(ctx, section)
-            } else {
-                null
+            if (ctx.within(PROCEDURE)) {
+                if (currentProcedure != null && currentTransform != null) {
+                    return currentTransform.transformSectionStart(ctx, section)
+                } else {
+                    return null
+                }
             }
         }
     }
@@ -68,25 +76,16 @@ class ProcedureExtractor extends StreamingTxaTransform {
         }
 
         if (currentProcedure != null && currentTransform != null) {
-            currentTransform.transformSectionContent(ctx, section, content)
+            return currentTransform.transformSectionContent(ctx, section, content)
         } else {
-            null
+            return null
         }
     }
 
     @Override
     protected String transformSectionEnd(TxaContext ctx, SectionMark section) {
-        // End of the current procedure: store it and set it to null until
-        // we receive the next [PROCEDURE] start mark
-        if ( isProcedureDeclaration(ctx, section)){
-            if ( currentProcedure && currentTransform) {
-                writeProcedure()
-                currentProcedure = null
-                currentTransform = null
-                null
-            }
-        } else {
-            if ( currentProcedure && currentTransform){
+        if (ctx.within(PROCEDURE)) { // only process sections within the procedure
+            if (currentProcedure && currentTransform) {
                 currentTransform.transformSectionEnd(ctx, section)
             }
         }
@@ -94,7 +93,7 @@ class ProcedureExtractor extends StreamingTxaTransform {
 
     @Override
     protected String transformFinalize(TxaContext context) {
-        if ( currentProcedure) {
+        if (currentProcedure) {
             writeProcedure()
         }
         currentProcedure = null
@@ -107,11 +106,5 @@ class ProcedureExtractor extends StreamingTxaTransform {
             destination.write(currentProcedure)
             super.clear()
         }
-    }
-
-    /* Support methods */
-
-    def static isProcedureDeclaration(TxaContext context,SectionMark section) {
-        section == SectionMark.PROCEDURE && !context.within(SectionMark.DEFINITION)
     }
 }

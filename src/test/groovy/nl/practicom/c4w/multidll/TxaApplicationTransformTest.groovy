@@ -2,12 +2,11 @@ package nl.practicom.c4w.multidll
 
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
-import nl.practicom.c4w.txa.test.TxaTestSupport
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
 import static nl.practicom.c4w.multidll.TxaTransformOptions.ApplicationType.*
 
-class TxaApplicationTransformTest extends GroovyTestCase implements TxaTestSupport {
+class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTestSupport {
 
   void setUp() {
     super.setUp()
@@ -275,7 +274,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements TxaTestSuppo
         [COMMON]
     '''.trimLines()
 
-    StringBuffer output = '' << ''
+    def output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions())
     def reader = new StreamingTxaReader()
     reader.registerHandler(t)

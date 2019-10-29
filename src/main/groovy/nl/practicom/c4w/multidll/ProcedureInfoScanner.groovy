@@ -41,7 +41,7 @@ class ProcedureInfoScanner implements TxaContentHandler, TxaSectionHandler, TxaL
 
   @Override
   void onSectionStart(TxaContext ctx, SectionMark section) {
-    if (isProcedureDeclaration(ctx, section)) {
+    if (ctx.isProcedureDeclaration(section)) {
       currentProcedure = new ProcedureInfo()
       currentProcedure.lineNumber = ctx.currentLineNumber
     }
@@ -75,14 +75,10 @@ class ProcedureInfoScanner implements TxaContentHandler, TxaSectionHandler, TxaL
 
   @Override
   void onSectionEnd(TxaContext context, SectionMark section) {
-    if ( currentProcedure && isProcedureDeclaration(context, section)){
+    if ( currentProcedure && context.isProcedureDeclaration(section)){
       this.procedures << currentProcedure
       currentProcedure = null
     }
-  }
-
-  def static isProcedureDeclaration(TxaContext context,SectionMark section) {
-    section == SectionMark.PROCEDURE && !context.within(SectionMark.DEFINITION)
   }
 
 }

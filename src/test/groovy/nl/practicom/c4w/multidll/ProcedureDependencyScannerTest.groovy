@@ -2,10 +2,9 @@ package nl.practicom.c4w.multidll
 
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
-import nl.practicom.c4w.txa.test.TxaTestSupport
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
-class ProcedureDependencyScannerTest extends GroovyTestCase implements TxaTestSupport {
+class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllTestSupport {
     void setUp() throws java . lang . Exception {
         super.setUp()
         ClarionStringMixins.initialize()
