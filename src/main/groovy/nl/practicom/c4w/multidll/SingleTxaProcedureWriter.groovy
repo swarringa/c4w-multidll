@@ -3,7 +3,7 @@ package nl.practicom.c4w.multidll
 /**
  * Writes procedures to a single txa file
  */
-class SingleTxaProcedureWriter extends FileWriter implements ProcedureWriter {
+class SingleTxaProcedureWriter extends OutputStreamWriter implements ProcedureWriter {
 
   private static EOL = System.lineSeparator()
 
@@ -11,7 +11,12 @@ class SingleTxaProcedureWriter extends FileWriter implements ProcedureWriter {
   def numProceduresWritten = 0
 
   SingleTxaProcedureWriter(String txaFile, boolean append = false, int numProceduresPerModule = 20) {
-    super(txaFile,append)
+    super(new FileOutputStream(txaFile))
+    this.numProceduresPerModule = numProceduresPerModule
+  }
+
+  SingleTxaProcedureWriter(OutputStream os, boolean append = false, int numProceduresPerModule = 20) {
+    super(os)
     this.numProceduresPerModule = numProceduresPerModule
   }
 
