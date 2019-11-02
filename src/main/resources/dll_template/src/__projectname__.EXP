@@ -1,9 +1,0 @@
-LIBRARY '__PROJECTNAME__' GUI
-EXPORTS
-;Start of initialisation function
-  __PROJECTNAME__:INIT@F10ERRORCLASS8INICLASS               @?
-  __PROJECTNAME__:KILL@F                                    @?
-;End of initialisation functions
-
-
-
