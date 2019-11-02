@@ -59,9 +59,9 @@ class TxaApplicationTransform extends StreamingTxaTransform {
      * @param targetTxaFile - absolute path where txa should be generated
      * @param transformOptions - instructions on required transformations
      */
-    TxaApplicationTransform(String targetTxaFile, TxaTransformOptions transformOptions) {
+    TxaApplicationTransform(File targetTxaFile, TxaTransformOptions transformOptions) {
         /* ToDo: path resolution, existence and access checks */
-        super(new File(targetTxaFile).newWriter())
+        super(targetTxaFile.newWriter())
         this.options = transformOptions
     }
 
