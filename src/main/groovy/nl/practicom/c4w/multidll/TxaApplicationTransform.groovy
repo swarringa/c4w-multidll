@@ -43,6 +43,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     // Global state
     String currentPrompt = null
+    Boolean insideQueue = false
 
     /**
      * Use for testing
@@ -113,7 +114,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             return processProjectContent(context, content)
         }
 
-        if ( context.within(PROGRAM,COMMON,DATA,REPORTCONTROLS)){
+        if ( context.within(APPLICATION,PROGRAM,COMMON,DATA,REPORTCONTROLS)){
             return processGlobalData(context, content)
         }
 
@@ -227,16 +228,25 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             return content
         }
 
+        if ( content.trim().toUpperCase() == "END"){
+            this.insideQueue = false // assumme maximum nesting is 1
+            return content
+        }
+
+        if ( content.trim().size() == 0){
+            return content
+        }
+
         def output = content
         Matcher matcher = (content =~ FIELD_DECLARATION)
 
         if ( context.currentSection == REPORTCONTROLS && matcher.matches()){
-            def fieldDeclaration = (matcher[0][1]).trim()
+            String fieldDeclaration = (matcher[0][1]).trim()
             def fieldAttributes = (matcher[0][2]).split(',') as List<String>
             def fieldComment = matcher[0][3] ?: ""
             def isExternalDeclaration = fieldAttributes?.contains('EXTERNAL')
 
-            if (options.targetType == DataDLL){
+            if (options.targetType == DataDLL || this.insideQueue){
                 if (isExternalDeclaration){
                     fieldAttributes.removeAll(['EXTERNAL','DLL'])
                 }
@@ -253,6 +263,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             }
 
             output = fieldDeclaration + fieldAttributes.join(',') + fieldComment
+
+            if ( fieldDeclaration.trim().toUpperCase().contains('QUEUE')){
+                this.insideQueue = true
+            }
         }
 
         return output

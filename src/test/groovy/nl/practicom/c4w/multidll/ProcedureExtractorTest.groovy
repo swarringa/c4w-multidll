@@ -28,7 +28,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                     NAME P3
                     FROM ABC Report
                [END]
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -97,7 +97,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                    [END]
                  [END]
            [END]          
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -125,7 +125,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
          [PROCEDURE]
          NAME P3
          FROM ABC Report          
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -172,7 +172,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                 [REPORTCONTROLS]
         [WINDOW]
         Window  MyWindow
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -263,7 +263,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
         INSTANCE 0
         DESCRIPTION 
         = HVER:SVE * HVER:Aantal
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -275,11 +275,10 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
 
         wr.with {
             assert procedures.size() == 1
-
             def body = procedures[0].body.toString()
-            assert body.lineCount() == contents.lineCount()
+            assert body.lineCount(EOL) == contents.lineCount(EOL)
             assertSectionsClosedCorrectly(body)
-            assertStructureAtLine(procedures[0], 0, contents.toLineArray())
+            assertStructureAtLine(procedures[0], 0, contents.toLineArray(EOL))
         }
     }
 }

@@ -29,7 +29,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         FROM ABC
         MODIFIED '2019/05/28' '14:50:06'
         [PROMPTS]
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTXA = '' << ''''
         [APPLICATION]
@@ -40,28 +40,29 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         FROM ABC
         MODIFIED '2019/05/28' '14:50:06'
         [PROMPTS]
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
     def h = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: MainApplication))
     reader.registerHandler(h)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(sourceTXA) // no changes made
+    assertContentEquals(output,sourceTXA)
+    // no changes made
 
     reader = new StreamingTxaReader()
     output = '' << ''
     h = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: ProcedureDLL))
     reader.registerHandler(h)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
 
     reader = new StreamingTxaReader()
     output = '' << ''
     h = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: DataDLL))
     reader.registerHandler(h)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
   }
 
   void testGlobalOptionsSetToExternalGlobalsAndFiles(){
@@ -72,7 +73,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     %GlobalExternal LONG  (0)
     %DefaultExternal DEFAULT  ('None External')
     %DefaultExternalAPP LONG  (0)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTXA = '' << '''
     [APPLICATION]
@@ -81,7 +82,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     %GlobalExternal LONG  (1)
     %DefaultExternal DEFAULT  ('All External')
     %DefaultExternalAPP LONG  (1)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
@@ -91,7 +92,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     )
     reader.registerHandler(h)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
   }
 
   void testStandardExternalModuleIsUpdated(){
@@ -103,7 +104,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
      WHEN  ('') (1)
      WHEN  ('invervo.clw') (1)
      WHEN  ('invervo001.clw') (1) 
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTXA = '' << '''
     [APPLICATION]
@@ -113,7 +114,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
      WHEN  ('') (1)
      WHEN  ('stamgegevens.clw') (1)
      WHEN  ('stamgegevens001.clw') (1)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
@@ -123,7 +124,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     )
     reader.registerHandler(h)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
   }
 
   void testSystemCommandSetToExeForMainApplication(){
@@ -132,21 +133,21 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         #system win32 abc
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTXA = '' << ''''
         [PROJECT]
         #system win32 exe
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
     def h = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: MainApplication))
     reader.registerHandler(h)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
   }
 
   void testSystemCommandSetToDllForProcedureAndDataDLL(){
@@ -155,27 +156,27 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         #system win32 abc
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTXA = '' << ''''
         [PROJECT]
         #system win32 dll
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def output = '' << ''
     def t1 = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: ProcedureDLL))
     def reader = new StreamingTxaReader()
     reader.registerHandler(t1)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
 
     output = '' << ''
     def t2 = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: DataDLL))
     reader.registerHandler(t2)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
   }
 
   void testProjectPragmasArePassedOn(){
@@ -185,7 +186,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         #pragma define(_ODDJOB_=>0) -- GENERATED
         #pragma define(_CRYPTONITE_=>0) -- GENERATED
         #pragma define(_DRAW_=>0) -- GENERATED
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTXA = '' << '''
         [PROJECT]
@@ -193,14 +194,14 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         #pragma define(_ODDJOB_=>0) -- GENERATED
         #pragma define(_CRYPTONITE_=>0) -- GENERATED
         #pragma define(_DRAW_=>0) -- GENERATED
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output,new TxaTransformOptions())
     def reader = new StreamingTxaReader()
     reader.registerHandler(t)
     reader.parse(sourceTXA)
-    assert output.toString().contentEquals(targetTXA)
+    assertContentEquals(output, targetTXA)
   }
 
   void testProjectLinkCommandsAreReplaced(){
@@ -211,21 +212,21 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         #compile "source_applications002.clw" -- GENERATED
         #compile "source_applications003.clw" -- GENERATED
         #link "source_application.EXE"
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTxaMainApplication = '' << '''
         [PROJECT]
         #compile "target_application.clw" -- GENERATED
         #compile "target_application001.clw" -- GENERATED
         #link "target_application.EXE"
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTxaDll = '' << '''
         [PROJECT]
         #compile "target_application.clw" -- GENERATED
         #compile "target_application001.clw" -- GENERATED
         #link "target_application.DLL"
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def options = new TxaTransformOptions(applicationName: 'target_application')
     options.targetType = MainApplication
@@ -235,7 +236,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     def reader = new StreamingTxaReader()
     reader.registerHandler(t1)
     reader.parse(sourceTxa)
-    assert output.toString().contentEquals(targetTxaMainApplication)
+    assertContentEquals(output, targetTxaMainApplication)
 
     output = '' << ''
     options.targetType = ProcedureDLL
@@ -243,8 +244,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     reader = new StreamingTxaReader()
     reader.registerHandler(t2)
     reader.parse(sourceTxa)
-    assert output.toString().contentEquals(targetTxaDll)
-
+    assertContentEquals(output, targetTxaDll)
   }
 
   void testProceduresAreRemoved(){
@@ -262,7 +262,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         [COMMON]
         [MODULE]
         [COMMON]
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTxa = '' << '''
         [APPLICATION]
@@ -272,14 +272,14 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         [COMMON]
         [MODULE]
         [COMMON]
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions())
     def reader = new StreamingTxaReader()
     reader.registerHandler(t)
     reader.parse(sourceTxa)
-    assert output.toString().contentEquals(targetTxa)
+    assertContentEquals(output, targetTxa)
   }
 
   void testGlobalDataIsDeclaredExternalForMainApplicationAndProcedureDll(){
@@ -307,7 +307,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTxaExternal = '' << '''
         [PROGRAM]
@@ -333,21 +333,21 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     StringBuffer output = '' << ''
     def t1 = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: MainApplication))
     def reader = new StreamingTxaReader()
     reader.registerHandler(t1)
     reader.parse(sourceTxa)
-    assert output.toString().contentEquals(targetTxaExternal)
+    assertContentEquals(output, targetTxaExternal)
 
     output = '' << ''
     def t2 = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: ProcedureDLL))
     def reader2 = new StreamingTxaReader()
     reader2.registerHandler(t2)
     reader2.parse(sourceTxa)
-    assert output.toString().contentEquals(targetTxaExternal)
+    assertContentEquals(output, targetTxaExternal)
   }
 
   void testGlobalDataIsDeclaredInternalForDataDll() {
@@ -375,7 +375,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     def targetTxaInternal = '' << '''
         [PROGRAM]
@@ -401,13 +401,14 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines()
+    '''.trimLines(EOL)
 
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: DataDLL))
     def reader = new StreamingTxaReader()
     reader.registerHandler(t)
     reader.parse(sourceTxa)
-    assert output.toString().contentEquals(targetTxaInternal)
+    assertContentEquals(output, targetTxaInternal)
+  }
   }
 }

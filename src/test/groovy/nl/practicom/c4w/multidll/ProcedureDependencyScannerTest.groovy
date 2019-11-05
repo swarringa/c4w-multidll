@@ -27,7 +27,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
         [PROCEDURE]
         NAME P3
         [COMMON]
-        '''.trimLines()
+        '''.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
 
@@ -52,7 +52,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                 PARENT 1
                 [PROMPTS]
                 %PrintProcedure PROCEDURE  (PrintCBSAangifte)
-        '''.trimLines()
+        '''.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
 
@@ -74,7 +74,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                 WHEN  ('?LOC:DebNr') (BrowseDebiteuren)
                 WHEN  ('?LOC:FustNr') (BrowseDebiteuren)
                 WHEN  ('?LOC:TotaalSaldo') (BrowseSaldo)
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
 
@@ -94,7 +94,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
             [COMMON]
                 [PROMPTS]
                 %SplashProcedure PROCEDURE  (Splash)
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
 
@@ -128,7 +128,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                     [END]
                 [END]
             [END]
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
 
@@ -158,7 +158,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                     [PROMPTS]
                         %DisableRunScreen LONG  (0)
                         %ChangeColumnsProc PROCEDURE  (RunScreenSelectColumns)
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
 
@@ -202,7 +202,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                         [END]
                     [END]
                 [END]
-        """.trimLines()
+        """.trimLines(EOL)
 
         assertSectionsClosedCorrectly(content)
         StreamingTxaReader reader = new StreamingTxaReader()

@@ -21,7 +21,7 @@ class ConvertToPrivateProcedureTest extends GroovyTestCase implements MultiDllTe
                      [COMMON]
                        FROM ABC Browse
                 [END]
-        """.trimLines()
+        """.trimLines(EOL)
 
     assertSectionsClosedCorrectly(contents)
 
@@ -52,7 +52,7 @@ class ConvertToPrivateProcedureTest extends GroovyTestCase implements MultiDllTe
                   [PROCEDURE]
                      NAME P1
                 [END]
-        """.trimLines()
+        """.trimLines(EOL)
 
     assertSectionsClosedCorrectly(contents)
 

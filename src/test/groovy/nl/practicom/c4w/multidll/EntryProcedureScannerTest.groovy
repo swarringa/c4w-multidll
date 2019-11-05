@@ -4,7 +4,7 @@ import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
-class EntryProcedureScannerTest extends GroovyTestCase {
+class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestSupport {
     void setUp() {
         super.setUp()
         ClarionStringMixins.initialize()
@@ -33,7 +33,7 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                         ITEM('item3'),USE(?ITEM3),#ORDINAL(3)
                         ITEM('item4'),USE(?ITEM3),#ORDINAL(4)
                       END
-        """.trimLines()
+        """.trimLines(EOL)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
@@ -85,7 +85,7 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                             ITEM('item_2_4'),USE(?ITEM8),#ORDINAL(4)
                         END
                       END
-        """.trimLines()
+        """.trimLines(EOL)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
@@ -159,7 +159,7 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                             END
                         END
                       END
-        """.trimLines()
+        """.trimLines(EOL)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
@@ -233,7 +233,7 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                       MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
                         ITEM('item1'),USE(?ITEM1),#ORDINAL(1)
                       END
-        """.trimLines()
+        """.trimLines(EOL)
 
         def scanner = new EntryProcedureScanner()
 
@@ -312,7 +312,7 @@ class EntryProcedureScannerTest extends GroovyTestCase {
                               #ORDINAL(2)
                         END
                       END
-        """.trimLines()
+        """.trimLines(EOL)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
