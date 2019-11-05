@@ -410,5 +410,46 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     reader.parse(sourceTxa)
     assertContentEquals(output, targetTxaInternal)
   }
+
+  void testQueueFieldsAreDeclaredInternal(){
+    def sourceTxa = '' << '''
+          [APPLICATION]
+          [PROGRAM]
+          [COMMON]
+          [DATA]
+          [SCREENCONTROLS]
+          [REPORTCONTROLS]
+          GLO:QueueFustenRegel     QUEUE,PRE()
+          [SCREENCONTROLS]
+          [REPORTCONTROLS]
+          qfr_Fust                   DECIMAL(7),EXTERNAL,DLL !Verpakkingsnummer
+          [SCREENCONTROLS]
+          [REPORTCONTROLS]
+          qfr_Prijs                  DECIMAL(7,2) !Inkoopprijs NL
+                                   END
+     '''
+
+    def targetTxa = '' << '''
+          [APPLICATION]
+          [PROGRAM]
+          [COMMON]
+          [DATA]
+          [SCREENCONTROLS]
+          [REPORTCONTROLS]
+          GLO:QueueFustenRegel     QUEUE,PRE(),EXTERNAL,DLL
+          [SCREENCONTROLS]
+          [REPORTCONTROLS]
+          qfr_Fust                   DECIMAL(7) !Verpakkingsnummer
+          [SCREENCONTROLS]
+          [REPORTCONTROLS]
+          qfr_Prijs                  DECIMAL(7,2) !Inkoopprijs NL
+                                   END
+     '''
+    StringBuffer output = '' << ''
+    def t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: MainApplication))
+    def reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output,targetTxa)
   }
 }
