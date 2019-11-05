@@ -93,11 +93,22 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     @Override
     protected String transformSectionStart(TxaContext context, SectionMark section) {
+        def output = '' << section
+
         if ( section == PROCEDURE || context.within(PROCEDURE)) {
             return null
         }
 
-        return super.transformSectionStart(context, section)
+        if (section == DATA && context.within(PROGRAM)){
+            if ( options.targetType == DataDLL) {
+                def resourceURL = TxaApplicationTransform.classLoader.getResource("missing_globals.txa")
+                if (resourceURL) {
+                    output << EOL << resourceURL.text
+                }
+            }
+        }
+
+        return output.toString()
     }
 
     @Override
