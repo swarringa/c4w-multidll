@@ -453,4 +453,46 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     reader.parse(sourceTxa)
     assertContentEquals(output,targetTxa)
   }
+
+  void testCapeSoftExtensionsMultiDllEnabled(){
+    def sourceTxa = '' << txaContent('''
+      [APPLICATION]
+        [COMMON]
+          [ADDITION]
+            [INSTANCE]
+            INSTANCE 5
+            [PROMPTS]
+            %MultiDLL LONG  (0)
+            %RootDLL LONG  (0)
+            %DynamicDLL LONG  (0)
+    ''')
+
+    def targetTxaEnabled = '' << txaContent('''
+      [APPLICATION]
+        [COMMON]
+          [ADDITION]
+            [INSTANCE]
+              INSTANCE 5
+            [PROMPTS]
+              %MultiDLL LONG  (1)
+              %RootDLL LONG  (1)
+              %DynamicDLL LONG  (1)              
+    ''')
+
+    assertSectionsClosedCorrectly(sourceTxa.toString())
+
+    StringBuffer output = '' << ''
+    def t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: MainApplication))
+    def reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, sourceTxa)
+
+    output = '' << ''
+    t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: DataDLL))
+    reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, targetTxaEnabled)
+  }
 }

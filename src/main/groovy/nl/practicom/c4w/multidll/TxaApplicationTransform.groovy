@@ -106,6 +106,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
           return processApplicationContent(context, content)
         }
 
+        if ( context.within(APPLICATION,COMMON,ADDITION)) {
+            return processCapeSoftGlobalExtensions(context, content)
+        }
+
         if ( context.within(APPLICATION,COMMON,PROMPTS)){
           return processGlobalPromptContent(context, content)
         }
@@ -114,7 +118,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             return processProjectContent(context, content)
         }
 
-        if ( context.within(APPLICATION,PROGRAM,COMMON,DATA,REPORTCONTROLS)){
+        if ( context.within(PROGRAM,COMMON,DATA,REPORTCONTROLS)){
             return processGlobalData(context, content)
         }
 
@@ -323,4 +327,20 @@ class TxaApplicationTransform extends StreamingTxaTransform {
         return output
     }
 
+    def processCapeSoftGlobalExtensions(TxaContext ctx,  String content){
+        def output = content
+        if ( ctx.currentSection == PROMPTS) {
+            if (content.startsWith("%MultiDLL")) {
+                // Generic capesoft
+                output = options.targetType == DataDLL ? "%MultiDLL LONG  (1)" : "%MultiDLL LONG  (0)"
+            } else if (content.startsWith("%RootDLL")) {
+                // Generic capesoft
+                output = options.targetType == DataDLL ? "%RootDLL LONG  (1)" : "%RootDLL LONG  (0)"
+            } else if(content.startsWith("%DynamicDLL")){
+                // Nettalk Dynamic DLL support
+                output = options.targetType == DataDLL ? "%DynamicDLL LONG  (1)" : "%DynamicDLL LONG  (0)"
+            }
+        }
+        return output
+    }
 }
