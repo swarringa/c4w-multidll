@@ -412,8 +412,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testQueueFieldsAreDeclaredInternal(){
-    // Don't use txaContent() because indentation is relevant
-    def sourceTxa = '' << '''
+    def sourceTxa = '' << txaContent('''
           [APPLICATION]
           [PROGRAM]
           [COMMON]
@@ -428,9 +427,9 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
           [REPORTCONTROLS]
           qfr_Prijs                  DECIMAL(7,2) !Inkoopprijs NL
                                    END
-     '''
+     ''')
 
-    def targetTxa = '' << '''
+    def targetTxa = '' << txaContent('''
           [APPLICATION]
           [PROGRAM]
           [COMMON]
@@ -445,7 +444,8 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
           [REPORTCONTROLS]
           qfr_Prijs                  DECIMAL(7,2) !Inkoopprijs NL
                                    END
-     '''
+     ''')
+
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: MainApplication))
     def reader = new StreamingTxaReader()
