@@ -13,7 +13,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
     }
 
     void testExtraction(){
-        def contents = """\
+        def contents = txaContent("""\
             [APPLICATION]
                [MODULE]
                   [PROCEDURE]
@@ -28,7 +28,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                     NAME P3
                     FROM ABC Report
                [END]
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -69,7 +69,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
     }
 
     void testEmbeddedProcedureIsIgnored(){
-        def contents = """\
+        def contents = txaContent("""\
            [MODULE]
              [PROCEDURE]
              NAME P1
@@ -97,7 +97,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                    [END]
                  [END]
            [END]          
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -115,7 +115,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
     }
 
     void testFlatProcedureListIsExtractedCorrectly(){
-        def contents = """\
+        def contents = txaContent("""\
          [PROCEDURE]
          NAME P1
          FROM ABC Browse
@@ -125,7 +125,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
          [PROCEDURE]
          NAME P3
          FROM ABC Report          
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -162,7 +162,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
     }
 
     void testCorrectRollupInnerSection(){
-        def contents = """
+        def contents = txaContent("""
         [PROCEDURE]
         NAME PrintHistorieProductPeriodeTotProduct
         [COMMON]
@@ -172,7 +172,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                 [REPORTCONTROLS]
         [WINDOW]
         Window  MyWindow
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(contents)
 
@@ -189,7 +189,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
     }
 
     void testFullProcedureExtractedCorrectly(){
-        def contents = """\
+        def contents = txaContent("""\
         [PROCEDURE]
         NAME PrintHistorieProductPeriodeTotProduct
         [COMMON]
@@ -263,7 +263,7 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
         INSTANCE 0
         DESCRIPTION 
         = HVER:SVE * HVER:Aantal
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(contents)
 

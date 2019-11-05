@@ -19,7 +19,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testMainProcedureIsRemovedForDlls(){
-    def sourceTXA = '' << ''''
+    def sourceTXA = '' << txaContent(''''
         [APPLICATION]
         VERSION 34
         TODO ABC ToDo
@@ -29,9 +29,9 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         FROM ABC
         MODIFIED '2019/05/28' '14:50:06'
         [PROMPTS]
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTXA = '' << ''''
+    def targetTXA = '' << txaContent(''''
         [APPLICATION]
         VERSION 34
         TODO ABC ToDo
@@ -40,7 +40,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         FROM ABC
         MODIFIED '2019/05/28' '14:50:06'
         [PROMPTS]
-    '''.trimLines(EOL)
+    ''')
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
@@ -66,23 +66,23 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testGlobalOptionsSetToExternalGlobalsAndFiles(){
-    def sourceTXA = '' << '''
+    def sourceTXA = '' << txaContent('''
     [APPLICATION]
     [COMMON]
     [PROMPTS]
     %GlobalExternal LONG  (0)
     %DefaultExternal DEFAULT  ('None External')
     %DefaultExternalAPP LONG  (0)
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTXA = '' << '''
+    def targetTXA = '' << txaContent('''
     [APPLICATION]
     [COMMON]
     [PROMPTS]
     %GlobalExternal LONG  (1)
     %DefaultExternal DEFAULT  ('All External')
     %DefaultExternalAPP LONG  (1)
-    '''.trimLines(EOL)
+    ''')
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
@@ -96,7 +96,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testStandardExternalModuleIsUpdated(){
-    def sourceTXA = '' << '''
+    def sourceTXA = '' << txaContent('''
     [APPLICATION]
     [COMMON]
     [PROMPTS]
@@ -104,9 +104,9 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
      WHEN  ('') (1)
      WHEN  ('invervo.clw') (1)
      WHEN  ('invervo001.clw') (1) 
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTXA = '' << '''
+    def targetTXA = '' << txaContent('''
     [APPLICATION]
     [COMMON]
     [PROMPTS]
@@ -114,7 +114,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
      WHEN  ('') (1)
      WHEN  ('stamgegevens.clw') (1)
      WHEN  ('stamgegevens001.clw') (1)
-    '''.trimLines(EOL)
+    ''')
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
@@ -128,19 +128,19 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testSystemCommandSetToExeForMainApplication(){
-    def sourceTXA = '' << ''''
+    def sourceTXA = '' << txaContent('''
         [PROJECT]
         #system win32 abc
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTXA = '' << ''''
+    def targetTXA = '' << txaContent('''
         [PROJECT]
         #system win32 exe
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines(EOL)
+    ''')
 
     def reader = new StreamingTxaReader()
     def output = '' << ''
@@ -151,19 +151,19 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testSystemCommandSetToDllForProcedureAndDataDLL(){
-    def sourceTXA = '' << ''''
+    def sourceTXA = '' << txaContent('''
         [PROJECT]
         #system win32 abc
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTXA = '' << ''''
+    def targetTXA = '' << txaContent('''
         [PROJECT]
         #system win32 dll
         #model clarion dll
         #set RELEASE = on 
-    '''.trimLines(EOL)
+    ''')
 
     def output = '' << ''
     def t1 = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: ProcedureDLL))
@@ -180,21 +180,21 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testProjectPragmasArePassedOn(){
-    def sourceTXA = '' << '''
+    def sourceTXA = '' << txaContent('''
         [PROJECT]
         #pragma link_option(icon=>practicom.ico) -- GENERATED
         #pragma define(_ODDJOB_=>0) -- GENERATED
         #pragma define(_CRYPTONITE_=>0) -- GENERATED
         #pragma define(_DRAW_=>0) -- GENERATED
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTXA = '' << '''
+    def targetTXA = '' << txaContent('''
         [PROJECT]
         #pragma link_option(icon=>practicom.ico) -- GENERATED
         #pragma define(_ODDJOB_=>0) -- GENERATED
         #pragma define(_CRYPTONITE_=>0) -- GENERATED
         #pragma define(_DRAW_=>0) -- GENERATED
-    '''.trimLines(EOL)
+    ''')
 
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output,new TxaTransformOptions())
@@ -205,28 +205,28 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testProjectLinkCommandsAreReplaced(){
-    def sourceTxa = '' << '''
+    def sourceTxa = '' << txaContent('''
         [PROJECT]
         #compile "source_application.clw" -- GENERATED
         #compile "source_applications001.clw" -- GENERATED
         #compile "source_applications002.clw" -- GENERATED
         #compile "source_applications003.clw" -- GENERATED
         #link "source_application.EXE"
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTxaMainApplication = '' << '''
+    def targetTxaMainApplication = '' << txaContent('''
         [PROJECT]
         #compile "target_application.clw" -- GENERATED
         #compile "target_application001.clw" -- GENERATED
         #link "target_application.EXE"
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTxaDll = '' << '''
+    def targetTxaDll = '' << txaContent('''
         [PROJECT]
         #compile "target_application.clw" -- GENERATED
         #compile "target_application001.clw" -- GENERATED
         #link "target_application.DLL"
-    '''.trimLines(EOL)
+    ''')
 
     def options = new TxaTransformOptions(applicationName: 'target_application')
     options.targetType = MainApplication
@@ -248,7 +248,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testProceduresAreRemoved(){
-    def sourceTxa = '' << '''
+    def sourceTxa = '' << txaContent('''
         [APPLICATION]
         VERSION 34
         TODO ABC ToDo
@@ -262,9 +262,9 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         [COMMON]
         [MODULE]
         [COMMON]
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTxa = '' << '''
+    def targetTxa = '' << txaContent('''
         [APPLICATION]
         VERSION 34
         TODO ABC ToDo
@@ -272,7 +272,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         [COMMON]
         [MODULE]
         [COMMON]
-    '''.trimLines(EOL)
+    ''')
 
     def output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions())
@@ -283,7 +283,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testGlobalDataIsDeclaredExternalForMainApplicationAndProcedureDll(){
-    def sourceTxa = '' << '''
+    def sourceTxa = '' << txaContent('''
         [PROGRAM]
         [COMMON]
         [DATA]
@@ -307,9 +307,9 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTxaExternal = '' << '''
+    def targetTxaExternal = '' << txaContent('''
         [PROGRAM]
         [COMMON]
         [DATA]
@@ -333,7 +333,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines(EOL)
+    ''')
 
     StringBuffer output = '' << ''
     def t1 = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: MainApplication))
@@ -351,7 +351,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testGlobalDataIsDeclaredInternalForDataDll() {
-    def sourceTxa = '' << '''
+    def sourceTxa = '' << txaContent('''
         [PROGRAM]
         [COMMON]
         [DATA]
@@ -375,9 +375,9 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines(EOL)
+    ''')
 
-    def targetTxaInternal = '' << '''
+    def targetTxaInternal = '' << txaContent('''
         [PROGRAM]
         [COMMON]
         [DATA]
@@ -401,7 +401,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         GloWijzigenVerkoper      SHORT
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    '''.trimLines(EOL)
+    ''')
 
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: DataDLL))
@@ -412,6 +412,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   }
 
   void testQueueFieldsAreDeclaredInternal(){
+    // Don't use txaContent() because indentation is relevant
     def sourceTxa = '' << '''
           [APPLICATION]
           [PROGRAM]

@@ -12,7 +12,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testCollectCalls() {
-        def content = '''\
+        def content = txaContent('''\
         [PROCEDURE]
         NAME P1
         [COMMON]
@@ -27,7 +27,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
         [PROCEDURE]
         NAME P3
         [COMMON]
-        '''.trimLines(EOL)
+        ''')
 
         assertSectionsClosedCorrectly(content)
 
@@ -41,7 +41,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testCollectPrintButtonProcedure(){
-        def content = '''\
+        def content = txaContent('''\
             [PROCEDURE]
             NAME BrowseCbsAangifte
             [COMMON]
@@ -52,7 +52,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                 PARENT 1
                 [PROMPTS]
                 %PrintProcedure PROCEDURE  (PrintCBSAangifte)
-        '''.trimLines(EOL)
+        ''')
 
         assertSectionsClosedCorrectly(content)
 
@@ -64,7 +64,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testCollectProcedurePromptProcedures(){
-        def content ="""\
+        def content = txaContent("""\
             [PROCEDURE]
             NAME BrowseFustSaldo
             [COMMON]
@@ -74,7 +74,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                 WHEN  ('?LOC:DebNr') (BrowseDebiteuren)
                 WHEN  ('?LOC:FustNr') (BrowseDebiteuren)
                 WHEN  ('?LOC:TotaalSaldo') (BrowseSaldo)
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(content)
 
@@ -88,13 +88,13 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testCollectSplash(){
-        def content = """
+        def content = txaContent("""
             [PROCEDURE]
             NAME Hoofdmenu
             [COMMON]
                 [PROMPTS]
                 %SplashProcedure PROCEDURE  (Splash)
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(content)
 
@@ -106,7 +106,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testCollectProcedureFromEmbedOnAcceptEvent(){
-        def content = """
+        def content = txaContent("""
             [PROCEDURE]
             NAME SelPrtOmzetTopXXOmzet
             [COMMON]
@@ -128,7 +128,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                     [END]
                 [END]
             [END]
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(content)
 
@@ -141,7 +141,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testCollectDependencyFromGlobalAddition(){
-        def content = """\
+        def content = txaContent("""\
             [APPLICATION]
             VERSION 34
             TODO ABC ToDo
@@ -158,7 +158,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                     [PROMPTS]
                         %DisableRunScreen LONG  (0)
                         %ChangeColumnsProc PROCEDURE  (RunScreenSelectColumns)
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(content)
 
@@ -172,7 +172,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
     }
 
     void testIgnoreNonProcedureCalls(){
-        def content ="""\
+        def content = txaContent("""\
             [PROCEDURE]
             NAME SelPrtOmzetTopXXOmzet
             [COMMON]
@@ -202,7 +202,7 @@ class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllT
                         [END]
                     [END]
                 [END]
-        """.trimLines(EOL)
+        """)
 
         assertSectionsClosedCorrectly(content)
         StreamingTxaReader reader = new StreamingTxaReader()

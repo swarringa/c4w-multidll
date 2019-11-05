@@ -12,7 +12,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
     }
 
     void testTopLevelItems(){
-        def content = """\
+        def content = txaContent("""\
             [PROCEDURE]
             NAME Hoofdmenu
             [COMMON]
@@ -33,7 +33,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
                         ITEM('item3'),USE(?ITEM3),#ORDINAL(3)
                         ITEM('item4'),USE(?ITEM3),#ORDINAL(4)
                       END
-        """.trimLines(EOL)
+        """)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
@@ -49,7 +49,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
     }
 
     void testFlatMenu(){
-        def content = """\
+        def content = txaContent("""\
             [PROCEDURE]
             NAME Hoofdmenu
             [COMMON]
@@ -85,7 +85,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
                             ITEM('item_2_4'),USE(?ITEM8),#ORDINAL(4)
                         END
                       END
-        """.trimLines(EOL)
+        """)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
@@ -123,7 +123,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
     }
 
     void testSubmenus(){
-        def content = """\
+        def content = txaContent("""\
             [PROCEDURE]
             NAME Hoofdmenu
             [COMMON]
@@ -159,7 +159,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
                             END
                         END
                       END
-        """.trimLines(EOL)
+        """)
 
         def scanner = new EntryProcedureScanner('Hoofdmenu')
 
@@ -205,7 +205,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
     }
 
     void testMainProcedureIsScannedByIfNoSpecificProcedureProvided(){
-        def content = """\
+        def content = txaContent("""\
             [APPLICATION]
             PROCEDURE P1
             [PROCEDURE]
@@ -233,7 +233,7 @@ class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestS
                       MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
                         ITEM('item1'),USE(?ITEM1),#ORDINAL(1)
                       END
-        """.trimLines(EOL)
+        """)
 
         def scanner = new EntryProcedureScanner()
 
