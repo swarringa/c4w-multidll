@@ -218,6 +218,13 @@ class TxaApplicationTransform extends StreamingTxaTransform {
               output = "%DefaultGenerate LONG  (0)"
             }
             break
+        case "%DefaultExport":
+            if (options.targetType == DataDLL){
+                output = "%DefaultExport LONG  (1)"
+            } else {
+                output = "%DefaultExport LONG  (0)"
+            }
+            break
         }
       } else if ( content.startsWith('WHEN')) {
         if ( currentPrompt == '%StandardExternalModule' && options.applicationName != null){
