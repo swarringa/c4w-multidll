@@ -8,5 +8,8 @@ package nl.practicom.c4w.multidll
  * This interface allows for providing different implementations to handle each scenario.
  */
 interface ProcedureWriter {
-  def write(Procedure procedure)
+  void open()
+  void write(Procedure procedure)
+  void flush()
+  void close()
 }

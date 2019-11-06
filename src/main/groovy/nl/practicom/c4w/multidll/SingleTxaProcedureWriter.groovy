@@ -1,5 +1,8 @@
 package nl.practicom.c4w.multidll
 
+import java.nio.file.Path
+import java.nio.file.Paths
+
 /**
  * Writes procedures to a single txa file
  */
@@ -10,18 +13,36 @@ class SingleTxaProcedureWriter extends OutputStreamWriter implements ProcedureWr
   def numProceduresPerModule = 20
   def numProceduresWritten = 0
 
-  SingleTxaProcedureWriter(String txaFile, boolean append = false, int numProceduresPerModule = 20) {
-    super(new FileOutputStream(txaFile))
-    this.numProceduresPerModule = numProceduresPerModule
+  SingleTxaProcedureWriter(String txaFilePath, int numProceduresPerModule = 20) {
+    this(Paths.get(txaFilePath), numProceduresPerModule)
   }
 
-  SingleTxaProcedureWriter(OutputStream os, boolean append = false, int numProceduresPerModule = 20) {
+  SingleTxaProcedureWriter(Path txaFile, int numProceduresPerModule = 20) {
+    this(txaFile.toFile(), numProceduresPerModule)
+  }
+
+  SingleTxaProcedureWriter(File txaFile, int numProceduresPerModule = 20) {
+    this(txaFile.newOutputStream(), numProceduresPerModule)
+  }
+
+  SingleTxaProcedureWriter(OutputStream os, int numProceduresPerModule = 20) {
     super(os)
     this.numProceduresPerModule = numProceduresPerModule
   }
 
   @Override
-  def write(Procedure procedure) {
+  void open() {}
+
+  @Override
+  void close() {
+    if (numProceduresWritten > 0) {
+      writeModuleSectionEnd()
+    }
+    super.close()
+  }
+
+  @Override
+  void write(Procedure procedure) {
     if ( numProceduresPerModule > 0) {
       if (numProceduresWritten > 0 && numProceduresWritten % numProceduresPerModule == 0) {
         writeModuleSectionEnd()
@@ -33,7 +54,6 @@ class SingleTxaProcedureWriter extends OutputStreamWriter implements ProcedureWr
     super.write(procedure.body.toString())
     numProceduresWritten++
   }
-
 
   def writeModuleSectionStart() {
     super.write("[MODULE]" + EOL)

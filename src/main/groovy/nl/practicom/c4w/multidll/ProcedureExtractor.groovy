@@ -92,11 +92,17 @@ class ProcedureExtractor extends StreamingTxaTransform {
     }
 
     @Override
+    protected String transformInitialize(TxaContext context) {
+        destination.open()
+    }
+
+    @Override
     protected String transformFinalize(TxaContext context) {
         if (currentProcedure) {
             writeProcedure()
         }
         currentProcedure = null
+        destination.close()
     }
 
     // Copy collected content to procedure body and clear the contents
@@ -104,6 +110,7 @@ class ProcedureExtractor extends StreamingTxaTransform {
         if (currentProcedure) {
             currentProcedure.body.append(super.getContent())
             destination.write(currentProcedure)
+            destination.flush()
             super.clear()
         }
     }

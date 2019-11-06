@@ -1,6 +1,6 @@
 package nl.practicom.c4w.multidll
 
-class ProcedureTransformTestFactory extends ProcedureTransformFactory {
+class ProcedureTransformTestFactory implements ProcedureTransformFactory {
   private transform
 
   ProcedureTransformTestFactory() {
