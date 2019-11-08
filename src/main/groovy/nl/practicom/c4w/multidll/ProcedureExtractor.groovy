@@ -60,22 +60,24 @@ class ProcedureExtractor extends StreamingTxaTransform {
             if ( currentProcedure.name == null && ctx.currentProcedureName != null ){
                 currentProcedure.name = ctx.currentProcedureName
                 def t = transformFactory.getTransform(currentProcedure.name)
-                if ( t != null){
+                if ( t ){
                     currentTransform = t
                 } else {
+                    currentTransform = null
                     currentProcedure = null
                     super.clear() // clear [PROCEDURE] section marker
                 }
             }
+        }
 
-            if (!currentProcedure.template) {
-                (content =~ TEMPLATE_DECL).each {
-                    _, templateName -> currentProcedure.template = templateName
-                }
+        // Extract template for current procedure
+        if (currentProcedure && !currentProcedure.template) {
+            (content =~ TEMPLATE_DECL).each {
+                _, templateName -> currentProcedure.template = templateName
             }
         }
 
-        if (currentProcedure != null && currentTransform != null) {
+        if (currentTransform && currentProcedure) {
             return currentTransform.transformSectionContent(ctx, section, content)
         } else {
             return null
