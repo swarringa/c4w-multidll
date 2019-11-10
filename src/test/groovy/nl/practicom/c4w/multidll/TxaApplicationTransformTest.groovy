@@ -2,9 +2,11 @@ package nl.practicom.c4w.multidll
 
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
+import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
 import static nl.practicom.c4w.multidll.TxaTransformOptions.ApplicationType.*
+import static nl.practicom.c4w.txa.transform.SectionMark.*
 
 class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTestSupport {
 
@@ -309,45 +311,47 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
     ''')
 
-    def targetTxaExternal = '' << txaContent('''
-        [PROGRAM]
-        [COMMON]
-        [DATA]
-        [SCREENCONTROLS]
-        ! PROMPT('Glo Flag:'),USE(?GloFlag:Prompt)
-        ! ENTRY(@s1),USE(GloFlag)
-        [REPORTCONTROLS]
-        ! STRING(@s1),USE(GloFlag)
-        GloFlag                  STRING(1),EXTERNAL,DLL !Global flag
-        !!> GUID('9a57571a-c705-4c5e-bd13-2a7fc7f34da0'),PROMPT('Glo Flag:'),HEADER('Glo Flag'),PICTURE(@s1)
-        [SCREENCONTROLS]
-        ! PROMPT('GLO : Pos Schuif 1:'),USE(?GLO:PosSchuif1:Prompt)
-        ! ENTRY(@n-14),USE(GLO:PosSchuif1),RIGHT(1)
-        [REPORTCONTROLS]
-        ! STRING(@n-14),USE(GLO:PosSchuif1),RIGHT(1)
-        GLO:PosSchuif1           LONG,EXTERNAL,DLL
-        !!> GUID('4321bd7d-cec4-4204-94c4-0e0ebc4d7396'),PROMPT('GLO : Pos Schuif 1:'),HEADER('GLO : Pos Schuif 1'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-        [SCREENCONTROLS]
-        ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
-        [REPORTCONTROLS]
-        ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
-        GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
-        !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    ''')
+    /* We need to take another route here since missing globals are
+      inserted into the content which we don't want to test for.
+      Therefore we test if the field declarations contain the proper
+      attributes
+    */
+    def validateExternalDll = { line ->
+      if (line.trim()[0] == '!' || line.isSectionMark()) {
+        return true
+      } else {
+        return line.contains('EXTERNAL,DLL')
+      }
+    }
 
     StringBuffer output = '' << ''
     def t1 = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: MainApplication))
     def reader = new StreamingTxaReader()
     reader.registerHandler(t1)
     reader.parse(sourceTxa)
-    assertContentEquals(output, targetTxaExternal)
+
+    assertAllGlobals(output, validateExternalDll)
 
     output = '' << ''
     def t2 = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: ProcedureDLL))
     def reader2 = new StreamingTxaReader()
     reader2.registerHandler(t2)
     reader2.parse(sourceTxa)
-    assertContentEquals(output, targetTxaExternal)
+    assertAllGlobals(output, validateExternalDll)
+  }
+
+  def assertAllGlobals(StringBuffer content, validator){
+    def withinDataSection = false
+
+    content.toString().eachLine { line ->
+      if ( line.contains('[DATA]')) {
+        withinDataSection = true
+      } else if (line.isSectionMark()){
+          withinDataSection = line.asSectionMark() in [REPORTCONTROLS, SCREENCONTROLS]
+      }
+
+      withinDataSection && assertTrue(validator(line))
+    }
   }
 
   void testGlobalDataIsDeclaredInternalForDataDll() {
@@ -377,38 +381,20 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
     ''')
 
-    def targetTxaInternal = '' << txaContent('''
-        [PROGRAM]
-        [COMMON]
-        [DATA]
-        [SCREENCONTROLS]
-        ! PROMPT('Glo Flag:'),USE(?GloFlag:Prompt)
-        ! ENTRY(@s1),USE(GloFlag)
-        [REPORTCONTROLS]
-        ! STRING(@s1),USE(GloFlag)
-        GloFlag                  STRING(1) !Global flag
-        !!> GUID('9a57571a-c705-4c5e-bd13-2a7fc7f34da0'),PROMPT('Glo Flag:'),HEADER('Glo Flag'),PICTURE(@s1)
-        [SCREENCONTROLS]
-        ! PROMPT('GLO : Pos Schuif 1:'),USE(?GLO:PosSchuif1:Prompt)
-        ! ENTRY(@n-14),USE(GLO:PosSchuif1),RIGHT(1)
-        [REPORTCONTROLS]
-        ! STRING(@n-14),USE(GLO:PosSchuif1),RIGHT(1)
-        GLO:PosSchuif1           LONG
-        !!> GUID('4321bd7d-cec4-4204-94c4-0e0ebc4d7396'),PROMPT('GLO : Pos Schuif 1:'),HEADER('GLO : Pos Schuif 1'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
-        [SCREENCONTROLS]
-        ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
-        [REPORTCONTROLS]
-        ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
-        GloWijzigenVerkoper      SHORT
-        !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
-    ''')
+    def validateNoExternalDll = { line ->
+      if (line.trim()[0] == '!' || line.isSectionMark()) {
+        return true
+      } else {
+        return !line.contains('EXTERNAL,DLL')
+      }
+    }
 
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: DataDLL))
     def reader = new StreamingTxaReader()
     reader.registerHandler(t)
     reader.parse(sourceTxa)
-    assertContentEquals(output, targetTxaInternal)
+    assertAllGlobals(output, validateNoExternalDll)
   }
 
   void testQueueFieldsAreDeclaredInternal(){
