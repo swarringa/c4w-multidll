@@ -1,0 +1,238 @@
+[SCREENCONTROLS]
+! PROMPT('GLO : Bestands Copy:'),USE(?GLO:BestandsCopy:Prompt)
+! ENTRY(@s255),USE(GLO:BestandsCopy)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:BestandsCopy)
+GLO:BestandsCopy      CSTRING(256)
+!!> GUID('1a9547fc-ad0a-4bef-8128-931bf55c46ca'),PROMPT('GLO : Bestands Copy:'),HEADER('GLO : Bestands Copy'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : Bestandsnaam:'),USE(?GLO:Bestandsnaam:Prompt)
+! TEXT,USE(GLO:Bestandsnaam),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GLO:Bestandsnaam),BOXED
+GLO:Bestandsnaam      CSTRING(256)
+!!> GUID('377be10b-0b8d-446b-8247-37ce4ff9f0b3'),PROMPT('GLO : Bestandsnaam:'),HEADER('GLO : Bestandsnaam'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Bnl 500:'),USE(?GLO:c2Bnl500:Prompt)
+! ENTRY(@s255),USE(GLO:c2Bnl500)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2Bnl500)
+GLO:c2Bnl500          STRING(255)
+!!> GUID('924f9864-8a88-4627-8783-89863ccd9e35'),PROMPT('GLO : c 2 Bnl 500:'),HEADER('GLO : c 2 Bnl 500'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 dwe:'),USE(?GLO:c2dwe:Prompt)
+! ENTRY(@s255),USE(GLO:c2dwe)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2dwe)
+GLO:c2dwe             STRING(255)
+!!> GUID('5236acc2-7ff0-4fc7-a9d2-e5cd4e50f12f'),PROMPT('GLO : c 2 dwe:'),HEADER('GLO : c 2 dwe'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Dagafzet:'),USE(?GLO:c2ExportSlimDagafzet:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimDagafzet)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimDagafzet)
+GLO:c2ExportSlimDagafzet STRING(255)
+!!> GUID('e3f38b14-18b4-404d-a0bf-d1263a2dce07'),PROMPT('GLO : c 2 Export Slim Dagafzet:'),HEADER('GLO : c 2 Export Slim Dagafzet'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Promotie:'),USE(?GLO:c2ExportSlimPromotie:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimPromotie)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimPromotie)
+GLO:c2ExportSlimPromotie STRING(255)
+!!> GUID('aa757acd-458b-4be0-8a2e-66e64493713a'),PROMPT('GLO : c 2 Export Slim Promotie:'),HEADER('GLO : c 2 Export Slim Promotie'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Purchase:'),USE(?GLO:c2ExportSlimPurchase:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimPurchase)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimPurchase)
+GLO:c2ExportSlimPurchase STRING(255)
+!!> GUID('48e692f3-e563-4f9f-a303-95ac8a43b240'),PROMPT('GLO : c 2 Export Slim Purchase:'),HEADER('GLO : c 2 Export Slim Purchase'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Slim Stock:'),USE(?GLO:c2ExportSlimStock:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSlimStock)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSlimStock)
+GLO:c2ExportSlimStock STRING(255)
+!!> GUID('5463c883-5be2-43b6-91d9-945d2ff29a41'),PROMPT('GLO : c 2 Export Slim Stock:'),HEADER('GLO : c 2 Export Slim Stock'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 ORDERS:'),USE(?GLO:c2ORDERS:Prompt)
+! ENTRY(@s255),USE(GLO:c2ORDERS)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ORDERS)
+GLO:c2ORDERS          STRING(255)
+!!> GUID('879fc1f7-1e32-49b5-b70e-35d06c650a18'),PROMPT('GLO : c 2 ORDERS:'),HEADER('GLO : c 2 ORDERS'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Afbeeldingen:'),USE(?GLO:TempBestandAfbeeldingen:Prompt)
+! TEXT,USE(GLO:TempBestandAfbeeldingen)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandAfbeeldingen)
+GLO:TempBestandAfbeeldingen CSTRING(256)
+!!> GUID('42e78946-8eec-4ce6-b812-4d676ca7e9b4'),PROMPT('GLO : Temp Bestand Afbeeldingen:'),HEADER('GLO : Temp Bestand Afbeeldingen'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Chauffeurslijst:'),USE(?GLO:TempBestandChauffeurslijst:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandChauffeurslijst)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandChauffeurslijst),BOXED
+GLO:TempBestandChauffeurslijst CSTRING(256)
+!!> GUID('d3b1851e-ca1a-48c9-9a63-6129d3048ea2'),PROMPT('GLO : Temp Bestand Chauffeurslijst:'),HEADER('GLO : Temp Bestand Chauffeurslijst'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Ch Lijst Ophaal:'),USE(?GLO:TempBestandChLijstOphaal:Prompt)
+! TEXT,USE(GLO:TempBestandChLijstOphaal)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandChLijstOphaal)
+GLO:TempBestandChLijstOphaal CSTRING(256)
+!!> GUID('538fd23d-f929-46a3-b08c-f01f593ef618'),PROMPT('GLO : Temp Bestand Ch Lijst Ophaal:'),HEADER('GLO : Temp Bestand Ch Lijst Ophaal'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Diepvrieslijst:'),USE(?GLO:TempBestandDiepvrieslijst:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandDiepvrieslijst)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandDiepvrieslijst),BOXED
+GLO:TempBestandDiepvrieslijst CSTRING(256)
+!!> GUID('eeef068c-50b5-49b3-92c3-f8681cc94745'),PROMPT('GLO : Temp Bestand Diepvrieslijst:'),HEADER('GLO : Temp Bestand Diepvrieslijst'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Diepvrieslijst:'),USE(?GLO:TempBestandDiepvrieslijst:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandDiepvrieslijst)
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandDiepvrieslijst),BOXED
+GLO:TempBestandDiepvrieslijst CSTRING(256)
+!!> GUID('eeef068c-50b5-49b3-92c3-f8681cc94745'),PROMPT('GLO : Temp Bestand Diepvrieslijst:'),HEADER('GLO : Temp Bestand Diepvrieslijst'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Klanten DKW:'),USE(?GLO:TempBestandKlantenDKW:Prompt)
+! TEXT,USE(GLO:TempBestandKlantenDKW),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandKlantenDKW),BOXED
+GLO:TempBestandKlantenDKW STRING(256)
+!!> GUID('aed85f7b-b5af-4869-8a15-50eef2948d65'),PROMPT('GLO : Temp Bestand Klanten DKW:'),HEADER('GLO : Temp Bestand Klanten DKW'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Inkopen Retour:'),USE(?GLO:TempBestandInkopenRetour:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandInkopenRetour)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:TempBestandInkopenRetour)
+GLO:TempBestandInkopenRetour STRING(1024)
+!!> GUID('1766988d-89f7-4e05-aba6-e85a56085c87'),PROMPT('GLO : Temp Bestand Inkopen Retour:'),HEADER('GLO : Temp Bestand Inkopen Retour'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : IMPORTNWO:'),USE(?GLO:IMPORTNWO:Prompt)
+! ENTRY(@s255),USE(GLO:IMPORTNWO)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:IMPORTNWO)
+GLO:IMPORTNWO         STRING(255)
+!!> GUID('6d158fe6-8752-4e11-9406-20fcef66a260'),PROMPT('GLO : IMPORTNWO:'),HEADER('GLO : IMPORTNWO'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 CLIEOP 03:'),USE(?GLO:c2CLIEOP03:Prompt)
+! ENTRY(@s255),USE(GLO:c2CLIEOP03)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2CLIEOP03)
+GLO:c2CLIEOP03        STRING(255)
+!!> GUID('e4af0aeb-1236-47fa-b346-ad6809a6c7da'),PROMPT('GLO : c 2 CLIEOP 03:'),HEADER('GLO : c 2 CLIEOP 03'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : C 2 CLIEOP 02:'),USE(?GLO:C2CLIEOP02:Prompt)
+! ENTRY(@s255),USE(GLO:C2CLIEOP02)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:C2CLIEOP02)
+GLO:C2CLIEOP02        STRING(255)
+!!> GUID('dfc3d6dd-40f7-4cd5-b73e-94a75a8f5329'),PROMPT('GLO : C 2 CLIEOP 02:'),HEADER('GLO : C 2 CLIEOP 02'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 inversco:'),USE(?GLO:c2inversco:Prompt)
+! ENTRY(@s255),USE(GLO:c2inversco)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2inversco)
+GLO:c2inversco        STRING(255)
+!!> GUID('5f718100-a29d-47c0-aa48-74d518f5bb54'),PROMPT('GLO : c 2 inversco:'),HEADER('GLO : c 2 inversco'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 pbb:'),USE(?GLO:c2pbb:Prompt)
+! ENTRY(@s255),USE(GLO:c2pbb)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2pbb)
+GLO:c2pbb             STRING(255)
+!!> GUID('fecab34f-b4d2-4f4f-b944-d13b790048c7'),PROMPT('GLO : c 2 pbb:'),HEADER('GLO : c 2 pbb'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Unit 4 Deb:'),USE(?GLO:c2Unit4Deb:Prompt)
+! ENTRY(@s255),USE(GLO:c2Unit4Deb)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2Unit4Deb)
+GLO:c2Unit4Deb        STRING(255)
+!!> GUID('23cf2392-adaa-4ea3-83dd-1c2adf594c14'),PROMPT('GLO : c 2 Unit 4 Deb:'),HEADER('GLO : c 2 Unit 4 Deb'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : C 2 MAGORDIM:'),USE(?GLO:C2MAGORDIM:Prompt)
+! ENTRY(@s255),USE(GLO:C2MAGORDIM)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:C2MAGORDIM)
+GLO:C2MAGORDIM        STRING(255)
+!!> GUID('0d327b01-a0b3-4e03-9b59-84f5aa8ff6c7'),PROMPT('GLO : C 2 MAGORDIM:'),HEADER('GLO : C 2 MAGORDIM'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : C 2 MAGORDEX:'),USE(?GLO:C2MAGORDEX:Prompt)
+! ENTRY(@s255),USE(GLO:C2MAGORDEX)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:C2MAGORDEX)
+GLO:C2MAGORDEX        STRING(255)
+!!> GUID('99885ef7-a287-484f-b7da-de52421d5c14'),PROMPT('GLO : C 2 MAGORDEX:'),HEADER('GLO : C 2 MAGORDEX'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : C 2 UREN:'),USE(?GLO:C2UREN:Prompt)
+! ENTRY(@s255),USE(GLO:C2UREN)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:C2UREN)
+GLO:C2UREN            STRING(255)
+!!> GUID('1c6ca59a-b730-4d26-ad41-5bebba843b78'),PROMPT('GLO : C 2 UREN:'),HEADER('GLO : C 2 UREN'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand GBI nkopen:'),USE(?GLO:TempBestandGBInkopen:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandGBInkopen)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:TempBestandGBInkopen)
+GLO:TempBestandGBInkopen STRING(1024)
+!!> GUID('3a7bc282-dbd2-43c2-9966-9bd1f0e14a39'),PROMPT('GLO : Temp Bestand GBI nkopen:'),HEADER('GLO : Temp Bestand GBI nkopen'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand GBV oorraad:'),USE(?GLO:TempBestandGBVoorraad:Prompt)
+! TEXT,USE(GLO:TempBestandGBVoorraad),BOXED
+[REPORTCONTROLS]
+! TEXT,USE(GLO:TempBestandGBVoorraad),BOXED
+GLO:TempBestandGBVoorraad CSTRING(256)
+!!> GUID('352f4505-3ed1-4f0b-abc7-6bbcc4d611f9'),PROMPT('GLO : Temp Bestand GBV oorraad:'),HEADER('GLO : Temp Bestand GBV oorraad'),PICTURE(@s255),TYPEMODE(OVR)
+[SCREENCONTROLS]
+! PROMPT('GLO : C 2 U 4 JPDWE:'),USE(?GLO:C2U4JPDWE:Prompt)
+! ENTRY(@s255),USE(GLO:C2U4JPDWE)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:C2U4JPDWE)
+GLO:C2U4JPDWE         STRING(255)
+!!> GUID('b470f88e-4bb9-4a34-b639-fcca56e7388a'),PROMPT('GLO : C 2 U 4 JPDWE:'),HEADER('GLO : C 2 U 4 JPDWE'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : Temp Bestand Inkopen Tot Groepen:'),USE(?GLO:TempBestandInkopenTotGroepen:Prompt)
+! ENTRY(@s255),USE(GLO:TempBestandInkopenTotGroepen)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:TempBestandInkopenTotGroepen)
+GLO:TempBestandInkopenTotGroepen STRING(1024)
+!!> GUID('6148e14e-9e99-41a6-bf8d-cab2edb98cc9'),PROMPT('GLO : Temp Bestand Inkopen Tot Groepen:'),HEADER('GLO : Temp Bestand Inkopen Tot Groepen'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : C 2 U 4 CREDDWE:'),USE(?GLO:C2U4CREDDWE:Prompt)
+! ENTRY(@s255),USE(GLO:C2U4CREDDWE)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:C2U4CREDDWE)
+GLO:C2U4CREDDWE       STRING(255)
+!!> GUID('dea9b65d-3ef1-41aa-bd1d-2d856de44834'),PROMPT('GLO : C 2 U 4 CREDDWE:'),HEADER('GLO : C 2 U 4 CREDDWE'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 vakadi:'),USE(?GLO:c2vakadi:Prompt)
+! ENTRY(@s255),USE(GLO:c2vakadi)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2vakadi)
+GLO:c2vakadi          STRING(255)
+!!> GUID('81d4668c-e7c7-4b17-9db3-196c74b40163'),PROMPT('GLO : c 2 vakadi:'),HEADER('GLO : c 2 vakadi'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Incasso:'),USE(?GLO:c2Incasso:Prompt)
+! ENTRY(@s255),USE(GLO:c2Incasso)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2Incasso)
+GLO:c2Incasso         STRING(255)
+!!> GUID('411ba1da-7dd8-4dd4-84b1-3c8547f2966b'),PROMPT('GLO : c 2 Incasso:'),HEADER('GLO : c 2 Incasso'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Unit 4 Jp:'),USE(?GLO:c2Unit4Jp:Prompt)
+! ENTRY(@s255),USE(GLO:c2Unit4Jp)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2Unit4Jp)
+GLO:c2Unit4Jp         STRING(255)
+!!> GUID('cf2446c9-bd85-40e5-9294-13ab37561b27'),PROMPT('GLO : c 2 Unit 4 Jp:'),HEADER('GLO : c 2 Unit 4 Jp'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('GLO : c 2 Export Spaceman:'),USE(?GLO:c2ExportSpaceman:Prompt)
+! ENTRY(@s255),USE(GLO:c2ExportSpaceman)
+[REPORTCONTROLS]
+! STRING(@s255),USE(GLO:c2ExportSpaceman)
+GLO:c2ExportSpaceman  STRING(255)
+!!> GUID('80c5976b-8092-4658-81d9-ccfa6cc6ec2b'),PROMPT('GLO : c 2 Export Spaceman:'),HEADER('GLO : c 2 Export Spaceman'),PICTURE(@s255)
