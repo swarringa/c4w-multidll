@@ -133,6 +133,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             return processGlobalData(context, content)
         }
 
+        if ( section == MODULE || context.within(MODULE)) {
+            return null
+        }
+
         if ( section == PROCEDURE || context.within(PROCEDURE)) {
             return null
         }
