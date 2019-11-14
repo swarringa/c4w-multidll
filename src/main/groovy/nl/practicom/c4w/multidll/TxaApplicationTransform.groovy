@@ -296,6 +296,8 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     def processProjectContent(TxaContext context, String content) {
         final SYSTEM_COMMAND = ~/^#system\s+(\w+)\s(\w+)\s*$/
+        final LinkModePragma = ~/^#pragma define\(((.*)LinkMode(.*))=>[0,1]\)(.*)$/
+        final DllModePragma = ~/^#pragma define\(((.*)DllMode(.*))=>[0,1]\)(.*)$/
 
         def output = "" << ""
 
@@ -321,6 +323,24 @@ class TxaApplicationTransform extends StreamingTxaTransform {
         // Remove compile and link commands for source application
         if ( content.startsWith("#compile")|| content.startsWith("#link")){
             return null
+        }
+
+        // Disable link-mode: Link
+        if (content ==~ LinkModePragma){
+            def matches =  (content =~ LinkModePragma)[0]
+            def symbol = matches[1]
+            def postamble = matches[4]
+            output << "#pragma define(${symbol}=>0)$postamble"
+            return output
+        }
+
+        // Enable link-mode DLL
+        if (content ==~ DllModePragma){
+            def matches =  (content =~ DllModePragma)[0]
+            def symbol = matches[1]
+            def postamble = matches[4]
+            output << "#pragma define(${symbol}=>1)$postamble"
+            return output
         }
 
         return content

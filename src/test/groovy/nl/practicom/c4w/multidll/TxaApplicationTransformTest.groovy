@@ -181,6 +181,38 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     assertContentEquals(output, targetTXA)
   }
 
+
+  void testLinkModeSetCorrectly(){
+    def dllModeTXA = '' << txaContent('''
+        [PROJECT]
+        #pragma define(_CCLSDllMode_=>1) -- GENERATED
+        #pragma define(_CCLSLinkMode_=>0) -- GENERATED
+        #pragma define(HyperActiveLinkMode=>0) -- GENERATED
+        #pragma define(HyperActiveDllMode=>1) -- GENERATED
+    ''')
+
+    def linkModeTXA = '' << txaContent('''
+        [PROJECT]
+        #pragma define(_CCLSDllMode_=>0) -- GENERATED
+        #pragma define(_CCLSLinkMode_=>1) -- GENERATED
+        #pragma define(HyperActiveLinkMode=>1) -- GENERATED
+        #pragma define(HyperActiveDllMode=>0) -- GENERATED
+    ''')
+
+    def output = '' << ''
+    def t1 = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: ProcedureDLL))
+    def reader = new StreamingTxaReader()
+    reader.registerHandler(t1)
+    reader.parse(linkModeTXA)
+    assertContentEquals(output, dllModeTXA)
+
+    output = '' << ''
+    t1 = new TxaApplicationTransform(output,new TxaTransformOptions(targetType: MainApplication))
+    reader.registerHandler(t1)
+    reader.parse(linkModeTXA)
+    assertContentEquals(output, dllModeTXA)
+  }
+
   void testProjectPragmasArePassedOn(){
     def sourceTXA = '' << txaContent('''
         [PROJECT]
@@ -481,4 +513,5 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     reader.parse(sourceTxa)
     assertContentEquals(output, targetTxaEnabled)
   }
+
 }
