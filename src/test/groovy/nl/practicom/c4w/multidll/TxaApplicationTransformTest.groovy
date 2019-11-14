@@ -339,7 +339,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         [REPORTCONTROLS]
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
-        GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
+        GloWijzigenVerkoper      SHORT,EXTERNAL,DLL(dll_mode)
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
     ''')
 
@@ -352,7 +352,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       if (line.trim()[0] == '!' || line.isSectionMark()) {
         return true
       } else {
-        return line.contains('EXTERNAL,DLL')
+        return line.contains('EXTERNAL,DLL(dll_mode)')
       }
     }
 
@@ -409,7 +409,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
         [REPORTCONTROLS]
         ! CHECK('Wijzigen Verkoper'),USE(GloWijzigenVerkoper),RIGHT
-        GloWijzigenVerkoper      SHORT,EXTERNAL,DLL
+        GloWijzigenVerkoper      SHORT,EXTERNAL,DLL(dll_mode)
         !!> GUID('aee622ca-57f2-4be8-977c-aa51a32f8ca4'),VALID(BOOLEAN),PROMPT('Wijzigen Verkoper:'),HEADER('Wijzigen Verkoper'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
     ''')
 
@@ -440,7 +440,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
           GLO:QueueFustenRegel     QUEUE,PRE()
           [SCREENCONTROLS]
           [REPORTCONTROLS]
-          qfr_Fust                   DECIMAL(7),EXTERNAL,DLL !Verpakkingsnummer
+          qfr_Fust                   DECIMAL(7),EXTERNAL,DLL(dll_mode) !Verpakkingsnummer
           [SCREENCONTROLS]
           [REPORTCONTROLS]
           qfr_Prijs                  DECIMAL(7,2) !Inkoopprijs NL
@@ -454,7 +454,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
           [DATA]
           [SCREENCONTROLS]
           [REPORTCONTROLS]
-          GLO:QueueFustenRegel     QUEUE,PRE(),EXTERNAL,DLL
+          GLO:QueueFustenRegel     QUEUE,PRE(),EXTERNAL,DLL(dll_mode)
           [SCREENCONTROLS]
           [REPORTCONTROLS]
           qfr_Fust                   DECIMAL(7) !Verpakkingsnummer
@@ -485,7 +485,19 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
             %DynamicDLL LONG  (0)
     ''')
 
-    def targetTxaEnabled = '' << txaContent('''
+    def targetTxaEnabledMain = '' << txaContent('''
+      [APPLICATION]
+        [COMMON]
+          [ADDITION]
+            [INSTANCE]
+              INSTANCE 5
+            [PROMPTS]
+              %MultiDLL LONG  (1)
+              %RootDLL LONG  (0)
+              %DynamicDLL LONG  (0)              
+    ''')
+
+    def targetTxaEnabledDll = '' << txaContent('''
       [APPLICATION]
         [COMMON]
           [ADDITION]
@@ -504,14 +516,14 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     def reader = new StreamingTxaReader()
     reader.registerHandler(t)
     reader.parse(sourceTxa)
-    assertContentEquals(output, sourceTxa)
+    assertContentEquals(output, targetTxaEnabledMain)
 
     output = '' << ''
     t = new TxaApplicationTransform(output, new TxaTransformOptions(targetType: DataDLL))
     reader = new StreamingTxaReader()
     reader.registerHandler(t)
     reader.parse(sourceTxa)
-    assertContentEquals(output, targetTxaEnabled)
+    assertContentEquals(output, targetTxaEnabledDll)
   }
 
 }

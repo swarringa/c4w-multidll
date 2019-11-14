@@ -270,17 +270,17 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
             if (options.targetType == DataDLL || this.insideQueue){
                 if (isExternalDeclaration){
-                    fieldAttributes.removeAll(['EXTERNAL','DLL'])
+                    fieldAttributes.removeAll(['EXTERNAL','DLL(dll_mode)'])
                 }
             } else {
                 // For main application and procedure dll global data needs to be
                 // declared as EXTERNAL,DLL
                 if (isExternalDeclaration) {
                     if ( !fieldAttributes.contains('DLL')){
-                        fieldAttributes << 'DLL'
+                        fieldAttributes << 'DLL(dll_mode)'
                     }
                 } else {
-                    fieldAttributes << 'EXTERNAL' << 'DLL'
+                    fieldAttributes << 'EXTERNAL' << 'DLL(dll_mode)'
                 }
             }
 
@@ -370,7 +370,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
         if ( ctx.currentSection == PROMPTS) {
             if (content.startsWith("%MultiDLL")) {
                 // Generic capesoft
-                output = options.targetType == DataDLL ? "%MultiDLL LONG  (1)" : "%MultiDLL LONG  (0)"
+                output = "%MultiDLL LONG  (1)"
             } else if (content.startsWith("%RootDLL")) {
                 // Generic capesoft
                 output = options.targetType == DataDLL ? "%RootDLL LONG  (1)" : "%RootDLL LONG  (0)"
