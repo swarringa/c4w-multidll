@@ -44,6 +44,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
     // Global state
     String currentPrompt = null
     Boolean insideQueue = false
+    String[] referencedProcedures
 
     /**
      * Use for testing
@@ -95,6 +96,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
     protected String transformSectionStart(TxaContext context, SectionMark section) {
         def output = '' << section
 
+        if ( section == MODULE || context.within(MODULE)) {
+            return null
+        }
+
         if ( section == PROCEDURE || context.within(PROCEDURE)) {
             return null
         }
@@ -113,8 +118,16 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     @Override
     protected String transformSectionContent(TxaContext context, SectionMark section, String content) {
+        if ( section == MODULE || context.within(MODULE)) {
+            return null
+        }
+
+        if ( section == PROCEDURE || context.within(PROCEDURE)) {
+            return null
+        }
+
         if ( section == APPLICATION && context.currentSection == APPLICATION){
-          return processApplicationContent(context, content)
+            return processApplicationContent(context, content)
         }
 
         if ( context.within(APPLICATION,COMMON,ADDITION)) {
@@ -133,25 +146,24 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             return processGlobalData(context, content)
         }
 
-        if ( section == MODULE || context.within(MODULE)) {
-            return null
-        }
-
-        if ( section == PROCEDURE || context.within(PROCEDURE)) {
-            return null
-        }
-
         return super.transformSectionContent(context, section, content)
     }
 
-
-  @Override
+    @Override
     protected String transformSectionEnd(TxaContext context, SectionMark section) {
         switch(section){
             case PROJECT:
                 return processProjectEnd(context)
+                break
+            case MODULE:
+                return null
+                break
             default:
-                return super.transformSectionEnd(context, section)
+                if (context.within(MODULE)) {
+                    return null
+                } else {
+                    return super.transformSectionEnd(context, section)
+                }
         }
     }
 
@@ -384,5 +396,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             }
         }
         return output
+    }
+
+    def processGlobalAdditionContent(TxaContext ctx, String content){
+        def PROCEDURE_REFERENCE = ~/%(.*)\s+PROCEDURE\s+\(.*\)/
+
     }
 }

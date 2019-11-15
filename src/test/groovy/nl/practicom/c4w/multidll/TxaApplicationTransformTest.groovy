@@ -281,7 +281,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     assertContentEquals(output, targetTxaDll)
   }
 
-  void testProceduresAreRemoved(){
+  void testProceduresAndModulesAreRemoved(){
     def sourceTxa = '' << txaContent('''
         [APPLICATION]
         VERSION 34
@@ -294,8 +294,6 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         [PROCEDURE]
         NAME Procedure1
         [COMMON]
-        [MODULE]
-        [COMMON]
     ''')
 
     def targetTxa = '' << txaContent('''
@@ -304,9 +302,58 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
         TODO ABC ToDo
         DICTIONARY 'udea10.dct'
         [COMMON]
+    ''')
+
+    def output = '' << ''
+    def t = new TxaApplicationTransform(output, new TxaTransformOptions())
+    def reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, targetTxa)
+  }
+
+  void testtModulesWithContentAreRemoved() {
+    def sourceTxa = '' << txaContent('''
+        [APPLICATION]
+        VERSION 34
+        TODO ABC ToDo
+        DICTIONARY 'udea10.dct'
+        [COMMON]
         [MODULE]
+          [PROCEDURE]
+          NAME Procedure1
+            [COMMON]
+        [END]
+        [MODULE]
+          [PROCEDURE]
+          NAME Procedure1
+            [COMMON]
+              [EMBED]
+                EMBED %WindowManagerMethodCodeSection
+                [INSTANCES]
+                  WHEN 'Init\'
+                  [INSTANCES]
+                    WHEN '(),BYTE\'
+                    [DEFINITION]
+                        [SOURCE]
+                        Source code here
+                    [END]
+                  [END]
+                [END]
+              [END]
+         [END]
+         [PROCEDURE]     
+    ''')
+
+    def targetTxa = '' << txaContent('''
+        [APPLICATION]
+        VERSION 34
+        TODO ABC ToDo
+        DICTIONARY 'udea10.dct'
         [COMMON]
     ''')
+
+    assertSectionsClosedCorrectly(sourceTxa.toString())
 
     def output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaTransformOptions())
