@@ -383,16 +383,23 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     def processCapeSoftGlobalExtensions(TxaContext ctx,  String content){
         def output = content
+
         if ( ctx.currentSection == PROMPTS) {
-            if (content.startsWith("%MultiDLL")) {
-                // Generic capesoft
+            if (content.startsWith('%FMDataDLL')){
+                //FM3 - mark the data DLL
+                output = options.targetType == DataDLL ? '%FMDataDLL LONG  (1)' : '%FMDataDLL LONG  (0)'
+            } else if ( content.startsWith('%FMPartOfMultiDLLPrj')){
+                //FM3 - multi-DLL checkbox
+                output =  '%FMPartOfMultiDLLPrj LONG  (1)'
+            } else if (content.startsWith("%MultiDLL")) {
+                // Generic capesoft multi-DLL checkbox
                 output = "%MultiDLL LONG  (1)"
             } else if (content.startsWith("%RootDLL")) {
                 // Generic capesoft
                 output = options.targetType == DataDLL ? "%RootDLL LONG  (1)" : "%RootDLL LONG  (0)"
             } else if(content.startsWith("%DynamicDLL")){
                 // Nettalk Dynamic DLL support
-                output = options.targetType == DataDLL ? "%DynamicDLL LONG  (1)" : "%DynamicDLL LONG  (0)"
+                output =  "%DynamicDLL LONG  (1)"
             }
         }
         return output
