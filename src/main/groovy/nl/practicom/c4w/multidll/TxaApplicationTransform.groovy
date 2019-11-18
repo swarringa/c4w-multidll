@@ -33,7 +33,7 @@ import java.util.regex.Matcher
  *   - add link command for application
  */
 
-import static nl.practicom.c4w.multidll.TxaTransformOptions.ApplicationType.*
+import static nl.practicom.c4w.multidll.ApplicationType.*
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 /**
  * Generates a new application TXA file from source TXA.

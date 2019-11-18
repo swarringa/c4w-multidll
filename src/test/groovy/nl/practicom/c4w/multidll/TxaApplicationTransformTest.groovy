@@ -5,7 +5,7 @@ import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
 
-import static nl.practicom.c4w.multidll.TxaTransformOptions.ApplicationType.*
+import static nl.practicom.c4w.multidll.ApplicationType.*
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 
 class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTestSupport {
