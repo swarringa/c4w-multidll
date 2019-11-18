@@ -57,16 +57,19 @@ class ClarionProjectTransformer {
 
     def transformCompilationSymbols(GPathResult root) {
         if (!root.PropertyGroup.DefineConstants.isEmpty()) {
+            def linkModeValue = options.applicationType == ApplicationType.ProcedureDLL ? 0 : 1
+            def dllModeValue = 1 - linkModeValue
+
             def compileSymbols = root.PropertyGroup.DefineConstants.toString().split("%3b")
             def updatedCompileSymbols = compileSymbols.inject(
                     [],
                     { accu, symbolExpr ->
                         def (key, value) = symbolExpr.split('=>')
                         if (key.toLowerCase().contains('linkmode')) {
-                            value = 0
+                            value = linkModeValue
                         }
                         if (key.toLowerCase().contains('dllmode')) {
-                            value = 1
+                            value = dllModeValue
                         }
                         accu << "${key}=>${value}"
                         return accu

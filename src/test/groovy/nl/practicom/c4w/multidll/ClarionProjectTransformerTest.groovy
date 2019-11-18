@@ -1,5 +1,6 @@
 package nl.practicom.c4w.multidll
 
+import groovy.util.slurpersupport.GPathResult
 import groovy.xml.MarkupBuilder
 import groovy.xml.StreamingMarkupBuilder
 import org.codehaus.groovy.runtime.StringBufferWriter
@@ -40,7 +41,7 @@ class ClarionProjectTransformerTest extends GroovyTestCase {
             HyperActiveDllMode : 1
         ]
 
-        def compileSymbolsExpected = [
+        def compileSymbolsDllMode = [
             IPDRV : 1,
             _CCLSDllMode_ : 1,
             _CCLSLinkMode_ : 0,
@@ -48,6 +49,16 @@ class ClarionProjectTransformerTest extends GroovyTestCase {
             FM2 : 1,
             HyperActiveLinkMode : 0,
             HyperActiveDllMode : 1
+        ]
+
+        def compileSymbolsLinkMode = [
+                IPDRV : 1,
+                _CCLSDllMode_ : 0,
+                _CCLSLinkMode_ : 1,
+                _IGDLL_ : 1,
+                FM2 : 1,
+                HyperActiveLinkMode : 1,
+                HyperActiveDllMode : 0
         ]
 
         def compileSymbolsText = compileSymbols.inject(
@@ -74,17 +85,28 @@ class ClarionProjectTransformerTest extends GroovyTestCase {
 
         new ClarionProjectTransformer(options).convert(cwproj.toString(), writer)
         def xmlout = new XmlSlurper(false,false).parse(new StringReader(writer.toString()))
+        def updatedSymbols = extractCompileSymbols(xmlout)
+        assert updatedSymbols == compileSymbolsLinkMode
 
+        options.applicationType = ApplicationType.ProcedureDLL
+        writer = new StringBufferWriter(''<<'')
+        new ClarionProjectTransformer(options).convert(cwproj.toString(), writer)
+        xmlout = new XmlSlurper(false,false).parse(new StringReader(writer.toString()))
+        updatedSymbols = extractCompileSymbols(xmlout)
+        assert updatedSymbols == compileSymbolsDllMode
+
+    }
+
+    def extractCompileSymbols(GPathResult xmlout) {
         def updatedSymbolsText = xmlout.PropertyGroup.DefineConstants.first().text()
-        def updatedSymbols = updatedSymbolsText.split(',').inject(
+        def updatedSymbols = updatedSymbolsText.split('%3b').inject(
                 [:],
-                {symbols, symbol ->
+                { symbols, symbol ->
                     def (key, value) = symbol.split('=>')
                     symbols.putAll([(key): value as Integer])
                     return symbols
                 })
-
-        assert updatedSymbols == compileSymbolsExpected
+        updatedSymbols
     }
 
     void testGeneratedResourcesReplacedBySingleSource(){
