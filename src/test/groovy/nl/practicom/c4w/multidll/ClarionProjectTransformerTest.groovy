@@ -55,7 +55,7 @@ class ClarionProjectTransformerTest extends GroovyTestCase {
                 {accu, symbol ->
                     accu << "${symbol.key}=>${symbol.value}"
                 }
-            ).join(',')
+            ).join('%3b')
 
         def cwproj = new StreamingMarkupBuilder().bind {
             Project(DefaultTargets: "Build", 'xmlns' : "http://schemas.microsoft.com/developer/msbuild/2003") {

@@ -28,6 +28,7 @@ class ClarionProjectTransformer {
             transformCompilationSymbols(root)
             transformApplicationName(root)
             transformApplicationModel(root)
+            transformBuildEvents(root)
         }
 
         transformSourceGeneration(root)
@@ -46,15 +47,17 @@ class ClarionProjectTransformer {
 
     def transformApplicationModel(GPathResult root) {
         if (options.applicationType == ApplicationType.MainApplication) {
-            root.PropertyGroup.Model = "Exe"
+            root.PropertyGroup.first().Model = "Dll"
+            root.PropertyGroup.first().OutputType = "WinExe"
         } else {
             root.PropertyGroup.Model = "Dll"
+            root.PropertyGroup.first().OutputType = "Library"
         }
     }
 
     def transformCompilationSymbols(GPathResult root) {
         if (!root.PropertyGroup.DefineConstants.isEmpty()) {
-            def compileSymbols = root.PropertyGroup.DefineConstants.toString().split(",")
+            def compileSymbols = root.PropertyGroup.DefineConstants.toString().split("%3b")
             def updatedCompileSymbols = compileSymbols.inject(
                     [],
                     { accu, symbolExpr ->
@@ -68,7 +71,7 @@ class ClarionProjectTransformer {
                         accu << "${key}=>${value}"
                         return accu
                     }
-            ).join(',')
+            ).join('%3b')
 
             root.PropertyGroup.DefineConstants = updatedCompileSymbols
         }
@@ -85,4 +88,17 @@ class ClarionProjectTransformer {
         }
     }
 
+    def transformBuildEvents(GPathResult root){
+        if (!root.PropertyGroup.PostBuildEvent.isEmpty()){
+            if ( options.applicationType == ApplicationType.MainApplication){
+                root.PropertyGroup.PostBuildEvent.first().replaceNode {
+                    PostBuildEvent("unicore.bat ${options.outputName}.exe")
+                }
+            } else {
+                root.PropertyGroup.PostBuildEvent.first().replaceNode {
+                    PostBuildEvent()
+                }
+            }
+        }
+    }
 }
