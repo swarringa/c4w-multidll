@@ -5,18 +5,18 @@ import java.nio.file.Paths
 
 class MultiFileTxaWriter implements ProcedureWriter {
 
-    List<Writer> writers = []
+    List<ProcedureWriter> writers = []
 
     int numSplits
     int currentSplit
 
-    MultiFileTxaWriter(Path destinationPath, String filePrefix, int numSplits) {
+    MultiFileTxaWriter(Path destinationPath, String filePrefix, int numSplits, int numProceduresPerModule) {
         this.numSplits = numSplits
 
         for ( split in 0..numSplits-1) {
             def postfix = String.format("%03d", split)
             def outFilePath = destinationPath.resolve(Paths.get("${filePrefix}_${postfix}.txa"))
-            writers << new FileWriter(outFilePath.toFile())
+            writers << new SingleTxaProcedureWriter(outFilePath.toFile(),numProceduresPerModule)
         }
 
         this.currentSplit = 0
@@ -27,7 +27,7 @@ class MultiFileTxaWriter implements ProcedureWriter {
 
     @Override
     void write(Procedure procedure) {
-        writers[currentSplit].write(procedure.body.toString())
+        writers[currentSplit].write(procedure)
         this.currentSplit = (this.currentSplit+1) % numSplits
     }
 
