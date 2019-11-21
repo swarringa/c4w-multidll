@@ -1,14 +1,6 @@
 package nl.practicom.c4w.multidll.dto
 
-class Procedure {
-  // Name of procedure extracted from NAME
-  String name = null
-
-  // Template used to generate procedure extracted from FROM
-  String template = null
-
-  // Line number where procedure definition starts in txa
-  long lineNumber = 0
+class Procedure extends ProcedureInfo {
 
   // Text content of procedure including [PROCEDURE]
   StringBuilder body = new StringBuilder()

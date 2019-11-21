@@ -63,7 +63,7 @@ class ProcedureExtractor extends StreamingTxaTransform {
         if ( currentProcedure ) {
             if ( currentProcedure.name == null && ctx.currentProcedureName != null ){
                 currentProcedure.name = ctx.currentProcedureName
-                def t = transformFactory.getTransform(currentProcedure.name)
+                def t = transformFactory.getTransform(currentProcedure)
                 if ( t ){
                     currentTransform = t
                 } else {

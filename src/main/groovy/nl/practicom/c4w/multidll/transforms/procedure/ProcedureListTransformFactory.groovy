@@ -1,5 +1,6 @@
 package nl.practicom.c4w.multidll.transforms.procedure
 
+import nl.practicom.c4w.multidll.dto.ProcedureInfo
 import nl.practicom.c4w.multidll.transforms.procedure.ConvertToExternalProcedure
 import nl.practicom.c4w.multidll.transforms.procedure.ConvertToPrivateProcedure
 import nl.practicom.c4w.multidll.transforms.procedure.ConvertToPublicProcedure
@@ -7,6 +8,10 @@ import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
 import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransformFactory
 
 class ProcedureListTransformFactory implements ProcedureTransformFactory {
+
+  def ProcedureTransform publicTransform = new ConvertToPublicProcedure()
+  def ProcedureTransform privateTransform = new ConvertToPrivateProcedure()
+  def ProcedureTransform externalTransform = new ConvertToExternalProcedure()
 
   // list of procedures names to be included and exported. Only applicable for DLL
   List<String> publicProcedures = []
@@ -17,13 +22,13 @@ class ProcedureListTransformFactory implements ProcedureTransformFactory {
   // List of procedures to be declared as external
   List<String> externalProcedures = []
 
-    ProcedureTransform getTransform(String procedureName){
-    if (publicProcedures.contains(procedureName)){
-      return new ConvertToPublicProcedure()
-    } else if ( privateProcedures.contains(procedureName)){
-      return new ConvertToPrivateProcedure()
-    } else if ( externalProcedures.contains(procedureName)){
-      return new ConvertToExternalProcedure()
+    ProcedureTransform getTransform(ProcedureInfo procedureInfo){
+    if (publicProcedures.contains(procedureInfo.name)){
+      return this.publicTransform
+    } else if ( privateProcedures.contains(procedureInfo.name)){
+      return this.privateTransform
+    } else if ( externalProcedures.contains(procedureInfo.name)){
+      return this.externalTransform
     } else {
       return null
     }
