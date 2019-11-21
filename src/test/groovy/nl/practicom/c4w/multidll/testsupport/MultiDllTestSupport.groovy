@@ -1,5 +1,6 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.testsupport
 
+import nl.practicom.c4w.multidll.dto.Procedure
 import nl.practicom.c4w.txa.test.TxaTestSupport
 
 trait MultiDllTestSupport implements TxaTestSupport {

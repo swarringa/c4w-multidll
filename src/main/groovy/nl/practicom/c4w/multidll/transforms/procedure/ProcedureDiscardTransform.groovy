@@ -1,9 +1,10 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.transforms.procedure
 
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContext
 
-class ConvertToExternalProcedure implements ProcedureTransform {
+class ProcedureDiscardTransform implements ProcedureTransform {
   @Override
   String transformSectionStart(TxaContext context, SectionMark section) {
     return null

@@ -1,5 +1,10 @@
 package nl.practicom.c4w.multidll
 
+import nl.practicom.c4w.multidll.testsupport.MultiDllTestSupport
+import nl.practicom.c4w.multidll.testsupport.ProcedureTestWriter
+import nl.practicom.c4w.multidll.testsupport.ProcedureTransformTestFactory
+import nl.practicom.c4w.multidll.transforms.procedure.ConvertToPrivateProcedure
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureExtractor
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.StreamingTxaReader

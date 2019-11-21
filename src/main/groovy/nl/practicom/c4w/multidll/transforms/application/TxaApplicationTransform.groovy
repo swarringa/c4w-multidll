@@ -1,4 +1,4 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.transforms.application
 
 
 import nl.practicom.c4w.txa.transform.SectionMark
@@ -33,13 +33,13 @@ import java.util.regex.Matcher
  *   - add link command for application
  */
 
-import static nl.practicom.c4w.multidll.ApplicationType.*
+import static ApplicationType.*
 import static nl.practicom.c4w.txa.transform.SectionMark.*
 /**
  * Generates a new application TXA file from source TXA.
  */
 class TxaApplicationTransform extends StreamingTxaTransform {
-    TxaTransformOptions options
+    TxaApplicationTransformOptions options
 
     // Global state
     String currentPrompt = null
@@ -51,7 +51,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
      * @param txaout
      * @param transformOptions
      */
-    TxaApplicationTransform(StringBuffer txaout, TxaTransformOptions transformOptions){
+    TxaApplicationTransform(StringBuffer txaout, TxaApplicationTransformOptions transformOptions){
         super(txaout)
         this.options = transformOptions
     }
@@ -61,7 +61,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
      * @param targetTxaFile - absolute path where txa should be generated
      * @param transformOptions - instructions on required transformations
      */
-    TxaApplicationTransform(File targetTxaFile, TxaTransformOptions transformOptions) {
+    TxaApplicationTransform(File targetTxaFile, TxaApplicationTransformOptions transformOptions) {
         /* ToDo: path resolution, existence and access checks */
         super(targetTxaFile.newWriter())
         this.options = transformOptions
@@ -72,7 +72,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
      * @param txaout
      * @param transformOptions
      */
-    TxaApplicationTransform(OutputStream txaout,TxaTransformOptions transformOptions) {
+    TxaApplicationTransform(OutputStream txaout, TxaApplicationTransformOptions transformOptions) {
         super(txaout.newWriter())
         this.options = transformOptions
     }
@@ -82,7 +82,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
      * @param txaout
      * @param transformOptions
      */
-    TxaApplicationTransform(Writer txaout, TxaTransformOptions transformOptions) {
+    TxaApplicationTransform(Writer txaout, TxaApplicationTransformOptions transformOptions) {
         super(txaout)
         this.options = transformOptions
     }
@@ -154,10 +154,8 @@ class TxaApplicationTransform extends StreamingTxaTransform {
         switch(section){
             case PROJECT:
                 return processProjectEnd(context)
-                break
             case MODULE:
                 return null
-                break
             default:
                 if (context.within(MODULE)) {
                     return null

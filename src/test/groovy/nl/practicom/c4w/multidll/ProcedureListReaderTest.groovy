@@ -1,5 +1,7 @@
 package nl.practicom.c4w.multidll
 
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureListReader
+
 class ProcedureListReaderTest extends GroovyTestCase {
 
     void testEmptyList(){

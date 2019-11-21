@@ -1,4 +1,10 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.transforms.procedure
+
+import nl.practicom.c4w.multidll.transforms.procedure.ConvertToExternalProcedure
+import nl.practicom.c4w.multidll.transforms.procedure.ConvertToPrivateProcedure
+import nl.practicom.c4w.multidll.transforms.procedure.ConvertToPublicProcedure
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransformFactory
 
 class ProcedureListTransformFactory implements ProcedureTransformFactory {
 
@@ -11,7 +17,7 @@ class ProcedureListTransformFactory implements ProcedureTransformFactory {
   // List of procedures to be declared as external
   List<String> externalProcedures = []
 
-  ProcedureTransform getTransform(String procedureName){
+    ProcedureTransform getTransform(String procedureName){
     if (publicProcedures.contains(procedureName)){
       return new ConvertToPublicProcedure()
     } else if ( privateProcedures.contains(procedureName)){

@@ -1,4 +1,6 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.io
+
+import nl.practicom.c4w.multidll.dto.Procedure
 
 import java.nio.file.Path
 import java.nio.file.Paths

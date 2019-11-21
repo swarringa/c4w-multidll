@@ -1,6 +1,6 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.transforms.application
 
-class TxaTransformOptions {
+class TxaApplicationTransformOptions {
 
   // Name of the application
   String applicationName

@@ -1,5 +1,6 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.scanners
 
+import nl.practicom.c4w.multidll.dto.ProcedureInfo
 import nl.practicom.c4w.txa.transform.*
 
 import static nl.practicom.c4w.txa.transform.SectionMark.APPLICATION

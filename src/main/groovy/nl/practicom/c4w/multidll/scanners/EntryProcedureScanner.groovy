@@ -2,7 +2,7 @@
  * Extracts the procedures attached to a menu (sub)tree
  * from a txa file.
  */
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.scanners
 
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContentHandler

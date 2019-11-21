@@ -1,4 +1,4 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.dto
 
 class Procedure {
   // Name of procedure extracted from NAME

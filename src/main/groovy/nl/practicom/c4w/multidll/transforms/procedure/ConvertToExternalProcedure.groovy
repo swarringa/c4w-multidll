@@ -1,24 +1,22 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.transforms.procedure
 
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContext
 
-import static nl.practicom.c4w.txa.transform.SectionMark.END
-
-class ProcedureIdentityTransform implements ProcedureTransform {
-
+class ConvertToExternalProcedure implements ProcedureTransform {
   @Override
   String transformSectionStart(TxaContext context, SectionMark section) {
-    return section.toString()
+    return null
   }
 
   @Override
   String transformSectionContent(TxaContext context, SectionMark section, String content) {
-    return content
+    return null
   }
 
   @Override
   String transformSectionEnd(TxaContext context, SectionMark section) {
-    return section.requiresExplicitEnd() && context.currentLine.isSectionEnd()? END : null
+    return null
   }
 }

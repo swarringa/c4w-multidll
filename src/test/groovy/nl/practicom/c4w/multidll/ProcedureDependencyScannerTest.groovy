@@ -1,5 +1,7 @@
 package nl.practicom.c4w.multidll
 
+import nl.practicom.c4w.multidll.scanners.ProcedureDependencyScanner
+import nl.practicom.c4w.multidll.testsupport.MultiDllTestSupport
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.StreamingTxaReader

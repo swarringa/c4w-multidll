@@ -1,4 +1,6 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.io
+
+import nl.practicom.c4w.multidll.dto.Procedure
 
 /**
  * We may want to handle the export of procedures from a txa in different ways.

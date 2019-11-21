@@ -1,4 +1,4 @@
-package nl.practicom.c4w.multidll
+package nl.practicom.c4w.multidll.scanners
 
 import nl.practicom.c4w.txa.transform.*
 
