@@ -1,5 +1,7 @@
 package nl.practicom.c4w.multidll.dto
 
+import java.nio.file.Path
+
 class Procedure extends ProcedureInfo {
 
   // Text content of procedure including [PROCEDURE]
@@ -10,7 +12,7 @@ class Procedure extends ProcedureInfo {
     return "${this.name} (${this.template})@${this.lineNumber}"
   }
 
-  def save(String filePath){
-    new File(filePath).write(this.body.toString())
+  def save(Path filePath){
+    filePath.toFile().write(this.body.toString())
   }
 }

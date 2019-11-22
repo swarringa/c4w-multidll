@@ -8,7 +8,7 @@ import nl.practicom.c4w.txa.transform.TxaContext
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class MultiFileTxaWriter extends ProcedureDiscardTransform implements ProcedureWriter {
+class MultiFileTxaProcedureWriter extends ProcedureDiscardTransform implements ProcedureWriter {
 
     List<ProcedureWriter> writers = []
 
@@ -18,7 +18,7 @@ class MultiFileTxaWriter extends ProcedureDiscardTransform implements ProcedureW
 
     Boolean categoryWritten = false
 
-    MultiFileTxaWriter(Path destinationPath, String filePrefix, int numSplits, int numProceduresPerModule) {
+    MultiFileTxaProcedureWriter(Path destinationPath, String filePrefix, int numSplits, int numProceduresPerModule) {
         this.numSplits = numSplits
         this.filePrefix = filePrefix
 
