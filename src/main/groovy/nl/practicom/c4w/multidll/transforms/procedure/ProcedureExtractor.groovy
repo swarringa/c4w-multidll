@@ -74,17 +74,20 @@ class ProcedureExtractor extends StreamingTxaTransform {
             }
         }
 
-        // Extract template for current procedure
-        if (currentProcedure && !currentProcedure.template) {
-            (content =~ TEMPLATE_DECL).each {
-                _, templateName -> currentProcedure.template = templateName
+        if ( ctx.within(PROCEDURE) ) {
+            // Extract template for current procedure
+            if (currentProcedure && !currentProcedure.template) {
+                (content =~ TEMPLATE_DECL).each {
+                    _, templateName -> currentProcedure.template = templateName
+                }
             }
-        }
 
-        if (currentTransform && currentProcedure) {
-            return currentTransform.transformSectionContent(ctx, section, content)
-        } else {
-            return null
+            if (currentTransform && currentProcedure) {
+                return currentTransform.transformSectionContent(ctx, section, content)
+            } else {
+                return null
+            }
+
         }
     }
 

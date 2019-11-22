@@ -20,6 +20,11 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
         def contents = txaContent("""\
             [APPLICATION]
                [MODULE]
+                  [COMMON]
+                   FROM ABC GENERATED
+                     [DATA]
+                     [EMBED]
+                     [END]
                   [PROCEDURE]
                      NAME P1
                      FROM ABC Browse
@@ -28,6 +33,14 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
                      FROM ABC Window
                [END]
                [MODULE]
+                   [COMMON]
+                   FROM ABC GENERATED
+                     [DATA]
+                     [EMBED]
+                       [DEFINITION]
+                         [PROCEDURE]
+                       [END]
+                     [END]
                  [PROCEDURE]
                     NAME P3
                     FROM ABC Report

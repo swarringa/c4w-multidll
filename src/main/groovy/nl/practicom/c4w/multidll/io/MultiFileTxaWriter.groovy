@@ -66,8 +66,8 @@ class MultiFileTxaWriter extends ProcedureDiscardTransform implements ProcedureW
     */
     @Override
     String transformSectionContent(TxaContext context, SectionMark section, String content) {
-        if ( content.trim().toLowerCase().startsWith('CATEGORY') ){
-            return "CATEGORY ${getCategory()}"
+        if ( content.trim().toUpperCase().startsWith('CATEGORY') ){
+            return "CATEGORY '${getCategory()}'"
             categoryWritten = true
         } else {
             return null
@@ -78,7 +78,7 @@ class MultiFileTxaWriter extends ProcedureDiscardTransform implements ProcedureW
     String transformSectionStart(TxaContext context, SectionMark section) {
         if (section == SectionMark.DATA){
             if (!categoryWritten){
-                return  "CATEGORY ${getCategory()}" << System.lineSeparator() << section
+                return  "CATEGORY '${getCategory()}'" << System.lineSeparator() << section
                 categoryWritten = true
             } else {
                 return null
