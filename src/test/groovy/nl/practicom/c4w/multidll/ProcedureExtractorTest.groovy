@@ -1,12 +1,16 @@
 package nl.practicom.c4w.multidll
 
+import nl.practicom.c4w.multidll.io.MultiFileTxaProcedureWriter
 import nl.practicom.c4w.multidll.testsupport.MultiDllTestSupport
 import nl.practicom.c4w.multidll.testsupport.ProcedureTestWriter
 import nl.practicom.c4w.multidll.testsupport.ProcedureTransformTestFactory
 import nl.practicom.c4w.multidll.transforms.procedure.ProcedureExtractor
+import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
 import nl.practicom.c4w.txa.meta.ClarionDateMixins
 import nl.practicom.c4w.txa.meta.ClarionStringMixins
 import nl.practicom.c4w.txa.transform.StreamingTxaReader
+
+import java.nio.file.Files
 
 class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSupport {
 
@@ -296,6 +300,52 @@ class ProcedureExtractorTest extends GroovyTestCase implements MultiDllTestSuppo
             assert body.lineCount(EOL) == contents.lineCount(EOL)
             assertSectionsClosedCorrectly(body)
             assertStructureAtLine(procedures[0], 0, contents.toLineArray(EOL))
+        }
+    }
+
+    void testCategoryIsReplacedByMultifileWriter() {
+        def contents = txaContent("""\
+            [APPLICATION]
+               [MODULE]
+                 [COMMON]
+                    FROM ABC GENERATED
+                 [PROCEDURE]
+                  NAME P1
+                    [COMMON]
+                    DESCRIPTION 'P1'
+                    FROM ABC Window
+                    CATEGORY 'invervo10_000'
+                    MODIFIED '2019/10/10' '10:02:07'
+                    [DATA]
+                 [PROCEDURE]
+                  NAME P2
+                    [COMMON]
+                    DESCRIPTION 'P2'
+                    FROM ABC Window
+                    MODIFIED '2019/10/10' '10:02:07'
+                    [DATA]                  
+               [END]
+        """)
+
+        assertSectionsClosedCorrectly(contents)
+
+        def reader = new StreamingTxaReader()
+        def wr = new ProcedureTestWriter()
+        def xt = new ProcedureExtractor(
+                new ProcedureTransformTestFactory()
+                    .withDefaultTransform(
+                        new MultiFileTxaProcedureWriter(
+                            Files.createTempDirectory("test").toAbsolutePath(),
+                            "test",0,0
+                        ) as ProcedureTransform
+                    ),
+                    wr
+                )
+        reader.registerHandler(xt)
+        reader.parse('' << contents)
+        wr.procedures.each { p ->
+            def matches = ( p.body =~ /CATEGORY 'test_000'/ )
+            assert matches.count == 1
         }
     }
 }

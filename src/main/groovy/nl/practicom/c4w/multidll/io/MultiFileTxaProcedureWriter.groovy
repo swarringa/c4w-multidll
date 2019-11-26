@@ -1,14 +1,14 @@
 package nl.practicom.c4w.multidll.io
 
 import nl.practicom.c4w.multidll.dto.Procedure
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureDiscardTransform
+import nl.practicom.c4w.multidll.transforms.procedure.ChainableTransform
 import nl.practicom.c4w.txa.transform.SectionMark
 import nl.practicom.c4w.txa.transform.TxaContext
 
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class MultiFileTxaProcedureWriter extends ProcedureDiscardTransform implements ProcedureWriter {
+class MultiFileTxaProcedureWriter extends ChainableTransform implements ProcedureWriter {
 
     List<ProcedureWriter> writers = []
 
@@ -64,13 +64,12 @@ class MultiFileTxaProcedureWriter extends ProcedureDiscardTransform implements P
     * The assumption here is that the procedure that is being transformed
     * will be the next one written!
     */
+
     @Override
     String transformSectionContent(TxaContext context, SectionMark section, String content) {
         if ( content.trim().toUpperCase().startsWith('CATEGORY') ){
-            return "CATEGORY '${getCategory()}'"
             categoryWritten = true
-        } else {
-            return null
+            return "CATEGORY '${getCategory()}'"
         }
     }
 
@@ -78,11 +77,16 @@ class MultiFileTxaProcedureWriter extends ProcedureDiscardTransform implements P
     String transformSectionStart(TxaContext context, SectionMark section) {
         if (section == SectionMark.DATA){
             if (!categoryWritten){
-                return  "CATEGORY '${getCategory()}'" << System.lineSeparator() << section
                 categoryWritten = true
-            } else {
-                return null
+                return "CATEGORY '${getCategory()}'" << System.lineSeparator() << section
             }
+        }
+    }
+
+    @Override
+    String transformSectionEnd(TxaContext context, SectionMark section) {
+        if (section == SectionMark.DATA){
+            categoryWritten = false
         }
     }
 
