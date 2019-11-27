@@ -28,7 +28,7 @@ class SingleTxaProcedureWriter extends OutputStreamWriter implements ProcedureWr
   }
 
   SingleTxaProcedureWriter(OutputStream os, int numProceduresPerModule = 20) {
-    super(os)
+    super(os,"ISO-8859-1")
     this.numProceduresPerModule = numProceduresPerModule
   }
 

@@ -13,6 +13,6 @@ class Procedure extends ProcedureInfo {
   }
 
   def save(Path filePath){
-    filePath.toFile().write(this.body.toString())
+    filePath.toFile().write(this.body.toString(),"ISO-8859-1")
   }
 }
