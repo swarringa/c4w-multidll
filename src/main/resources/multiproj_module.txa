@@ -1,0 +1,7 @@
+[MODULE]
+NAME 'external.ico'
+NOPOPULATE 
+[COMMON]
+DESCRIPTION 'Externe functies'
+FROM MultiPrj ExternalModule
+MODIFIED '2019/12/10' '16:25:45'
