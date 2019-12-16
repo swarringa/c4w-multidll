@@ -133,4 +133,24 @@ class ClarionProjectTransformerTest extends GroovyTestCase {
         def generatedSources = xmlout.ItemGroup.Compile
         assert generatedSources.size() == 1
     }
+
+    void testManifestAndVersionResourcesAreRemoved(){
+        def cwproj = new StreamingMarkupBuilder().bind {
+            Project(DefaultTargets: "Build", 'xmlns' : "http://schemas.microsoft.com/developer/msbuild/2003") {
+                ItemGroup() {
+                    Library(Include: "invervo.EXE.manifest")
+                    Library(Include: "invervo.Version")
+                }
+            }
+        }
+        def writer = new StringBufferWriter(''<<'')
+        def options = new ProjectTransformOptions(
+                assemblyName: 'mymainapp',
+                outputName: 'mymainapp1',
+                applicationType: ApplicationType.MainApplication
+        )
+        new ClarionProjectTransformer(options).convert(cwproj.toString(), writer)
+        def xmlout = new XmlSlurper(false,false).parse(new StringReader(writer.toString()))
+        assert xmlout.ItemGroup.Library.size() == 0
+    }
 }

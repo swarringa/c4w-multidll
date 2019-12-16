@@ -33,7 +33,7 @@ class ClarionProjectTransformer {
         }
 
         transformSourceGeneration(root)
-
+        transformLinkedResources(root)
         XmlUtil.serialize(root, writer)
     }
 
@@ -87,6 +87,17 @@ class ClarionProjectTransformer {
             root.ItemGroup.first().appendNode {
                 Compile(Include: "${options.assemblyName}.clw") {
                     Generated(true)
+                }
+            }
+        }
+    }
+
+    def transformLinkedResources(GPathResult root){
+        if (!root.ItemGroup.isEmpty()) {
+            for ( libraryResource in root.ItemGroup.Library ){
+                def resourceName = libraryResource?.'@Include'?.text().toLowerCase()
+                if ( resourceName.endsWith('.manifest') || resourceName.endsWith('.version')){
+                    libraryResource.replaceNode {}
                 }
             }
         }
