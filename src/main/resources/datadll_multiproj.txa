@@ -1,0 +1,183 @@
+[ADDITION]
+NAME MultiPrj ActivateMultiPrj
+[INSTANCE]
+INSTANCE 14
+[PROMPTS]
+%ProjectName DEFAULT  ('invervo10_data')
+%ExportFiles LONG  (1)
+%ExportData LONG  (1)
+%ExportTemplateData LONG  (1)
+%ExportABC LONG  (1)
+%ExpMod LONG  (0)
+%NoFiles LONG  (0)
+%NoSF LONG  (0)
+%NoBCFiles LONG  (0)
+%MaxBC DEFAULT  ('P')
+%ExportOW LONG  (0)
+%OnlyExportOW LONG  (0)
+%SuppressInit LONG  (0)
+%AppNumber DEFAULT  ('1')
+%MultiProjGlobalNoBatch LONG  (0)
+%MultiProjVersionWasAt DEFAULT  ('3.00')
+%Versions MULTI LONG  (1)
+%title DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('Default')
+
+%Set DEPEND %Versions DEFAULT TIMES 0
+
+%TargetType DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('dll')
+
+%TargetOS DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('32 bit')
+
+%Runtime DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('Stand Alone')
+
+%Debugging DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('off')
+
+%TargetName DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('udinv10data')
+
+%ProjectNameL DEPEND %Versions DEFAULT TIMES 0
+
+%SuppressVersion DEPEND %Versions LONG TIMES 1
+WHEN  (1) (0)
+
+%MPPreBuildEvent DEPEND %Versions DEFAULT TIMES 0
+
+%ThisOverride DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('0')
+
+%OtherRscs DEPEND %Versions MULTI LONG TIMES 0
+
+%Resource DEPEND %OtherRscs DEFAULT TIMES 0
+
+%VerApplicationIcon DEPEND %Versions DEFAULT TIMES 0
+
+%ODrivers DEPEND %Versions MULTI LONG TIMES 0
+
+%Odriver DEPEND %ODrivers DEFAULT TIMES 0
+
+%ExportMemos DEPEND %Versions LONG TIMES 1
+WHEN  (1) (1)
+
+%Defines DEPEND %Versions MULTI LONG TIMES 0
+
+%Define DEPEND %Defines DEFAULT TIMES 0
+
+%Distrib DEPEND %Versions MULTI LONG TIMES 0
+
+%Source DEPEND %Distrib DEFAULT TIMES 0
+
+%Destination DEPEND %Distrib DEFAULT TIMES 0
+
+%ExcludeTemplate DEPEND %Versions LONG TIMES 0
+
+%csNoBatch DEPEND %Versions LONG TIMES 0
+
+%Extras DEPEND %Versions MULTI LONG TIMES 0
+
+%extra DEPEND %Extras DEFAULT TIMES 0
+
+%ExtraAfter DEPEND %Extras LONG TIMES 0
+
+%Guid DEPEND %Versions DEFAULT TIMES 1
+WHEN  (1) ('14835963-6452-4901-9511-752386685426')
+
+%Pause LONG  (0)
+%Drivers MULTI LONG  ()
+%DriverName DEPEND %Drivers DEFAULT TIMES 0
+
+%IncludeCommonDriversInAllPrj LONG  (0)
+%Force6 LONG  (0)
+%Force7 LONG  (0)
+%CommonDefines MULTI LONG  ()
+%CommonDefine DEPEND %CommonDefines DEFAULT TIMES 0
+
+%CommonResources MULTI LONG  ()
+%CommonResource DEPEND %CommonResources DEFAULT TIMES 0
+
+%ExternalSources MULTI LONG  ()
+%ExternalSource DEPEND %ExternalSources DEFAULT TIMES 0
+
+%ExternalRangeStart DEPEND %ExternalSources DEFAULT TIMES 0
+
+%ExternalRangeEnd DEPEND %ExternalSources DEFAULT TIMES 0
+
+%ExternalSuffix DEPEND %ExternalSources DEFAULT TIMES 0
+
+%ExternalProjects MULTI LONG  ()
+%ExternalProject DEPEND %ExternalProjects DEFAULT TIMES 0
+
+%EnableOD LONG  (0)
+%OverrideForSecwin LONG  (0)
+%OverrideForSecwinLib LONG  (0)
+%Overrides MULTI LONG  ()
+%Condition DEPEND %Overrides DEFAULT TIMES 0
+
+%FromDriver DEPEND %Overrides DEFAULT TIMES 0
+
+%ToDriver DEPEND %Overrides DEFAULT TIMES 0
+
+%IsNameLimit DEPEND %Overrides DEFAULT TIMES 0
+
+%NewNameVar DEPEND %Overrides LONG TIMES 0
+
+%NewName DEPEND %Overrides DEFAULT TIMES 0
+
+%DriverCase DEPEND %Overrides DEFAULT TIMES 0
+
+%ExternalDriverCase DEPEND %Overrides DEFAULT TIMES 0
+
+%NewOwner DEPEND %Overrides DEFAULT TIMES 0
+
+%Send DEPEND %Overrides DEFAULT TIMES 0
+
+%AddCreate DEPEND %Overrides LONG TIMES 0
+
+%CallFM3Connect DEPEND %Overrides LONG TIMES 0
+
+%NoExternalNames DEPEND %Overrides LONG TIMES 0
+
+%AutoDateTime DEPEND %Overrides LONG TIMES 0
+
+%KeyCase DEPEND %Overrides LONG TIMES 0
+
+%GenOvers DEPEND %Overrides LONG TIMES 0
+
+%UseOldNamingConvention DEPEND %Overrides LONG TIMES 0
+
+%AutoNumber DEPEND %Overrides DEFAULT TIMES 0
+
+%GeneralForceSQLDataTypeID DEPEND %Overrides MULTI LONG TIMES 0
+
+%GeneralForceSQLDataType DEPEND %GeneralForceSQLDataTypeID DEFAULT TIMES 0
+
+%GeneralForceSQLDataTypeTo DEPEND %GeneralForceSQLDataTypeID DEFAULT TIMES 0
+
+%NewOtherOwner DEPEND %Overrides DEFAULT TIMES 0
+
+%SecwinUseOtherNewOwner DEPEND %Overrides LONG TIMES 0
+
+%NewOtherOwnerFiles DEPEND %Overrides MULTI DEFAULT TIMES 0
+
+%ApplicationIcon DEFAULT  ('')
+%ManualDataExports UNIQUE DEFAULT  ()
+%TemplateSet DEFAULT  ('UdeaInvervo.tpl')
+%TemplateName DEFAULT  ('invervo10_data.tpw')
+%NoCodeTemplates LONG  (1)
+%Includes MULTI LONG  ()
+%Include DEPEND %Includes DEFAULT TIMES 0
+
+%LowDefines LONG  (1)
+%GenerateTempFilesFolder DEFAULT  ('')
+%MsSqlRealSreal LONG  (0)
+%ABCGlobalsDefinedExternalMP LONG  (0)
+%DisableDFD LONG  (1)
+%FM3IsHere LONG  (1)
+%MultiProjSystemNoBatchSet LONG  (0)
+%MPOverrideList DEFAULT  ('')
+%MAVIsHere DEFAULT  ('0')
+%NewOtherOwnerFilesList UNIQUE DEFAULT  ()
