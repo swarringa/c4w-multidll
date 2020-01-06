@@ -703,4 +703,86 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     reader.parse(sourceTxa)
     assertContentEquals(output, targetTxaDll)
   }
+
+  void testOnceAttributeAddedToIncludes(){
+    def sourceTxa = '' << txaContent('''
+        [APPLICATION]
+          [COMMON]
+          [PROGRAM]
+            [COMMON]
+            FROM ABC ABC
+            [DATA]
+            [EMBED]
+              EMBED %AfterGlobalIncludes
+              [DEFINITION]
+                [SOURCE]
+                PROPERTY:BEGIN
+                PRIORITY 4000
+                PROPERTY:END
+                include('prnprop.clw')
+              [END]
+              EMBED %BeforeGlobalIncludes
+              [DEFINITION]
+                [SOURCE]
+                PROPERTY:BEGIN
+                PRIORITY 4000
+                PROPERTY:END
+                INCLUDE('LibXL.clw','Equates'),ONCE
+              [END]
+              EMBED %GlobalMap
+              [DEFINITION]
+                [SOURCE]
+                PROPERTY:BEGIN
+                FIRST 
+                PROPERTY:END
+                INCLUDE('LibXL.clw','Prototypes')
+              [END]
+            [END]
+          [END]
+    ''')
+
+    def targetTxa = '' << txaContent('''
+        [APPLICATION]
+          [COMMON]
+          [PROGRAM]
+            [COMMON]
+            FROM ABC ABC
+            [DATA]
+            [EMBED]
+              EMBED %AfterGlobalIncludes
+              [DEFINITION]
+                [SOURCE]
+                PROPERTY:BEGIN
+                PRIORITY 4000
+                PROPERTY:END
+                include('prnprop.clw'), ONCE
+              [END]
+              EMBED %BeforeGlobalIncludes
+              [DEFINITION]
+                [SOURCE]
+                PROPERTY:BEGIN
+                PRIORITY 4000
+                PROPERTY:END
+                INCLUDE('LibXL.clw','Equates'),ONCE
+              [END]
+              EMBED %GlobalMap
+              [DEFINITION]
+                [SOURCE]
+                PROPERTY:BEGIN
+                FIRST 
+                PROPERTY:END
+                INCLUDE('LibXL.clw','Prototypes'), ONCE
+              [END]
+            [END]
+          [END]            
+    ''')
+
+    assertSectionsClosedCorrectly(sourceTxa.toString())
+    StringBuffer output = '' << ''
+    def t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: ProcedureDLL))
+    def reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, targetTxa)
+  }
 }

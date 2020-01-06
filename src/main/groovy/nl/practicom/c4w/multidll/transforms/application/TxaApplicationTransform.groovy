@@ -51,7 +51,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     // Patterns
     def NAME_PATTERN = ~/^\s*NAME\s([A-Za-z0-9\_\-\W]+)\s*$/
-
+    def INLCLUDE_PATTERN = ~/(?i)\s*INCLUDE\(.*\),?(ONCE)?\s*$/
     /**
      * Use for testing
      * @param txaout
@@ -144,6 +144,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
         if ( section == APPLICATION && context.currentSection == APPLICATION){
             return processApplicationContent(context, content)
+        }
+
+        if ( section == SOURCE && context.within(PROGRAM, EMBED)){
+            return processGlobalEmbeds(context, content)
         }
 
         if ( context.within(APPLICATION,COMMON,ADDITION)) {
@@ -444,6 +448,17 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     def processGlobalAdditionContent(TxaContext ctx, String content){
         def PROCEDURE_REFERENCE = ~/%(.*)\s+PROCEDURE\s+\(.*\)/
+    }
 
+    def processGlobalEmbeds(TxaContext ctx, String content){
+        def output = content
+        if ( content ==~ INLCLUDE_PATTERN){
+            (content =~ INLCLUDE_PATTERN).each {
+                _, once -> if ( once == null ){
+                    output = content + ", ONCE"
+                }
+            }
+        }
+        return output
     }
 }
