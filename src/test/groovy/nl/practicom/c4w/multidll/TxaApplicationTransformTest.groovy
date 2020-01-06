@@ -580,6 +580,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       [APPLICATION]
         [COMMON]
           [ADDITION]
+            NAME The name of the addition
             [INSTANCE]
             INSTANCE 5
             [PROMPTS]
@@ -594,6 +595,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       [APPLICATION]
         [COMMON]
           [ADDITION]
+            NAME The name of the addition
             [INSTANCE]
               INSTANCE 5
             [PROMPTS]
@@ -608,6 +610,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       [APPLICATION]
         [COMMON]
           [ADDITION]
+            NAME The name of the addition
             [INSTANCE]
               INSTANCE 5
             [PROMPTS]
@@ -622,6 +625,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       [APPLICATION]
         [COMMON]
           [ADDITION]
+            NAME The name of the addition
             [INSTANCE]
               INSTANCE 5
             [PROMPTS]
@@ -637,16 +641,16 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     StringBuffer output = '' << ''
     def t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: MainApplication))
     def reader = new StreamingTxaReader()
-//    reader.registerHandler(t)
-//    reader.parse(sourceTxa)
-//    assertContentEquals(output, targetTxaEnabledMain)
-//
-//    output = '' << ''
-//    t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: ProcedureDLL))
-//    reader = new StreamingTxaReader()
-//    reader.registerHandler(t)
-//    reader.parse(sourceTxa)
-//    assertContentEquals(output, targetTxaProcedureDll)
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, targetTxaEnabledMain)
+
+    output = '' << ''
+    t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: ProcedureDLL))
+    reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, targetTxaProcedureDll)
 
     output = '' << ''
     t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: DataDLL))
@@ -656,4 +660,47 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
     assertContentEquals(output, targetTxaDataDll)
   }
 
+  void testPCVersionDisabledForDLL(){
+    def sourceTxa = '' << txaContent('''
+      [APPLICATION]
+        [COMMON]
+          [ADDITION]
+            NAME PractiComTemplates PC_VersionControl
+            [INSTANCE]
+            INSTANCE 5
+            [PROMPTS]
+            %PractiComGenerate LONG (1)
+            %pcVersieOverslaan LONG (0)
+            %pcSubversieOverslaan LONG (0)
+    ''')
+
+    def targetTxaDll = '' << txaContent('''
+      [APPLICATION]
+      [COMMON]
+      [ADDITION]
+      NAME PractiComTemplates PC_VersionControl
+      [INSTANCE]
+      INSTANCE 5
+      [PROMPTS]
+      %PractiComGenerate LONG (0)
+      %pcVersieOverslaan LONG (1)
+      %pcSubversieOverslaan LONG (0)
+    ''')
+
+    assertSectionsClosedCorrectly(sourceTxa.toString())
+
+    StringBuffer output = '' << ''
+    def t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: MainApplication))
+    def reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, sourceTxa)
+
+    output = '' << ''
+    t = new TxaApplicationTransform(output, new TxaApplicationTransformOptions(targetType: ProcedureDLL))
+    reader = new StreamingTxaReader()
+    reader.registerHandler(t)
+    reader.parse(sourceTxa)
+    assertContentEquals(output, targetTxaDll)
+  }
 }

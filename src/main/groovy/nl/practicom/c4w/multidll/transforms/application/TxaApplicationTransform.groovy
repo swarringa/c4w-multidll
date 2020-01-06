@@ -41,10 +41,16 @@ import static nl.practicom.c4w.txa.transform.SectionMark.*
 class TxaApplicationTransform extends StreamingTxaTransform {
     TxaApplicationTransformOptions options
 
+    String extensionsProcessor = [:]
+
     // Global state
     String currentPrompt = null
+    String currentAddition = null
     Boolean insideQueue = false
     String[] referencedProcedures
+
+    // Patterns
+    def NAME_PATTERN = ~/^\s*NAME\s([A-Za-z0-9\_\-\W]+)\s*$/
 
     /**
      * Use for testing
@@ -85,6 +91,12 @@ class TxaApplicationTransform extends StreamingTxaTransform {
     TxaApplicationTransform(Writer txaout, TxaApplicationTransformOptions transformOptions) {
         super(txaout)
         this.options = transformOptions
+        this.extensionsProcessor = [
+            "fm3 ActivateFileManager3" : processCapeSoftGlobalExtensions,
+            "NetTalk Activate_NetTalk " : processCapeSoftGlobalExtensions,
+            "WinEvent EnableWinEvent " : processCapeSoftGlobalExtensions,
+            "StringTheory Activate_StringTheory" : processCapeSoftGlobalExtensions,
+        ]
     }
 
     @Override
@@ -113,6 +125,10 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             }
         }
 
+        if ( section == ADDITION ){
+            currentAddition = null
+        }
+
         return output.toString()
     }
 
@@ -131,7 +147,20 @@ class TxaApplicationTransform extends StreamingTxaTransform {
         }
 
         if ( context.within(APPLICATION,COMMON,ADDITION)) {
-            return processCapeSoftGlobalExtensions(context, content)
+            if ( currentAddition == null &&  content ==~ NAME_PATTERN) {
+                (content =~ NAME_PATTERN).each {
+                    _, name -> currentAddition = name
+                }
+            }
+
+            if (currentAddition) {
+                // Disable practicom version extension for DLL's
+                if (options.targetType != MainApplication && currentAddition.contains("PC_VersionControl")) {
+                    return processPCVersionControl(context, content)
+                } else {
+                    return processCapeSoftGlobalExtensions(context, content)
+                }
+            }
         }
 
         if ( context.within(APPLICATION,COMMON,PROMPTS)){
@@ -399,6 +428,16 @@ class TxaApplicationTransform extends StreamingTxaTransform {
                 // Nettalk Dynamic DLL support
                 output =  "%DynamicDLL LONG  (1)"
             }
+        }
+        return output
+    }
+
+    def processPCVersionControl(TxaContext ctx,  String content) {
+        def output = content
+        if (content.startsWith("%PractiComGenerate")){
+            output = "%PractiComGenerate LONG (0)"
+        } else if (content.startsWith("%pcVersieOverslaan")){
+            output = "%pcVersieOverslaan LONG (1)"
         }
         return output
     }
