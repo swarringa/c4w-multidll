@@ -41,8 +41,6 @@ import static nl.practicom.c4w.txa.transform.SectionMark.*
 class TxaApplicationTransform extends StreamingTxaTransform {
     TxaApplicationTransformOptions options
 
-    String extensionsProcessor = [:]
-
     // Global state
     String currentPrompt = null
     String currentAddition = null
@@ -91,12 +89,6 @@ class TxaApplicationTransform extends StreamingTxaTransform {
     TxaApplicationTransform(Writer txaout, TxaApplicationTransformOptions transformOptions) {
         super(txaout)
         this.options = transformOptions
-        this.extensionsProcessor = [
-            "fm3 ActivateFileManager3" : processCapeSoftGlobalExtensions,
-            "NetTalk Activate_NetTalk " : processCapeSoftGlobalExtensions,
-            "WinEvent EnableWinEvent " : processCapeSoftGlobalExtensions,
-            "StringTheory Activate_StringTheory" : processCapeSoftGlobalExtensions,
-        ]
     }
 
     @Override
