@@ -18,11 +18,13 @@ plugins {
 apply plugin: 'biz.aQute.bnd.builder'
 
 group 'nl.practicom'
-version '0.1'
+version '1.0'
 
 ext {
+    c4wTxaVersion = '1.0'
     groovyVersion = '2.4.17'
 }
+
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -35,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compile 'nl.practicom:c4w-txa:0.1'
+    compile group: 'nl.practicom', name: 'c4w-txa', version: c4wTxaVersion
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-xml', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
