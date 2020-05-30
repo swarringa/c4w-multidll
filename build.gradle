@@ -21,9 +21,10 @@ group 'nl.practicom'
 version '1.0'
 
 ext {
-    groovyVersion = '2.4.17'
     c4wTxaVersion = '1.0'
+    groovyVersion = '2.4.17'
 }
+
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -36,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compile "nl.practicom:c4w-txa:$c4wTxaVersion"
+    compile group: 'nl.practicom', name: 'c4w-txa', version: c4wTxaVersion
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-xml', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
