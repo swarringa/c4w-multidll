@@ -22,7 +22,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-group 'nl.practicom'
+group 'nl.intreq'
 version '1.0'
 
 ext {
@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'nl.practicom', name: 'c4w-txa', version: c4wTxaVersion
+    implementation group: 'nl.intreq', name: 'c4w-txa-parser', version: c4wTxaVersion
     implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     implementation group: 'org.codehaus.groovy', name: 'groovy-xml', version: groovyVersion
     implementation group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
@@ -48,10 +48,10 @@ jar {
     // to keep everything together here
     bundle {
         bnd (
-                'Bundle-Name'           : 'Practicom :: Clarion MultiDLL support',
-                'Bundle-SymbolicName'   : 'nl.practicom.c4w.multidll',
-                'Export-Package'        : "nl.practicom.c4w.multidll.*;ver=${archiveVersion}" ,
-                '-exportcontents'       : 'nl.practicom.c4w.multidll.*'
+                'Bundle-Name'           : 'Intreq :: Clarion MultiDLL support',
+                'Bundle-SymbolicName'   : 'nl.intreq.c4w.multidll',
+                'Export-Package'        : "nl.intreq.c4w.multidll.*;ver=${archiveVersion}" ,
+                '-exportcontents'       : 'nl.intreq.c4w.multidll.*'
         )
     }
 }

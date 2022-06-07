@@ -1,8 +1,8 @@
-package nl.practicom.c4w.multidll.scanners
+package nl.intreq.c4w.multidll.scanners
 
-import nl.practicom.c4w.txa.transform.*
+import nl.intreq.c4w.txa.transform.*
 
-import static nl.practicom.c4w.txa.transform.SectionMark.*
+import static nl.intreq.c4w.txa.transform.SectionMark.*
 
 class ProcedureDependencyScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 

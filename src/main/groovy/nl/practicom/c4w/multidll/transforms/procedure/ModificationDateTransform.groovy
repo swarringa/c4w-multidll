@@ -1,8 +1,11 @@
-package nl.practicom.c4w.multidll.transforms.procedure
+package nl.intreq.c4w.multidll.transforms.procedure
 
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContext
 
+/**
+ * Set the MODIFIED atrribute of a procedure to the current date and time
+ **/
 class ModificationDateTransform extends ChainableTransform {
     final modifiedDatePattern = /^\s*MODIFIED\s+[0-9\/:\s']+$/
 

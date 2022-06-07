@@ -1,4 +1,4 @@
-package nl.practicom.c4w.multidll.dto
+package nl.intreq.c4w.multidll.dto
 
 import java.nio.file.Path
 

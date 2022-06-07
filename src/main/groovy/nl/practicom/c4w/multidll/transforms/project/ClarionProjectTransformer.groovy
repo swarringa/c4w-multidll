@@ -1,8 +1,8 @@
-package nl.practicom.c4w.multidll.transforms.project
+package nl.intreq.c4w.multidll.transforms.project
 
 import groovy.util.slurpersupport.GPathResult
 import groovy.xml.XmlUtil
-import nl.practicom.c4w.multidll.transforms.application.ApplicationType
+import nl.intreq.c4w.multidll.transforms.application.ApplicationType
 
 class ClarionProjectTransformer {
     Writer out

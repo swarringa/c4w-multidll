@@ -1,10 +1,10 @@
-package nl.practicom.c4w.multidll
+package nl.intreq.c4w.multidll
 
 import groovy.util.slurpersupport.GPathResult
 import groovy.xml.StreamingMarkupBuilder
-import nl.practicom.c4w.multidll.transforms.application.ApplicationType
-import nl.practicom.c4w.multidll.transforms.project.ProjectTransformOptions
-import nl.practicom.c4w.multidll.transforms.project.ClarionProjectTransformer
+import nl.intreq.c4w.multidll.transforms.application.ApplicationType
+import nl.intreq.c4w.multidll.transforms.project.ProjectTransformOptions
+import nl.intreq.c4w.multidll.transforms.project.ClarionProjectTransformer
 import org.codehaus.groovy.runtime.StringBufferWriter
 
 class ClarionProjectTransformerTest extends GroovyTestCase {

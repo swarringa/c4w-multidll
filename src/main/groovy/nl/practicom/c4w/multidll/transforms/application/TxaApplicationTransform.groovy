@@ -1,9 +1,9 @@
-package nl.practicom.c4w.multidll.transforms.application
+package nl.intreq.c4w.multidll.transforms.application
 
 
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.StreamingTxaTransform
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.StreamingTxaTransform
+import nl.intreq.c4w.txa.transform.TxaContext
 
 import java.util.regex.Matcher
 
@@ -34,7 +34,7 @@ import java.util.regex.Matcher
  */
 
 import static ApplicationType.*
-import static nl.practicom.c4w.txa.transform.SectionMark.*
+import static nl.intreq.c4w.txa.transform.SectionMark.*
 /**
  * Generates a new application TXA file from source TXA.
  */
@@ -150,7 +150,7 @@ class TxaApplicationTransform extends StreamingTxaTransform {
             }
 
             if (currentAddition) {
-                // Disable practicom version extension for DLL's
+                // Disable intreq version extension for DLL's
                 if (options.targetType != MainApplication && currentAddition.contains("PC_VersionControl")) {
                     return processPCVersionControl(context, content)
                 } else {
@@ -430,8 +430,8 @@ class TxaApplicationTransform extends StreamingTxaTransform {
 
     def processPCVersionControl(TxaContext ctx,  String content) {
         def output = content
-        if (content.startsWith("%PractiComGenerate")){
-            output = "%PractiComGenerate LONG (0)"
+        if (content.startsWith("%intreqGenerate")){
+            output = "%intreqGenerate LONG (0)"
         } else if (content.startsWith("%pcVersieOverslaan")){
             output = "%pcVersieOverslaan LONG (1)"
         }

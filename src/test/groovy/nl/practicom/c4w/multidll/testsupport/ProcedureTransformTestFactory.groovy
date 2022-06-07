@@ -1,9 +1,9 @@
-package nl.practicom.c4w.multidll.testsupport
+package nl.intreq.c4w.multidll.testsupport
 
-import nl.practicom.c4w.multidll.dto.ProcedureInfo
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureIdentityTransform
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransformFactory
+import nl.intreq.c4w.multidll.dto.ProcedureInfo
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureIdentityTransform
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransform
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransformFactory
 
 class ProcedureTransformTestFactory implements ProcedureTransformFactory {
   private transform

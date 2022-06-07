@@ -1,12 +1,14 @@
-package nl.practicom.c4w.multidll.transforms.procedure
+package nl.intreq.c4w.multidll.transforms.procedure
 
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransform
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContext
 
-import static nl.practicom.c4w.txa.transform.SectionMark.END
+import static nl.intreq.c4w.txa.transform.SectionMark.END
 
-
+/**
+ * Removes the NOEXPORT flag from a procedure to make it a public procedure
+ **/
 class ConvertToPublicProcedure implements ProcedureTransform {
 
   @Override

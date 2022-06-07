@@ -1,11 +1,14 @@
-package nl.practicom.c4w.multidll.transforms.procedure
+package nl.intreq.c4w.multidll.transforms.procedure
 
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransform
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContext
 
-import static nl.practicom.c4w.txa.transform.SectionMark.*
+import static nl.intreq.c4w.txa.transform.SectionMark.*
 
+/**
+ * Marks a procedure as private by adding a NOEXPORT flag
+ **/
 class ConvertToPrivateProcedure implements ProcedureTransform {
 
   private final static EOL = System.lineSeparator()

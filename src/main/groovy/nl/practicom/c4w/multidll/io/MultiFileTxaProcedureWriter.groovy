@@ -1,9 +1,9 @@
-package nl.practicom.c4w.multidll.io
+package nl.intreq.c4w.multidll.io
 
-import nl.practicom.c4w.multidll.dto.Procedure
-import nl.practicom.c4w.multidll.transforms.procedure.ChainableTransform
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.multidll.dto.Procedure
+import nl.intreq.c4w.multidll.transforms.procedure.ChainableTransform
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContext
 
 import java.nio.file.Path
 import java.nio.file.Paths

@@ -1,10 +1,10 @@
-package nl.practicom.c4w.multidll
+package nl.intreq.c4w.multidll
 
-import nl.practicom.c4w.multidll.scanners.ProcedureDependencyScanner
-import nl.practicom.c4w.multidll.testsupport.MultiDllTestSupport
-import nl.practicom.c4w.txa.meta.ClarionDateMixins
-import nl.practicom.c4w.txa.meta.ClarionStringMixins
-import nl.practicom.c4w.txa.transform.StreamingTxaReader
+import nl.intreq.c4w.multidll.scanners.ProcedureDependencyScanner
+import nl.intreq.c4w.multidll.testsupport.MultiDllTestSupport
+import nl.intreq.c4w.txa.meta.ClarionDateMixins
+import nl.intreq.c4w.txa.meta.ClarionStringMixins
+import nl.intreq.c4w.txa.transform.StreamingTxaReader
 
 class ProcedureDependencyScannerTest extends GroovyTestCase implements MultiDllTestSupport {
     void setUp() throws java . lang . Exception {

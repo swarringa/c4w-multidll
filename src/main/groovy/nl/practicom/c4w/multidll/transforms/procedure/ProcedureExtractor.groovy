@@ -1,19 +1,18 @@
-package nl.practicom.c4w.multidll.transforms.procedure
+package nl.intreq.c4w.multidll.transforms.procedure
 
-import nl.practicom.c4w.multidll.dto.Procedure
-import nl.practicom.c4w.multidll.io.ProcedureWriter
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransformFactory
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.StreamingTxaTransform
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.multidll.dto.Procedure
+import nl.intreq.c4w.multidll.io.ProcedureWriter
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransform
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransformFactory
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.StreamingTxaTransform
+import nl.intreq.c4w.txa.transform.TxaContext
 
-import static nl.practicom.c4w.txa.transform.SectionMark.*
+import static nl.intreq.c4w.txa.transform.SectionMark.*
 
 /**
  * The ProcedureExtractor extracts specific procedures from a
- * source txa and writes them either collectively to a new txa
- * file or individually to a separate txa file per procedure.
+ * source txa and writes them out.
  *
  */
 class ProcedureExtractor extends StreamingTxaTransform {

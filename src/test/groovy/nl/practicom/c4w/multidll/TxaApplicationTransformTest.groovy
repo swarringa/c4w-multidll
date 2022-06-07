@@ -1,14 +1,14 @@
-package nl.practicom.c4w.multidll
+package nl.intreq.c4w.multidll
 
-import nl.practicom.c4w.multidll.testsupport.MultiDllTestSupport
-import nl.practicom.c4w.multidll.transforms.application.TxaApplicationTransform
-import nl.practicom.c4w.multidll.transforms.application.TxaApplicationTransformOptions
-import nl.practicom.c4w.txa.meta.ClarionDateMixins
-import nl.practicom.c4w.txa.meta.ClarionStringMixins
-import nl.practicom.c4w.txa.transform.StreamingTxaReader
+import nl.intreq.c4w.multidll.testsupport.MultiDllTestSupport
+import nl.intreq.c4w.multidll.transforms.application.TxaApplicationTransform
+import nl.intreq.c4w.multidll.transforms.application.TxaApplicationTransformOptions
+import nl.intreq.c4w.txa.meta.ClarionDateMixins
+import nl.intreq.c4w.txa.meta.ClarionStringMixins
+import nl.intreq.c4w.txa.transform.StreamingTxaReader
 
-import static nl.practicom.c4w.multidll.transforms.application.ApplicationType.*
-import static nl.practicom.c4w.txa.transform.SectionMark.*
+import static nl.intreq.c4w.multidll.transforms.application.ApplicationType.*
+import static nl.intreq.c4w.txa.transform.SectionMark.*
 
 class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTestSupport {
 
@@ -218,7 +218,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
   void testProjectPragmasArePassedOn(){
     def sourceTXA = '' << txaContent('''
         [PROJECT]
-        #pragma link_option(icon=>practicom.ico) -- GENERATED
+        #pragma link_option(icon=>intreq.ico) -- GENERATED
         #pragma define(_ODDJOB_=>0) -- GENERATED
         #pragma define(_CRYPTONITE_=>0) -- GENERATED
         #pragma define(_DRAW_=>0) -- GENERATED
@@ -226,7 +226,7 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
 
     def targetTXA = '' << txaContent('''
         [PROJECT]
-        #pragma link_option(icon=>practicom.ico) -- GENERATED
+        #pragma link_option(icon=>intreq.ico) -- GENERATED
         #pragma define(_ODDJOB_=>0) -- GENERATED
         #pragma define(_CRYPTONITE_=>0) -- GENERATED
         #pragma define(_DRAW_=>0) -- GENERATED
@@ -665,11 +665,11 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       [APPLICATION]
         [COMMON]
           [ADDITION]
-            NAME PractiComTemplates PC_VersionControl
+            NAME intreqTemplates PC_VersionControl
             [INSTANCE]
             INSTANCE 5
             [PROMPTS]
-            %PractiComGenerate LONG (1)
+            %intreqGenerate LONG (1)
             %pcVersieOverslaan LONG (0)
             %pcSubversieOverslaan LONG (0)
     ''')
@@ -678,11 +678,11 @@ class TxaApplicationTransformTest extends GroovyTestCase implements MultiDllTest
       [APPLICATION]
       [COMMON]
       [ADDITION]
-      NAME PractiComTemplates PC_VersionControl
+      NAME intreqTemplates PC_VersionControl
       [INSTANCE]
       INSTANCE 5
       [PROMPTS]
-      %PractiComGenerate LONG (0)
+      %intreqGenerate LONG (0)
       %pcVersieOverslaan LONG (1)
       %pcSubversieOverslaan LONG (0)
     ''')

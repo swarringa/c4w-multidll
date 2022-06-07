@@ -1,6 +1,6 @@
-package nl.practicom.c4w.multidll
+package nl.intreq.c4w.multidll
 
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureListReader
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureListReader
 
 class ProcedureListReaderTest extends GroovyTestCase {
 

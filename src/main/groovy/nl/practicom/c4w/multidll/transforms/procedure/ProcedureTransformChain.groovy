@@ -1,21 +1,21 @@
-package nl.practicom.c4w.multidll.transforms.procedure
+package nl.intreq.c4w.multidll.transforms.procedure
 
 
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContext
 
 /**
- * This procedure transformation chains together multiple transforms.
+ * This procedure transformation chains together multiple procedure transforms.
+ * It implements the 'chain of responsibilty' pattern where each handler
+ * (procedure transform) decides if it wants to process the input. 
  *
- * The current implementation provides the most basic 'first one wins'
- * algorithm: the first transformation that returns some content will determine
- * the results outputted.
+ * If a handler does not want to process the input it will should return a null. 
+ * Anything else will be considered transformed content.
  *
- * The transformations used with this transformation chain should therefore always
- * output 'null' when there's nothing to transform!
- * 
- * Also the order in which the transformations are added is therefore important
- * since this is the order in which transforms are called.
+ * Once a handler transforms the input the chain will emit the transformed input. 
+ * Any remaining handlers will be ignored.
+ *
+ * Therefore order in which the transformations are added is important!
  */
 class ProcedureTransformChain implements ProcedureTransform {
     List<ProcedureTransform> transformChain = []

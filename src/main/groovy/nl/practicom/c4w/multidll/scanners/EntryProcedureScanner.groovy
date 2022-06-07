@@ -2,15 +2,15 @@
  * Extracts the procedures attached to a menu (sub)tree
  * from a txa file.
  */
-package nl.practicom.c4w.multidll.scanners
+package nl.intreq.c4w.multidll.scanners
 
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContentHandler
-import nl.practicom.c4w.txa.transform.TxaContext
-import nl.practicom.c4w.txa.transform.TxaLogicalContentHandler
-import nl.practicom.c4w.txa.transform.TxaSectionHandler
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContentHandler
+import nl.intreq.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.txa.transform.TxaLogicalContentHandler
+import nl.intreq.c4w.txa.transform.TxaSectionHandler
 
-import static nl.practicom.c4w.txa.transform.SectionMark.*
+import static nl.intreq.c4w.txa.transform.SectionMark.*
 
 class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 

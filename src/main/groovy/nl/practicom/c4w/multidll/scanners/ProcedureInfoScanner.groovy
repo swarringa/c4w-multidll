@@ -1,9 +1,9 @@
-package nl.practicom.c4w.multidll.scanners
+package nl.intreq.c4w.multidll.scanners
 
-import nl.practicom.c4w.multidll.dto.ProcedureInfo
-import nl.practicom.c4w.txa.transform.*
+import nl.intreq.c4w.multidll.dto.ProcedureInfo
+import nl.intreq.c4w.txa.transform.*
 
-import static nl.practicom.c4w.txa.transform.SectionMark.APPLICATION
+import static nl.intreq.c4w.txa.transform.SectionMark.APPLICATION
 
 class ProcedureInfoScanner implements TxaContentHandler, TxaSectionHandler, TxaLogicalContentHandler {
 

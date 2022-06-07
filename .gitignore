@@ -1,4 +1,5 @@
 out
+bin
 .idea
 build
 .gradle/

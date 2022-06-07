@@ -1,10 +1,10 @@
-package nl.practicom.c4w.multidll
+package nl.intreq.c4w.multidll
 
-import nl.practicom.c4w.multidll.scanners.EntryProcedureScanner
-import nl.practicom.c4w.multidll.testsupport.MultiDllTestSupport
-import nl.practicom.c4w.txa.meta.ClarionDateMixins
-import nl.practicom.c4w.txa.meta.ClarionStringMixins
-import nl.practicom.c4w.txa.transform.StreamingTxaReader
+import nl.intreq.c4w.multidll.scanners.EntryProcedureScanner
+import nl.intreq.c4w.multidll.testsupport.MultiDllTestSupport
+import nl.intreq.c4w.txa.meta.ClarionDateMixins
+import nl.intreq.c4w.txa.meta.ClarionStringMixins
+import nl.intreq.c4w.txa.transform.StreamingTxaReader
 
 class EntryProcedureScannerTest extends GroovyTestCase implements  MultiDllTestSupport {
     void setUp() {

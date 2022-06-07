@@ -1,8 +1,8 @@
-package nl.practicom.c4w.multidll.transforms.procedure
+package nl.intreq.c4w.multidll.transforms.procedure
 
-import nl.practicom.c4w.multidll.transforms.procedure.ProcedureTransform
-import nl.practicom.c4w.txa.transform.SectionMark
-import nl.practicom.c4w.txa.transform.TxaContext
+import nl.intreq.c4w.multidll.transforms.procedure.ProcedureTransform
+import nl.intreq.c4w.txa.transform.SectionMark
+import nl.intreq.c4w.txa.transform.TxaContext
 
 class ConvertToExternalProcedure implements ProcedureTransform {
   @Override
