@@ -1,0 +1,70 @@
+import aQute.bnd.gradle.Bundle
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // See https://plugins.gradle.org/plugin/biz.aQute.bnd
+        classpath 'biz.aQute.bnd:biz.aQute.bnd.gradle:6.2.0'
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+}
+
+apply plugin: 'biz.aQute.bnd.builder'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+group 'nl.intreq'
+version '1.0'
+
+ext {
+    c4wTxaVersion = '1.0'
+    groovyVersion = '2.4.17'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'nl.intreq', name: 'c4w-txa-parser', version: c4wTxaVersion
+    implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+    implementation group: 'org.codehaus.groovy', name: 'groovy-xml', version: groovyVersion
+    implementation group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    // This can be placed in a bnd.bnd file. But it is more convenient
+    // to keep everything together here
+    bundle {
+        bnd (
+                'Bundle-Name'           : 'Intreq :: Clarion MultiDLL support',
+                'Bundle-SymbolicName'   : 'nl.intreq.c4w.multidll',
+                'Export-Package'        : "nl.intreq.c4w.multidll.*;ver=${archiveVersion}" ,
+                '-exportcontents'       : 'nl.intreq.c4w.multidll.*'
+        )
+    }
+}
+
+// Creates OSGI manifest for the jar
+task bundle(type: Bundle) {
+    from sourceSets.main.output
+}
+
+publishing {
+    publications {
+        osgiBundle(MavenPublication) {
+            from components.java
+        }
+    }
+}
