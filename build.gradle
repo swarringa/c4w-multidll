@@ -44,6 +44,8 @@ dependencies {
 }
 
 jar {
+    def archiveVersion = project.version
+
     // This can be placed in a bnd.bnd file. But it is more convenient
     // to keep everything together here
     bundle {
