@@ -184,7 +184,7 @@ class EntryProcedureScanner implements TxaContentHandler, TxaSectionHandler, Txa
                     }
                 } else if ( content ==~ menuEndPattern ) {
                     if (!menuParents.isEmpty()) {
-                        menuParents.pop()
+                        menuParents.removeLast()
                     }
                 }
             }

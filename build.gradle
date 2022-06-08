@@ -27,7 +27,7 @@ version '1.0'
 
 ext {
     c4wTxaVersion = '1.0'
-    groovyVersion = '2.4.17'
+    groovyVersion = '3.0.11'
 }
 
 repositories {
@@ -68,5 +68,11 @@ publishing {
         osgiBundle(MavenPublication) {
             from components.java
         }
+    }
+}
+
+test {
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED"
     }
 }
