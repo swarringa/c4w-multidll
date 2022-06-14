@@ -1,6 +1,7 @@
 package nl.intreq.c4w.multidll
 
-import groovy.util.slurpersupport.GPathResult
+import groovy.xml.XmlSlurper
+import groovy.xml.slurpersupport.NodeChild
 import groovy.xml.StreamingMarkupBuilder
 import nl.intreq.c4w.multidll.transforms.application.ApplicationType
 import nl.intreq.c4w.multidll.transforms.project.ProjectTransformOptions
@@ -99,7 +100,7 @@ class ClarionProjectTransformerTest extends GroovyTestCase {
 
     }
 
-    def extractCompileSymbols(GPathResult xmlout) {
+    def extractCompileSymbols(NodeChild xmlout) {
         def updatedSymbolsText = xmlout.PropertyGroup.DefineConstants.first().text()
         def updatedSymbols = updatedSymbolsText.split('%3b').inject(
                 [:],

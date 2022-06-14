@@ -35,12 +35,23 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    bundle {
+        // Only put our own stuff in the bundle
+        transitive = false
+    }
+}
+
 dependencies {
     implementation group: 'nl.intreq', name: 'c4w-txa-parser', version: c4wTxaVersion
     implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     implementation group: 'org.codehaus.groovy', name: 'groovy-xml', version: groovyVersion
     implementation group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    bundle "nl.intreq:c4w-txa-parser:$c4wTxaVersion"
+    bundle "org.codehaus.groovy:groovy:$groovyVersion"
+    bundle "org.codehaus.groovy:groovy-xml:$groovyVersion"
 }
 
 jar {
@@ -48,7 +59,7 @@ jar {
 
     // This can be placed in a bnd.bnd file. But it is more convenient
     // to keep everything together here
-    bundle {
+    bundle {    
         bnd (
                 'Bundle-Name'           : 'Intreq :: Clarion MultiDLL support',
                 'Bundle-SymbolicName'   : 'nl.intreq.c4w.multidll',

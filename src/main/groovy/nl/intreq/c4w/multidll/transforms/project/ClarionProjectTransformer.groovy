@@ -1,7 +1,8 @@
 package nl.intreq.c4w.multidll.transforms.project
 
-import groovy.util.slurpersupport.GPathResult
+import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
+import groovy.xml.slurpersupport.NodeChild
 import nl.intreq.c4w.multidll.transforms.application.ApplicationType
 
 class ClarionProjectTransformer {
@@ -37,16 +38,17 @@ class ClarionProjectTransformer {
         XmlUtil.serialize(root, writer)
     }
 
-    def generateProjectGuid(GPathResult root) {
+    def generateProjectGuid(NodeChild root) {
         root.PropertyGroup.ProjectGuid = '{' + UUID.randomUUID().toString().toUpperCase() + '}'
     }
 
-    def transformApplicationName(GPathResult root) {
+
+    def transformApplicationName(NodeChild root) {
         root.PropertyGroup.AssemblyName = options.assemblyName
         root.PropertyGroup.OutputName = options.outputName
     }
 
-    def transformApplicationModel(GPathResult root) {
+    def transformApplicationModel(NodeChild root) {
         if (options.applicationType == ApplicationType.MainApplication) {
             root.PropertyGroup.first().Model = "Dll"
             root.PropertyGroup.first().OutputType = "WinExe"
@@ -56,7 +58,7 @@ class ClarionProjectTransformer {
         }
     }
 
-    def transformCompilationSymbols(GPathResult root) {
+    def transformCompilationSymbols(NodeChild root) {
         if (!root.PropertyGroup.DefineConstants.isEmpty()) {
             def linkModeValue = options.applicationType == ApplicationType.ProcedureDLL ? 0 : 1
             def dllModeValue = 1 - linkModeValue
@@ -81,7 +83,7 @@ class ClarionProjectTransformer {
         }
     }
 
-    def transformSourceGeneration(GPathResult root) {
+    def transformSourceGeneration(NodeChild root) {
         if (!root.ItemGroup.isEmpty()) {
             root.ItemGroup.Compile.replaceNode {}
             root.ItemGroup.first().appendNode {
@@ -92,7 +94,7 @@ class ClarionProjectTransformer {
         }
     }
 
-    def transformLinkedResources(GPathResult root){
+    def transformLinkedResources(NodeChild root){
         if (!root.ItemGroup.isEmpty()) {
             for ( libraryResource in root.ItemGroup.Library ){
                 def resourceName = libraryResource?.'@Include'?.text().toLowerCase()
@@ -103,7 +105,7 @@ class ClarionProjectTransformer {
         }
     }
 
-    def transformBuildEvents(GPathResult root){
+    def transformBuildEvents(NodeChild root){
         if (!root.PropertyGroup.PostBuildEvent.isEmpty()){
             if ( options.applicationType == ApplicationType.MainApplication){
                 root.PropertyGroup.PostBuildEvent.first().replaceNode {
