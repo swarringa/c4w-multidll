@@ -23,10 +23,10 @@ java {
 }
 
 group 'nl.intreq'
-version '1.0'
+version '1.1'
 
 ext {
-    c4wTxaVersion = '1.0'
+    c4wTxaVersion = '1.1'
     groovyVersion = '3.0.11'
 }
 
