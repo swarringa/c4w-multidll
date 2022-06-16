@@ -72,10 +72,10 @@ jar {
     // to keep everything together here
     bundle {    
         bnd (
-                'Bundle-Name'           : 'Intreq :: Clarion MultiDLL support',
-                'Bundle-SymbolicName'   : 'nl.intreq.c4w.multidll',
-                'Export-Package'        : "nl.intreq.c4w.multidll.*;ver=${archiveVersion}" ,
-                '-exportcontents'       : 'nl.intreq.c4w.multidll.*'
+            'Bundle-Name'           : 'Intreq :: Clarion MultiDLL support',
+            'Bundle-SymbolicName'   : 'nl.intreq.c4w.multidll',
+            'Export-Package'        : "nl.intreq.c4w.multidll.*;ver=${archiveVersion}" ,
+            '-exportcontents'       : 'nl.intreq.c4w.multidll.*'
         )
     }
 }
@@ -89,6 +89,17 @@ publishing {
     publications {
         osgiBundle(MavenPublication) {
             from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            name = 'GithubPackages'
+            url = "https://maven.pkg.github.com/swarringa/c4w-multidll"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
