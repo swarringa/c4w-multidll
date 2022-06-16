@@ -30,16 +30,27 @@ ext {
     groovyVersion = '3.0.11'
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
 configurations {
     bundle {
         // Only put our own stuff in the bundle
         transitive = false
     }
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        name = 'gpr_c4w-txa-parser'
+        url = "https://maven.pkg.github.com/swarringa/c4w-txa-parser/"
+        content {
+            includeModule "nl.intreq", "c4w-txa-parser"
+        }
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+    mavenCentral()
 }
 
 dependencies {
