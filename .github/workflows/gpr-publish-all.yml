@@ -12,10 +12,10 @@ on:
     types: [created]
 
 jobs:
-  environment: production
   build:
 
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: read
       packages: write
